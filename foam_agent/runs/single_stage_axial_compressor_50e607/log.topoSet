@@ -1,0 +1,41 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2406                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _1653fa08-20260127 OPENFOAM=2406 patch=260127 version=2406
+Arch   : "LSB;label=32;scalar=64"
+Exec   : topoSet
+Date   : Nov 02 2026
+Time   : 16:56:26
+Host   : PIGPI
+PID    : 32502
+I/O    : uncollated
+Case   : /mnt/g/ChatCFD-main/foam_agent/runs/single_stage_axial_compressor_50e607
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create polyMesh for time = 0
+
+Reading topoSetDict
+
+Time = 0
+    mesh not changed.
+Created cellSet rotor
+    Applying source boxToCell
+    Adding cells with centre within boxes 1((0.06 0.1875 -0.0097262) (0.15 0.25 0.0097262))
+    cellSet rotor now size 2400
+Created cellSet stator
+    Applying source boxToCell
+    Adding cells with centre within boxes 1((0.15 0.1875 -0.0097262) (0.21 0.25 0.0097262))
+    cellSet stator now size 2400
+
+End
+

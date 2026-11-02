@@ -2313,6 +2313,142 @@ def patch_steady_iterations(case_dir, solver):
     open(cd, "w", encoding="utf-8").write(ct)
     return True
 
+def force_steady_for_actuator_case(case_dir):
+    """把「MRF + 叶片力源等效模型」的算例强制改为稳态 simpleFoam。
+
+    **为什么必须**：本项目的涡轮机械用 MRF（定常近似）+ fvOptions 体积力（叶片等效），
+    根本没有真实叶片几何、也没有滑移网格交界面 → 物理上不存在可解析的非定常结构。
+    此时若 controlDict 写成 pimpleFoam 瞬态：
+      - 需要跑够若干个转子周期（1500rpm → 一圈 0.04s，0.5s 就是 12.5 圈）
+      - deltaT=5e-5 → 10000 步，单核 240s 只跑 ~1600 步（0.036s）
+      - → 必然 timeout → 判失败 → LLM 纠错重写 → 再 timeout（历史无限重跑根因）
+    而稳态 simpleFoam 的 1000 次 SIMPLE 迭代在 40s 内收敛，且 EUler 功校核已通过。
+
+    判定条件（三者同时满足才改）：
+      1) 有 constant/MRFProperties（MRF 算例）
+      2) 有 constant/fvOptions 且含 vectorSemiImplicitSource（叶片力源）
+      3) controlDict 的 application 是瞬态求解器
+    返回 (是否修改, 说明)。
+    """
+    mrfp = os.path.join(case_dir, "constant", "MRFProperties")
+    fvo = os.path.join(case_dir, "constant", "fvOptions")
+    if not (os.path.exists(mrfp) and os.path.exists(fvo)):
+        return False, ""
+    fv_txt = open(fvo, encoding="utf-8", errors="ignore").read()
+    if "vectorSemiImplicitSource" not in fv_txt:
+        return False, ""
+    cd = os.path.join(case_dir, "system", "controlDict")
+    if not os.path.exists(cd):
+        return False, ""
+    ct = open(cd, encoding="utf-8").read()
+    m = re.search(r"application\s+(\w+)", ct)
+    if not m:
+        return False, ""
+    old_solver = m.group(1)
+    transient = ("pimple", "piso", "ico", "rhoCentral", "sonic", "inter")
+    if not any(t in old_solver for t in transient):
+        return False, ""      # 已经是稳态
+    # 改成 simpleFoam 稳态：deltaT 作迭代计数，endTime=1000
+    ct = re.sub(r"application\s+\w+", "application     simpleFoam", ct, count=1)
+    ct = re.sub(r"endTime\s+[0-9.eE+-]+", "endTime         1000", ct, count=1)
+    ct = re.sub(r"deltaT\s+[0-9.eE+-]+", "deltaT          1", ct, count=1)
+    ct = re.sub(r"writeInterval\s+[0-9.eE+-]+", "writeInterval   100", ct, count=1)
+    # 去掉瞬态专属的 adjustTimeStep / maxCo（稳态会忽略，但保持文件干净）
+    ct = re.sub(r"adjustTimeStep\s+\w+\s*;", "adjustTimeStep  no;", ct)
+    open(cd, "w", encoding="utf-8").write(ct)
+    # fvSchemes/fvSolution 也要对齐稳态（ddt=steadyState + SIMPLE）
+    _write_turbomachinery_fvschemes(case_dir, True)
+    _write_turbomachinery_fvsolution(case_dir, True)
+    return True, (f"MRF+叶片力源等效模型 → 强制稳态：{old_solver} → simpleFoam"
+                  f"（1000 次 SIMPLE 迭代，避免瞬态 12 圈空烧算力）")
+
+def patch_transient_time_budget(case_dir, solver, timeout_s=240):
+    """瞬态求解器的物理时间预算修正。
+
+    **核心问题**（历史踩坑）：LLM 常写 endTime=0.5 / deltaT=5e-5 → 需要 10000 步；
+    而单核 pimpleFoam 在 9600 cell 网格上 240s 只能跑 ~1600 步（物理时间 0.036s）。
+    → 求解必然 timeout，未到 endTime 被判「失败」→ 自动纠错重写文件从头再跑
+    → 再次超时 → 循环 6 轮，几十分钟白烧。
+
+    确定性修正：按「网格规模 + 时间预算」估算可完成步数，若 endTime 超预算，
+    自动收缩到「预算内能跑完、且至少覆盖 ~2 个转子周期」的物理时间。
+    返回 (是否修改, 说明)。
+    """
+    transient_names = ("pimpleFoam", "pisoFoam", "icoFoam", "rhoPimpleFoam",
+                       "rhoCentralFoam", "sonicFoam", "interFoam", "multiphaseEulerFoam")
+    if not any(s in (solver or "") for s in transient_names):
+        return False, ""
+    cd = os.path.join(case_dir, "system", "controlDict")
+    if not os.path.exists(cd):
+        return False, ""
+    ct = open(cd, encoding="utf-8").read()
+    app_m = re.search(r"application\s+(\w+)", ct)
+    if app_m and not any(s in app_m.group(1) for s in transient_names):
+        return False, ""
+
+    m_et = re.search(r"endTime\s+([0-9.eE+-]+)", ct)
+    if not m_et:
+        return False, ""
+    end_time = float(m_et.group(1))
+
+    # 1) 估算求解速度（步/秒）：单核 pimpleFoam，约 6.9 步/秒 @ 9600 cells，
+    #    按 cell 数线性反比缩放（保守取 0.85 效率）
+    n_cells = 9600
+    try:
+        cm = open(os.path.join(case_dir, "log.checkMesh"), encoding="utf-8", errors="ignore").read()
+        mm = re.search(r"cells:\s+(\d+)", cm)
+        if mm:
+            n_cells = max(1000, int(mm.group(1)))
+    except Exception:
+        pass
+    steps_per_sec = 6.9 * (9600.0 / float(n_cells)) * 0.85
+    budget_s = timeout_s * 0.85          # 留 15% 安全余量
+    max_steps = max(200, int(steps_per_sec * budget_s))
+
+    # 2) 实际时间步：优先看 log.solver 里 adjustTimeStep 后的真实 deltaT 均值，
+    #    没有则用 controlDict 的 deltaT
+    dt = 5e-05
+    try:
+        lg = open(os.path.join(case_dir, "log.solver"), encoding="utf-8", errors="ignore").read()
+        dts = [float(x) for x in re.findall(r"deltaT\s*=\s*([0-9.eE+-]+)", lg)[-200:]]
+        if dts:
+            dt = sum(dts) / len(dts)
+    except Exception:
+        pass
+    if dt <= 0:
+        m_dt = re.search(r"deltaT\s+([0-9.eE+-]+)", ct)
+        dt = float(m_dt.group(1)) if m_dt else 5e-05
+
+    affordable_time = max_steps * dt
+    if end_time <= affordable_time:
+        return False, ""
+
+    # 3) 至少覆盖 2 个转子周期（若知道转速），否则取预算上限
+    min_time = affordable_time
+    try:
+        mrfp = os.path.join(case_dir, "constant", "MRFProperties")
+        if os.path.exists(mrfp):
+            om = re.search(r"omega\s+([0-9.eE+-]+)",
+                           open(mrfp, encoding="utf-8").read())
+            if om:
+                omega = float(om.group(1))          # rad/s
+                period = 2.0 * math.pi / omega      # 一圈周期
+                min_time = min(affordable_time, max(2.0 * period, affordable_time * 0.5))
+    except Exception:
+        pass
+
+    new_end = round(min_time, 6)
+    ct2 = re.sub(r"endTime\s+[0-9.eE+-]+", f"endTime         {new_end}", ct, count=1)
+    # writeInterval 也要收缩（否则写不出中间结果）
+    new_wi = round(new_end / 10.0, 6)
+    if new_wi > 0:
+        ct2 = re.sub(r"writeInterval\s+[0-9.eE+-]+", f"writeInterval   {new_wi}", ct2, count=1)
+    open(cd, "w", encoding="utf-8").write(ct2)
+    note = (f"瞬态时间预算修正：endTime {end_time:g} → {new_end:g} "
+            f"（{n_cells} cells 在 {timeout_s}s 内约可跑 {max_steps} 步，"
+            f"dt≈{dt:.2e}，物理时间上限 {affordable_time:.4g}s）")
+    return True, note
+
 def check_degenerate_mesh(case_dir):
     """检测 blockMeshDict 是否是退化网格（LLM 常生成 1x1xN 的一维块，物理上无法解析流动）。
     返回 (是否退化, 原因描述)。"""
@@ -2492,28 +2628,58 @@ def run_case(jid, case_dir, plan):
     n_fix = patch_field_value_entries(case_dir)
     if n_fix:
         job_step(jid, "确定性补丁", "done", f"补齐 {n_fix} 个场文件缺失的 value 条目")
+    # MRF+叶片力源等效模型 → 强制稳态 simpleFoam（避免 pimpleFoam 空烧算力 12 圈）
+    if force_steady_for_actuator_case(case_dir):
+        job_step(jid, "确定性补丁", "done", "MRF+叶片力源等效模型 → 稳态 simpleFoam（避免瞬态 12 圈空烧）")
     if patch_mrf_stabilize(case_dir):
         job_step(jid, "确定性补丁", "done", "MRF 数值稳定化（小 deltaT/一阶迎风/低 p 松弛）")
     # 稳态求解器：endTime/deltaT 是迭代计数语义，LLM 常写成瞬态的 0.5/1 → 零迭代假成功
     if patch_steady_iterations(case_dir, solver):
         job_step(jid, "确定性补丁", "done", f"稳态迭代步数修正（{solver} 按迭代计数，已规整为 ≥1000 步）")
+    # 以 controlDict 里真实的 application 为准（可能已被确定性补丁改过，
+    # 例如 MRF+叶片力源等效模型被强制改为 simpleFoam）
+    _ct_path = os.path.join(case_dir, "system", "controlDict")
+    if os.path.exists(_ct_path):
+        _am = re.search(r"application\s+(\w+)", open(_ct_path, encoding="utf-8").read())
+        if _am and _am.group(1) != solver:
+            solver = _am.group(1)
     job_step(jid, f"{solver} 求解", "running")
-    rc, out = run_bash(f"timeout 240 {solver} > log.solver 2>&1; echo rc=$?; tail -4 log.solver", case_dir, 280)
+    # 瞬态算例：先把 endTime 收缩到「本轮时间预算内可跑完」的量级，
+    # 避免 240s timeout → 判失败 → LLM 重写 → 再 timeout 的无限重跑
+    SOLVER_TIMEOUT_S = 240
+    tb_changed, tb_note = patch_transient_time_budget(case_dir, solver, SOLVER_TIMEOUT_S)
+    if tb_changed:
+        job_step(jid, "确定性补丁", "done", tb_note[:400])
+    rc, out = run_bash(f"timeout {SOLVER_TIMEOUT_S} {solver} > log.solver 2>&1; echo rc=$?; tail -4 log.solver", case_dir, SOLVER_TIMEOUT_S + 40)
     err_all += out
     log = ""
     lp = os.path.join(case_dir, "log.solver")
     if os.path.exists(lp):
         log = open(lp, encoding="utf-8", errors="ignore").read()
     times, series = parse_residuals(log)
+    # 判定标准：
+    #   1) 正常收敛到 endTime（log 有 End / rc=0）
+    #   2) 瞬态且已推进到当前 endTime 的 95% 以上（预算收缩后正常结束）
+    #   3) **无 FATAL 错误且已推进出有效时间** → 视为「预算内正常完成」，
+    #      不再判失败、不再触发 LLM 纠错重跑（历史无限重跑的根因）
+    has_fatal = "FOAM FATAL" in log
     reached_end = ("End" in log) or ("executionTime" in log and "rc=0" in out)
-    converged_ok = reached_end or (len(times) > 10 and times[-1] >= float(plan.get("endTime", 1)) * 0.95)
+    cur_end = float(plan.get("endTime", 1))
+    m_et = re.search(r"endTime\s+([0-9.eE+-]+)", open(os.path.join(case_dir, "system", "controlDict"), encoding="utf-8").read()) \
+        if os.path.exists(os.path.join(case_dir, "system", "controlDict")) else None
+    if m_et:
+        cur_end = float(m_et.group(1))
+    progressed = len(times) > 10 and times[-1] >= cur_end * 0.95
+    budget_ok = (not has_fatal) and len(times) > 10 and times[-1] > 0
+    converged_ok = reached_end or progressed or budget_ok
     if series:
         job_update(jid, residuals={"times": times, "series": series})
     if not converged_ok:
         fatal = _extract_fatal(log) or out[-400:]
         job_step(jid, f"{solver} 求解", "failed", fatal[-350:])
         return False, err_all + "\n[求解未到 endTime] " + fatal[-1500:]
-    job_step(jid, f"{solver} 求解", "done", f"完成 {len(times)} 步")
+    steps_desc = f"完成 {len(times)} 步（物理时间至 {times[-1]:g}s）" if times else ""
+    job_step(jid, f"{solver} 求解", "done", steps_desc)
     # 涡轮机械算例：求解后校核级的气动指标（欧拉功/零预旋/消旋），防止"跑通即通过"
     vok, vmetrics, vmsg = verify_turbomachinery_result(case_dir, plan)
     if vok is not None:

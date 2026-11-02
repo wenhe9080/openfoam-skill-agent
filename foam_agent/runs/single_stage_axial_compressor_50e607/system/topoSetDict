@@ -1,0 +1,25 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+
+actions
+(
+    {
+        name    rotor;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        box     (0.06 0.1875 -0.0097262) (0.15 0.25 0.0097262);
+    }
+    {
+        name    stator;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        box     (0.15 0.1875 -0.0097262) (0.21 0.25 0.0097262);
+    }
+);
