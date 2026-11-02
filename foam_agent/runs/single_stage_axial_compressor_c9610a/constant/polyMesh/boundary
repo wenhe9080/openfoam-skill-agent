@@ -1,0 +1,73 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2406                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    arch        "LSB;label=32;scalar=64";
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+6
+(
+    inlet
+    {
+        type            patch;
+        nFaces          10;
+        startFace       1510;
+    }
+    outlet
+    {
+        type            patch;
+        nFaces          10;
+        startFace       1520;
+    }
+    hub
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          80;
+        startFace       1530;
+    }
+    shroud
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          80;
+        startFace       1610;
+    }
+    periodic1
+    {
+        type            cyclicAMI;
+        inGroups        1(cyclicAMI);
+        nFaces          800;
+        startFace       1690;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  periodic2;
+        AMIMethod       faceAreaWeightAMI;
+        restartUncoveredSourceFace 1;
+    }
+    periodic2
+    {
+        type            cyclicAMI;
+        inGroups        1(cyclicAMI);
+        nFaces          800;
+        startFace       2490;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  periodic1;
+        AMIMethod       faceAreaWeightAMI;
+        restartUncoveredSourceFace 1;
+    }
+)
+
+// ************************************************************************* //

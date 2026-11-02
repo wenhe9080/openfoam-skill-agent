@@ -1,0 +1,43 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2406                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _1653fa08-20260127 OPENFOAM=2406 patch=260127 version=2406
+Arch   : "LSB;label=32;scalar=64"
+Exec   : simpleFoam
+Date   : Oct 29 2026
+Time   : 17:34:43
+Host   : PIGPI
+PID    : 9776
+I/O    : uncollated
+Case   : /mnt/g/ChatCFD-main/foam_agent/runs/single_stage_axial_compressor_low_speed_2e7548
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+
+SIMPLE: no convergence criteria found. Calculations will run for 1000 steps.
+
+Reading field p
+
+
+
+--> FOAM FATAL IO ERROR: (openfoam-2406 patch=260127)
+Cannot find patchField entry for rotorBlade
+
+file: 0/p/boundaryField at line 14 to 35.
+
+    From void Foam::GeometricBoundaryField<Type, PatchField, GeoMesh>::readField(const Internal&, const Foam::dictionary&) [with Type = double; PatchField = Foam::fvPatchField; GeoMesh = Foam::volMesh; Foam::GeometricBoundaryField<Type, PatchField, GeoMesh>::Internal = Foam::DimensionedField<double, Foam::volMesh>]
+    in file ./src/OpenFOAM/lnInclude/GeometricBoundaryField.C at line 330.
+
+FOAM exiting
+

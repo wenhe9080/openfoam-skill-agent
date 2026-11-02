@@ -1,0 +1,88 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2406                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _1653fa08-20260127 OPENFOAM=2406 patch=260127 version=2406
+Arch   : "LSB;label=32;scalar=64"
+Exec   : blockMesh
+Date   : Oct 30 2026
+Time   : 03:56:19
+Host   : PIGPI
+PID    : 137641
+I/O    : uncollated
+Case   : /mnt/g/ChatCFD-main/foam_agent/runs/lid_driven_cavity_2d_6dde3d
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Creating block mesh from "system/blockMeshDict"
+--> FOAM IOWarning :
+    Found [v1012] 'convertToMeters' entry instead of 'scale' in dictionary "system/blockMeshDict"
+
+    This keyword is 162 months old.
+
+Creating block edges
+No non-planar block faces defined
+Creating topology blocks
+
+Creating topology patches - from boundary section
+
+Creating block mesh topology
+--> FOAM Warning : 
+    From void Foam::polyMesh::setTopology(const cellShapeList&, const faceListList&, const wordList&, Foam::labelList&, Foam::labelList&, Foam::label&, Foam::label&, Foam::cellList&)
+    in file meshes/polyMesh/polyMeshFromShapeMesh.C at line 363
+    Trying to specify a boundary face 4(0 1 2 3) on the face on cell 0 which is either an internal face or already belongs to some other patch. This is face 0 of patch 2 named frontAndBack.
+
+Check topology
+
+	Basic statistics
+		Number of internal faces : 0
+		Number of boundary faces : 7
+		Number of defined boundary faces : 7
+		Number of undefined boundary faces : 0
+	Checking patch -> block consistency
+
+Creating block offsets
+Creating merge list (topological search)...
+Deleting polyMesh directory "constant/polyMesh"
+
+Creating polyMesh from blockMesh
+Creating patches
+Creating cells
+Creating points with scale (1 1 1)
+    Block 0 cell size :
+        i : 0.0025 .. 0.0025
+        j : 0.0025 .. 0.0025
+        k : 0.0005 .. 0.0005
+
+--> FOAM Warning : 
+    From void Foam::polyMesh::setTopology(const cellShapeList&, const faceListList&, const wordList&, Foam::labelList&, Foam::labelList&, Foam::label&, Foam::label&, Foam::cellList&)
+    in file meshes/polyMesh/polyMeshFromShapeMesh.C at line 363
+    Trying to specify a boundary face 4(0 41 42 1) on the face on cell 0 which is either an internal face or already belongs to some other patch. This is face 0 of patch 2 named frontAndBack.
+No patch pairs to merge
+
+Writing polyMesh with 0 cellZones
+----------------
+Mesh Information
+----------------
+  boundingBox: (0 0 0) (0.1 0.1 0.01)
+  nPoints: 35301
+  nCells: 32000
+  nFaces: 100800
+  nInternalFaces: 92800
+----------------
+Patches
+----------------
+  patch 0 (start: 92800 size: 800) name: movingWall
+  patch 1 (start: 93600 size: 4000) name: fixedWalls
+  patch 2 (start: 97600 size: 3200) name: frontAndBack
+
+End
+

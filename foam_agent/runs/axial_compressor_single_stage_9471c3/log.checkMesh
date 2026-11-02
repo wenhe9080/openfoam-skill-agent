@@ -1,0 +1,37 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2406                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _1653fa08-20260127 OPENFOAM=2406 patch=260127 version=2406
+Arch   : "LSB;label=32;scalar=64"
+Exec   : checkMesh
+Date   : Oct 30 2026
+Time   : 03:08:50
+Host   : PIGPI
+PID    : 72101
+I/O    : uncollated
+Case   : /mnt/g/ChatCFD-main/foam_agent/runs/axial_compressor_single_stage_9471c3
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+
+--> FOAM FATAL IO ERROR: (openfoam-2406 patch=260127)
+Found ) but expected }
+
+file: system/fvSolution at line 44.
+
+    From static bool Foam::entry::New(Foam::dictionary&, Foam::Istream&, Foam::entry::inputMode, int)
+    in file db/dictionary/entry/entryIO.C at line 176.
+
+FOAM exiting
+

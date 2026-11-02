@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三个 OpenFOAM 项目对比分析</title>
+<style>
+  :root {
+    --c1: #22B8CF; --c2: #2e9e5b; --c3: #8b5cf6;
+    --bg: #f6f8fa; --card: #fff; --border: #e2e8f0;
+    --text: #1a2332; --muted: #5b6b7f; --primary: #1a7fa8;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Microsoft YaHei","PingFang SC","Segoe UI",sans-serif; background:var(--bg); color:var(--text); line-height:1.75; }
+  .container { max-width:1080px; margin:0 auto; padding:36px 30px; }
+  header { background:linear-gradient(135deg,#0f3a52 0%,#1a7fa8 55%,#22B8CF 100%); color:#fff; padding:52px 30px; text-align:center; }
+  header h1 { font-size:2rem; margin-bottom:10px; }
+  header p { opacity:.92; max-width:860px; margin:0 auto; }
+  h2 { font-size:1.45rem; color:var(--primary); margin:46px 0 16px; padding-left:14px; border-left:5px solid var(--c1); }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px 24px; margin:14px 0; box-shadow:0 1px 4px rgba(15,60,90,.06); }
+  .grid3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px; margin:16px 0; }
+  .proj { border-radius:12px; padding:20px 22px; color:#fff; }
+  .proj h3 { font-size:1.15rem; margin-bottom:6px; }
+  .proj .sub { font-size:.85rem; opacity:.92; }
+  .p1 { background:linear-gradient(135deg,#0e7490,#22B8CF); }
+  .p2 { background:linear-gradient(135deg,#1e6e3c,#2e9e5b); }
+  .p3 { background:linear-gradient(135deg,#6d28d9,#8b5cf6); }
+  table { width:100%; border-collapse:collapse; margin:14px 0; background:var(--card); font-size:.92rem; }
+  th { background:var(--primary); color:#fff; padding:10px 12px; text-align:left; }
+  td { padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top; }
+  td.dim { font-weight:700; color:var(--primary-dark,#0f5c7a); background:#f0f5f9; width:130px; }
+  .badge { display:inline-block; border-radius:16px; padding:2px 11px; font-size:.78rem; font-weight:700; margin:1px 2px; }
+  .b-cf { background:#e0f6fa; color:#0e7490; } .b-sk { background:#e5f5eb; color:#1e6e3c; } .b-ag { background:#f0e9fd; color:#6d28d9; }
+  .b-ok { background:#e5f5eb; color:#1e6e3c; } .b-part { background:#fff3d6; color:#8a6206; } .b-no { background:#fdeaea; color:#b23b3b; }
+  .note { background:#fff8e6; border-left:4px solid #e6a817; padding:12px 16px; border-radius:6px; margin:14px 0; font-size:.93rem; }
+  .figure { background:#fff; border:1px solid var(--border); border-radius:12px; padding:20px; margin:18px 0; text-align:center; }
+  .figure figcaption { color:var(--muted); font-size:.87rem; margin-top:10px; }
+  code { background:#eef2f6; padding:2px 7px; border-radius:5px; font-family:Consolas,monospace; font-size:.87em; color:#b3426a; }
+  footer { text-align:center; color:var(--muted); font-size:.85rem; padding:36px 0 26px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔬 三个 OpenFOAM 项目对比分析</h1>
+  <p>OpenFOAM智能体（调研设计） · OpenFOAM-skill（知识技能包） · Chatcfd-agent（端到端系统复现）——同一目标下的三种形态与一条演进路线</p>
+</header>
+
+<div class="container">
+
+<!-- ============ 一句话总览 ============ -->
+<h2>一、三个项目分别是什么</h2>
+<div class="grid3">
+  <div class="proj p3">
+    <h3>③ OpenFOAM智能体</h3>
+    <div class="sub">2026-10-25 · 研究调研 / 方案设计</div>
+    <p style="font-size:.9rem; margin-top:10px;">产出《OpenFOAM 智能体化可行性调研 × ADIAS-v3 改装设计》：梳理行业三条技术路线与 7 个竞品基线，提出 <b>OpenF-ADAS</b> 架构（策略即数据 + 可训练路由器 + issue-centric 自进化）。<b>纸面设计，无代码。</b></p>
+  </div>
+  <div class="proj p2">
+    <h3>② OpenFOAM-skill</h3>
+    <div class="sub">2026-10-26 · 可复用知识技能包</div>
+    <p style="font-size:.9rem; margin-top:10px;">产出 <b>hpc-openfoam</b> 技能包（v1.0.0）：12 篇领域参考文档 + 3 个案例模板 + 渐进式加载工作流 + 硬性守则；并用 2D 圆柱绕流案例在本机 OpenFOAM-10 上<b>完整验证通过</b>。<b>无代码系统，知识即能力。</b></p>
+  </div>
+  <div class="proj p1">
+    <h3>① Chatcfd-agent</h3>
+    <div class="sub">2026-10-27 · 端到端系统复现</div>
+    <p style="font-size:.9rem; margin-top:10px;">复现开源项目 <b>ChatCFD</b>（arXiv 2506.02019）：双 LLM 多智能体 + 结构化知识库 + RAG + ICOT 自动纠错，从论文 PDF 一键到仿真结果；修复上游 6 个 bug，聊天界面中文化 + 深色主题。<b>可运行的完整系统。</b></p>
+  </div>
+</div>
+
+<div class="note">💡 <b>演进关系</b>：三个项目按时间恰好构成一条路径——先做<b>学术调研</b>搞清"该往哪走"（智能体）→ 把领域知识沉淀为<b>可复用技能</b>（skill）→ 落地复现一个<b>完整可运行的系统</b>（ChatCFD agent），验证全链路可行性。</div>
+
+<!-- ============ 核心对比表 ============ -->
+<h2>二、十二维度详细对比</h2>
+<table>
+  <tr><th style="width:120px">维度</th><th>③ OpenFOAM智能体</th><th>② OpenFOAM-skill</th><th>① Chatcfd-agent</th></tr>
+  <tr><td class="dim">项目形态</td><td>可行性调研报告 + 架构设计文档</td><td>Agent Skill 技能包（知识资产）</td><td>开源系统本地复现 + 二次修复增强</td></tr>
+  <tr><td class="dim">核心产出</td><td><code>openfoam_agentization_research.md</code>（OpenF-ADAS 设计）</td><td>SKILL.md + 12 篇 references + 3 个模板 + 验证案例</td><td>可运行流水线 + 修好的 6 个 bug + 中文化界面 + 复测报告</td></tr>
+  <tr><td class="dim">技术路线</td><td>提出"第 4 条路"：把 ADIAS-v3 元贡献（策略即数据 / 可训练路由器 / 自进化）移植到 CFD</td><td>不写代码：靠结构化领域知识 + 工作流纪律武装宿主 Agent</td><td>LLM-Agent 主流路线：R1+V3 双模型、FAISS RAG、结构化知识库、ICOT 纠错循环</td></tr>
+  <tr><td class="dim">知识来源</td><td>文献交叉验证（7 个基线系统优劣势）</td><td>12 篇手册级文档：求解器选型、边界条件、湍流配方、网格、错误恢复、集群执行…</td><td>database_OFv24 结构化数据库（5 个 JSON：必需文件清单 / BC 条目 / 量纲 / 教程案例）</td></tr>
+  <tr><td class="dim">执行方式</td><td>—（未实现）</td><td>半自动：宿主 Agent 按 skill 工作流逐步生成与检查</td><td>全自动：上传论文+网格 → 一键到结果</td></tr>
+  <tr><td class="dim">错误处理</td><td>设计 issue-centric 自进化循环（诊断→画像→改进）</td><td>error-recovery.md 手册：发散 / 崩溃 / 有界场警告的处理守则</td><td>运行时自动纠错：报错解析→定位文件→重写→重试（≤30 轮）+ 反思经验回放</td></tr>
+  <tr><td class="dim">验证状态</td><td><span class="badge b-no">纸面设计</span></td><td><span class="badge b-ok">已验证</span> 2D 圆柱 simpleFoam：blockMesh/checkMesh/2000 步全部通过</td><td><span class="badge b-ok">部分成功</span> NACA0012 经 24 轮自动纠错跑通；喷管可压缩案例失败（与论文 30% 一致）</td></tr>
+  <tr><td class="dim">OpenFOAM 版本</td><td>调研覆盖 v2606 行业现状</td><td>OpenFOAM-10（WSL）</td><td>OpenFOAM v2406（WSL，版本强绑定知识库）</td></tr>
+  <tr><td class="dim">LLM 依赖</td><td>设计假定可换任意模型（领域微调 7B 反超 72B 的论据）</td><td>无专属依赖：宿主 Agent 现有模型即可</td><td>强依赖双通道 API（原设计 DeepSeek R1+V3，本地以 qwen-flash 兼容替代）</td></tr>
+  <tr><td class="dim">用户交互</td><td>—</td><td>对话式，Agent 主导逐项确认</td><td>ChatGPT 式聊天界面（已中文化 + 深色主题），支持对话改配置</td></tr>
+  <tr><td class="dim">可复用性</td><td>方法论可迁移到任意"组件选择+自进化"领域</td><td>最高：技能包可直接用于任何 OpenFOAM 任务</td><td>中：系统可复现，但知识库与 OpenFOAM 版本强耦合</td></tr>
+  <tr><td class="dim">发表 / 实用定位</td><td>学术发表位（自进化 + 策略即数据在 CFD 域尚无人做）</td><td>日常工程实用（写算例、排错、上集群）</td><td>工程验证 + 产品原型（对标论文基准）</td></tr>
+</table>
+
+<!-- ============ 架构对比图 ============ -->
+<h2>三、三种"智能"的实现方式对比</h2>
+<div class="figure">
+<svg viewBox="0 0 960 430" xmlns="http://www.w3.org/2000/svg" font-family="Microsoft YaHei, sans-serif">
+  <!-- 列1：智能体（调研） -->
+  <rect x="20" y="20" width="290" height="390" rx="14" fill="#f5f0fe" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="165" y="50" text-anchor="middle" fill="#6d28d9" font-size="16" font-weight="bold">OpenFOAM智能体</text>
+  <text x="165" y="70" text-anchor="middle" fill="#7c5aa0" font-size="11">调研 + 架构设计（未实现）</text>
+  <rect x="45" y="92" width="240" height="64" rx="8" fill="#fff" stroke="#c4b0ee"/>
+  <text x="165" y="118" text-anchor="middle" fill="#1a2332" font-size="12.5" font-weight="bold">行业调研：3 条路线 / 7 个基线</text>
+  <text x="165" y="137" text-anchor="middle" fill="#5b6b7f" font-size="10.5">OpenFOAMGPT·MetaOpenFOAM·Foam-Agent…</text>
+  <rect x="45" y="170" width="240" height="64" rx="8" fill="#fff" stroke="#c4b0ee"/>
+  <text x="165" y="196" text-anchor="middle" fill="#1a2332" font-size="12.5" font-weight="bold">OpenF-ADAS 三层设计</text>
+  <text x="165" y="215" text-anchor="middle" fill="#5b6b7f" font-size="10.5">CFD 组件词表 = 湍流/格式/算法/网格</text>
+  <rect x="45" y="248" width="240" height="64" rx="8" fill="#fff" stroke="#c4b0ee"/>
+  <text x="165" y="274" text-anchor="middle" fill="#1a2332" font-size="12.5" font-weight="bold">元贡献移植</text>
+  <text x="165" y="293" text-anchor="middle" fill="#5b6b7f" font-size="10.5">策略即数据 · 可训练路由器 · 自进化循环</text>
+  <rect x="45" y="330" width="240" height="56" rx="8" fill="#efe7fc"/>
+  <text x="165" y="353" text-anchor="middle" fill="#6d28d9" font-size="12" font-weight="bold">产出 = 设计蓝图</text>
+  <text x="165" y="372" text-anchor="middle" fill="#7c5aa0" font-size="10.5">回答"该往哪走才值得做"</text>
+
+  <!-- 列2：skill -->
+  <rect x="335" y="20" width="290" height="390" rx="14" fill="#effaf3" stroke="#2e9e5b" stroke-width="1.5"/>
+  <text x="480" y="50" text-anchor="middle" fill="#1e6e3c" font-size="16" font-weight="bold">OpenFOAM-skill</text>
+  <text x="480" y="70" text-anchor="middle" fill="#4a8a63" font-size="11">知识技能包（无代码系统）</text>
+  <rect x="360" y="92" width="240" height="64" rx="8" fill="#fff" stroke="#a9d8ba"/>
+  <text x="480" y="118" text-anchor="middle" fill="#1a2332" font-size="12.5" font-weight="bold">12 篇参考文档（按需加载）</text>
+  <text x="480" y="137" text-anchor="middle" fill="#5b6b7f" font-size="10.5">选型 / 边界 / 湍流 / 网格 / 排错 / 集群</text>
+  <rect x="360" y="170" width="240" height="64" rx="8" fill="#fff" stroke="#a9d8ba"/>
+  <text x="480" y="196" text-anchor="middle" fill="#1a2332" font-size="12.5" font-weight="bold">案例模板 + SLURM 脚本</text>
+  <text x="480" y="215" text-anchor="middle" fill="#5b6b7f" font-size="10.5">simpleFoam / interFoam 最小算例骨架</text>
+  <rect x="360" y="248" width="240" height="64" rx="8" fill="#fff" stroke="#a9d8ba"/>
+  <text x="480" y="274" text-anchor="middle" fill="#1a2332" font-size="12.5" font-weight="bold">工作流纪律 + Guardrails</text>
+  <text x="480" y="293" text-anchor="middle" fill="#5b6b7f" font-size="10.5">不造字典键 · checkMesh 前置 · 并行对齐</text>
+  <rect x="360" y="330" width="240" height="56" rx="8" fill="#e2f4e8"/>
+  <text x="480" y="353" text-anchor="middle" fill="#1e6e3c" font-size="12" font-weight="bold">产出 = 可复用能力 ✅ 已验证</text>
+  <text x="480" y="372" text-anchor="middle" fill="#4a8a63" font-size="10.5">2D 圆柱绕流全流程通过（OpenFOAM-10）</text>
+
+  <!-- 列3：chatcfd -->
+  <rect x="650" y="20" width="290" height="390" rx="14" fill="#e5f7fa" stroke="#22B8CF" stroke-width="1.5"/>
+  <text x="795" y="50" text-anchor="middle" fill="#0e7490" font-size="16" font-weight="bold">Chatcfd-agent</text>
+  <text x="795" y="70" text-anchor="middle" fill="#3d93a8" font-size="11">端到端自动系统（复现+修复）</text>
+  <rect x="675" y="92" width="240" height="64" rx="8" fill="#fff" stroke="#8ed3e0"/>
+  <text x="795" y="118" text-anchor="middle" fill="#1a2332" font-size="12.5" font-weight="bold">双 LLM 多智能体</text>
+  <text x="795" y="137" text-anchor="middle" fill="#5b6b7f" font-size="10.5">R1 物理推理 / V3 文件生成</text>
+  <rect x="675" y="170" width="240" height="64" rx="8" fill="#fff" stroke="#8ed3e0"/>
+  <text x="795" y="196" text-anchor="middle" fill="#1a2332" font-size="12.5" font-weight="bold">结构化知识库 + RAG</text>
+  <text x="795" y="215" text-anchor="middle" fill="#5b6b7f" font-size="10.5">5 个 JSON 数据库 + FAISS 论文检索</text>
+  <rect x="675" y="248" width="240" height="64" rx="8" fill="#fff" stroke="#8ed3e0"/>
+  <text x="795" y="274" text-anchor="middle" fill="#1a2332" font-size="12.5" font-weight="bold">ICOT 自动纠错 ≤30 轮</text>
+  <text x="795" y="293" text-anchor="middle" fill="#5b6b7f" font-size="10.5">报错定位→重写→重试 + 反思回放</text>
+  <rect x="675" y="330" width="240" height="56" rx="8" fill="#d8f0f5"/>
+  <text x="795" y="353" text-anchor="middle" fill="#0e7490" font-size="12" font-weight="bold">产出 = 可运行系统 ✅ 部分成功</text>
+  <text x="795" y="372" text-anchor="middle" fill="#3d93a8" font-size="10.5">NACA0012 跑通 · 喷管失败（≈论文基线）</text>
+
+  <!-- 演进箭头 -->
+  <path d="M 310 210 L 333 210" stroke="#5b6b7f" stroke-width="2.5" fill="none"/>
+  <path d="M 625 210 L 648 210" stroke="#5b6b7f" stroke-width="2.5" fill="none"/>
+  <text x="322" y="200" text-anchor="middle" fill="#5b6b7f" font-size="13" font-weight="bold">→</text>
+  <text x="637" y="200" text-anchor="middle" fill="#5b6b7f" font-size="13" font-weight="bold">→</text>
+</svg>
+<figcaption>图 1 · 三种形态：调研回答"该做什么"，技能沉淀"怎么做好"，系统验证"能做成"——输入/知识/执行三层互补</figcaption>
+</div>
+
+<!-- ============ 能力雷达 ============ -->
+<h2>四、能力画像对比</h2>
+<div class="figure">
+<svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" font-family="Microsoft YaHei, sans-serif">
+  <g transform="translate(450,215)">
+    <!-- 六边形网格：维度 = 自动化程度 / 领域知识深度 / 可复用性 / 已验证程度 / 学术价值 / 工程即用性 -->
+    <g stroke="#d7dfe8" stroke-width="1" fill="none">
+      <polygon points="0,-150 130,-75 130,75 0,150 -130,75 -130,-75"/>
+      <polygon points="0,-112 98,-56 98,56 0,112 -98,56 -98,-56"/>
+      <polygon points="0,-75 65,-37.5 65,37.5 0,75 -65,37.5 -65,-37.5"/>
+      <polygon points="0,-37 33,-18.5 33,18.5 0,37 -33,18.5 -33,-18.5"/>
+      <line x1="0" y1="0" x2="0" y2="-150"/><line x1="0" y1="0" x2="130" y2="-75"/><line x1="0" y1="0" x2="130" y2="75"/>
+      <line x1="0" y1="0" x2="0" y2="150"/><line x1="0" y1="0" x2="-130" y2="75"/><line x1="0" y1="0" x2="-130" y2="-75"/>
+    </g>
+    <g fill="#5b6b7f" font-size="12.5" font-weight="bold">
+      <text x="0" y="-160" text-anchor="middle">自动化程度</text>
+      <text x="140" y="-82" text-anchor="start">领域知识深度</text>
+      <text x="140" y="82" text-anchor="start">学术价值</text>
+      <text x="0" y="168" text-anchor="middle">已验证程度</text>
+      <text x="-140" y="82" text-anchor="end">工程即用性</text>
+      <text x="-140" y="-82" text-anchor="end">可复用性</text>
+    </g>
+    <!-- ChatCFD（青）：自动化高、验证中、学术中、复用中 -->
+    <polygon points="0,-135 91,-52 52,30 0,90 -65,37 -39,-22" fill="rgba(34,184,207,.30)" stroke="#0e7490" stroke-width="2.5"/>
+    <!-- skill（绿）：知识深、复用高、即用高、已验证高、自动低 -->
+    <polygon points="0,-52 117,-67 26,15 0,120 -104,60 -117,-67" fill="rgba(46,158,91,.26)" stroke="#1e6e3c" stroke-width="2.5"/>
+    <!-- 智能体（紫）：学术高、其余低 -->
+    <polygon points="0,-26 39,-22 117,-67 0,37 -33,19 -91,-52" fill="rgba(139,92,246,.22)" stroke="#6d28d9" stroke-width="2.5"/>
+  </g>
+  <g font-size="13" font-weight="bold">
+    <rect x="60" y="30" width="16" height="16" rx="4" fill="#22B8CF"/><text x="84" y="44" fill="#0e7490">① Chatcfd-agent</text>
+    <rect x="330" y="30" width="16" height="16" rx="4" fill="#2e9e5b"/><text x="354" y="44" fill="#1e6e3c">② OpenFOAM-skill</text>
+    <rect x="600" y="30" width="16" height="16" rx="4" fill="#8b5cf6"/><text x="624" y="44" fill="#6d28d9">③ OpenFOAM智能体</text>
+  </g>
+</svg>
+<figcaption>图 2 · 六维能力雷达（半定量示意）：三者画像几乎互补——没有一个是"另一个的重复"</figcaption>
+</div>
+
+<!-- ============ 互补关系 ============ -->
+<h2>五、互补关系与组合建议</h2>
+<div class="card">
+  <table>
+    <tr><th style="width:190px">场景</th><th>建议使用</th><th>理由</th></tr>
+    <tr><td>日常写算例 / 排错 / 上集群</td><td><span class="badge b-sk">OpenFOAM-skill</span></td><td>零 API 成本、即装即用，12 篇手册覆盖最高频需求；Agent 边查边做，可控性强</td></tr>
+    <tr><td>拿到一篇论文想直接出结果</td><td><span class="badge b-cf">Chatcfd-agent</span></td><td>唯一能"论文 PDF → 仿真结果"全自动的形态；不可压案例成功率已实测达标</td></tr>
+    <tr><td>规划下一代自进化 CFD 智能体</td><td><span class="badge b-ag">OpenFOAM智能体</span></td><td>竞品弱点分析（AutoFOAM 自进化未跑通多代、标量奖励失真）与发表位论证已就绪</td></tr>
+  </table>
+  <p><b>最优组合路径</b>（也正是三个项目已经形成的闭环）：</p>
+  <ol style="margin-left:24px">
+    <li>用 <b>ChatCFD 系统</b>批量跑案例，产出成功/失败轨迹数据 → 恰好是 OpenF-ADAS 设计里"弱监督标签挖掘"需要的原料；</li>
+    <li>把失败模式提炼进 <b>skill 的 error-recovery / 湍流配方</b>文档 → 知识库随实战增长；</li>
+    <li>当 skill 文档膨胀到需要"按工况选策略"时，上 <b>OpenF-ADAS 的 meta-skill + 路由器</b> → 完成从"知识即能力"到"策略即数据"的跃迁。</li>
+  </ol>
+</div>
+
+<!-- ============ 结论 ============ -->
+<h2>六、结论</h2>
+<div class="card">
+  <p><b>三个项目不是重复造轮子，而是同一目标（OpenFOAM 智能体化）下的三个互补层次</b>：调研层指明方向（学术上避开 7 个基线的红海、锁定"策略即数据 + 自进化"的空位），技能层解决当下实用（知识资产化、零成本复用、已实证），系统层验证端到端可行性（复现 ChatCFD 并达到论文一致水平，同时摸清了可压缩案例的能力边界）。</p>
+  <p style="margin-top:8px">按当前进度，最自然的下一步是：<b>用 ChatCFD 流水线批量生成训练/评估数据，反哺 skill 知识库迭代，并按 OpenF-ADAS 蓝图启动路由器与自进化循环的原型实现</b>——三者从"并列的三个项目"升级为"一条完整的研究-工程管线"。</p>
+</div>
+
+<footer>
+  三项目对比分析 · 数据来源：WorkBuddy 会话存档（C:/Users/12919/WorkBuddy）、~/.workbuddy/skills/openfoam-skills__skillhub、G:/ChatCFD-main 复现实测 · 2026-10-27
+</footer>
+
+</div>
+</body>
+</html>

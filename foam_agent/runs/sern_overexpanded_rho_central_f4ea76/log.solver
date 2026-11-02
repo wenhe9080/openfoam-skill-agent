@@ -1,0 +1,52 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2406                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _1653fa08-20260127 OPENFOAM=2406 patch=260127 version=2406
+Arch   : "LSB;label=32;scalar=64"
+Exec   : rhoCentralFoam
+Date   : Oct 30 2026
+Time   : 04:37:49
+Host   : PIGPI
+PID    : 182685
+I/O    : uncollated
+Case   : /mnt/g/ChatCFD-main/foam_agent/runs/sern_overexpanded_rho_central_f4ea76
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Reading thermophysical properties
+
+Selecting thermodynamics package 
+{
+    type            hePsiThermo;
+    mixture         pureMixture;
+    transport       const;
+    thermo          hConst;
+    equationOfState perfectGas;
+    specie          specie;
+    energy          sensibleInternalEnergy;
+}
+
+
+
+--> FOAM FATAL IO ERROR: (openfoam-2406 patch=260127)
+Expected keyword 'uniform' or 'nonuniform', found on line 16: label 300
+
+
+file: 0/T/boundaryField/inlet/T0 at line 16.
+
+    From void Foam::Field<Type>::assign(const Foam::entry&, Foam::label) [with Type = double; Foam::label = int]
+    in file ./src/OpenFOAM/lnInclude/Field.C at line 262.
+
+FOAM exiting
+

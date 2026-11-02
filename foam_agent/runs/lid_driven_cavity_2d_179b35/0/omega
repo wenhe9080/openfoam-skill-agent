@@ -1,0 +1,39 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      omega;
+}
+
+dimensions      [0 0 -1 0 0 0 0];
+
+internalField   uniform 100;
+
+boundaryField
+{
+    topWall
+    {
+        type            omegaWallFunction;
+        value           uniform 100;
+    }
+    bottomWall
+    {
+        type            omegaWallFunction;
+        value           uniform 100;
+    }
+    leftWall
+    {
+        type            omegaWallFunction;
+        value           uniform 100;
+    }
+    rightWall
+    {
+        type            omegaWallFunction;
+        value           uniform 100;
+    }
+    frontAndBack
+    {
+        type            empty;
+    }
+}

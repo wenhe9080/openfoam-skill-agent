@@ -1,0 +1,46 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      nut;
+}
+dimensions      [0 2 -1 0 0 0 0];
+internalField   uniform 1e-5;
+boundaryField
+{
+    inlet
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    outlet
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    farfield_top
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    farfield_bottom
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    wall_upper
+    {
+        type            nutkWallFunction;
+        value           uniform 1e-5;
+    }
+    wall_lower
+    {
+        type            nutkWallFunction;
+        value           uniform 1e-5;
+    }
+    frontAndBack
+    {
+        type            empty;
+    }
+}

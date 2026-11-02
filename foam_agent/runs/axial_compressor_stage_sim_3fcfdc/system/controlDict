@@ -1,0 +1,21 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+application     pimpleFoam;
+startFrom       startTime;
+startTime       0;
+stopAt          endTime;
+endTime         0.1;
+deltaT          1e-5; // Fixed small timestep to ensure stability without excessive reduction
+timeStep        1e-5;
+writeControl    adjustableRunTime;
+writeInterval   0.01;
+purgeWrite      0;
+runTimeModifiable true;
+adjustTimeStep  no; // Disable adaptive stepping to prevent timeout due to tiny dt
+maxCo           1.0;
+maxDeltaT       1e-3;

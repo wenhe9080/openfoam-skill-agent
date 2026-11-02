@@ -1,0 +1,29 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      Allrun;
+}
+
+#!/bin/sh
+cd "${0%/*}" || exit
+. ${WM_PROJECT_DIR:?}/bin/tools/RunFunctions
+
+# Generate wedge mesh
+runApplication blockMesh
+
+# Create cellSets for rotor and stator zones
+runApplication topoSet
+
+# Convert cellSets to cellZones (required by MRF)
+runApplication setsToZones -noFlipMap
+
+# Validate mesh and confirm CellZones exist
+runApplication checkMesh
+
+# Run steady-state MRF simulation
+runApplication simpleFoam
+
+# Post-processing: compute yPlus
+runApplication postProcess -func yPlus

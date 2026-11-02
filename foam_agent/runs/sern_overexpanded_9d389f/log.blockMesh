@@ -1,0 +1,42 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2406                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _1653fa08-20260127 OPENFOAM=2406 patch=260127 version=2406
+Arch   : "LSB;label=32;scalar=64"
+Exec   : blockMesh
+Date   : Oct 30 2026
+Time   : 04:29:40
+Host   : PIGPI
+PID    : 166042
+I/O    : uncollated
+Case   : /mnt/g/ChatCFD-main/foam_agent/runs/sern_overexpanded_9d389f
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Creating block mesh from "system/blockMeshDict"
+Creating block edges
+No non-planar block faces defined
+Creating topology blocks
+
+Creating topology patches - from boundary section
+
+Creating block mesh topology - scaling/transform applied later
+
+
+--> FOAM FATAL ERROR: (openfoam-2406 patch=260127)
+Trying to specify a boundary face 4(4 3 18 19) on the face on cell 0 which is either an internal face or already belongs to the same patch. This is face 0 of patch 2 named cowl_wall.
+
+    From void Foam::polyMesh::setTopology(const cellShapeList&, const faceListList&, const wordList&, Foam::labelList&, Foam::labelList&, Foam::label&, Foam::label&, Foam::cellList&)
+    in file meshes/polyMesh/polyMeshFromShapeMesh.C at line 348.
+
+FOAM exiting
+

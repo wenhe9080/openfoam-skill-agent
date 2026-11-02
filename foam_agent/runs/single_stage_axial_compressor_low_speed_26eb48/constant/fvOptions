@@ -1,0 +1,41 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvOptions;
+}
+
+// ============ 级的两排叶片力源（无叶片几何的等效模型）============
+// 转子排：在 MRF 旋转域内加周向体积力，令气流获得设计扭速
+//         Δc_u = psi*u_tip = 13.74 m/s（自由涡 r·Δc_u=const）
+// 静子排：在静止域内加反向体积力，把旋流收回轴向 → 满足题目 c3u=0
+rotorForce
+{
+    type            vectorSemiImplicitSource;
+    active          yes;
+    selectionMode   cellZone;
+    cellZone        rotor;
+    timeStart       0;
+    duration        1e6;
+    volumeMode      specific;
+    sources
+    {
+        U               ((0 0 3356.21) 0);
+    }
+}
+
+statorForce
+{
+    type            vectorSemiImplicitSource;
+    active          yes;
+    selectionMode   cellZone;
+    cellZone        stator;
+    timeStart       0;
+    duration        1e6;
+    volumeMode      specific;
+    sources
+    {
+        U               ((0 0 -5034.31) 0);
+    }
+}

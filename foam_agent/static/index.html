@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat-Foam-agent · 自然语言驱动 OpenFOAM</title>
+<style>
+:root{
+  --bg:#0E1117; --panel:#161B26; --panel2:#1C2333; --border:#2A3245;
+  --text:#E6EAF2; --muted:#8B93A7; --accent:#22B8CF; --accent2:#4FD1C5;
+  --ok:#2E9E5B; --warn:#E6A817; --err:#E05252;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:"Microsoft YaHei","PingFang SC",sans-serif;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+header{display:flex;align-items:center;gap:14px;padding:12px 22px;background:var(--panel);border-bottom:1px solid var(--border)}
+header h1{font-size:18px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+header .sub{color:var(--muted);font-size:12px}
+.sel{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+select{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-size:13px;outline:none;cursor:pointer}
+.main{flex:1;display:flex;min-height:0}
+.chat-col{flex:1.35;display:flex;flex-direction:column;min-width:0;border-right:1px solid var(--border)}
+#chat{flex:1;overflow-y:auto;padding:20px 26px;display:flex;flex-direction:column;gap:14px}
+.bubble{max-width:82%;padding:12px 16px;border-radius:12px;line-height:1.65;font-size:14px;white-space:pre-wrap;word-break:break-word}
+.bubble.user{align-self:flex-end;background:#1E3A5F;border:1px solid #2C4F7C;border-bottom-right-radius:3px}
+.bubble.ai{align-self:flex-start;background:var(--panel);border:1px solid var(--border);border-bottom-left-radius:3px}
+.bubble.ai b{color:var(--accent2)}
+.bubble .tag{display:block;font-size:11px;color:var(--muted);margin-bottom:6px}
+.input-row{display:flex;gap:10px;padding:14px 20px;background:var(--panel);border-top:1px solid var(--border)}
+#inp{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:12px 14px;font-size:14px;resize:none;outline:none;font-family:inherit;min-height:46px;max-height:120px}
+#inp:focus{border-color:var(--accent)}
+button.send{background:linear-gradient(135deg,var(--accent),#1B9AAA);border:none;border-radius:10px;color:#fff;padding:0 22px;font-size:14px;cursor:pointer;font-family:inherit}
+button.send:hover{filter:brightness(1.12)}
+button.send:disabled{opacity:.5;cursor:not-allowed}
+.attach{display:flex;align-items:center;justify-content:center;width:46px;height:46px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;font-size:19px;cursor:pointer;user-select:none}
+.attach:hover{border-color:var(--accent)}
+.attach.has{border-color:var(--accent);background:#12333B}
+.chip{display:inline-flex;align-items:center;gap:6px;background:#12333B;border:1px solid var(--accent);border-radius:14px;padding:3px 12px;font-size:12px;color:var(--accent2);margin-bottom:4px}
+.chip a{color:var(--err);cursor:pointer;text-decoration:none}
+.hint{padding:0 20px 8px;color:var(--muted);font-size:12px;background:var(--panel)}
+.hint code{color:var(--accent2);cursor:pointer}
+.result-col{flex:1;overflow-y:auto;padding:16px 18px;background:#0A0D13}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:14px}
+.card h3{font-size:14px;margin-bottom:10px;color:var(--accent2);display:flex;align-items:center;gap:8px}
+.step{display:flex;gap:10px;align-items:flex-start;padding:7px 0;font-size:13px;border-bottom:1px dashed var(--border)}
+.step:last-child{border-bottom:none}
+.step .dot{width:9px;height:9px;border-radius:50%;margin-top:5px;flex-shrink:0;background:var(--muted)}
+.step.running .dot{background:var(--warn);animation:pulse 1.2s infinite}
+.step.done .dot{background:var(--ok)}
+.step.failed .dot{background:var(--err)}
+@keyframes pulse{50%{opacity:.35}}
+.step .detail{color:var(--muted);font-size:12px;margin-top:3px;word-break:break-all;max-height:60px;overflow:hidden}
+.step .dur{font-size:11px;color:var(--muted);background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:1px 7px;margin-left:auto;white-space:nowrap;flex-shrink:0}
+.step.running .dur{color:var(--warn);border-color:var(--warn)}
+.progressbar{height:7px;background:var(--panel2);border-radius:5px;overflow:hidden;margin:6px 0 12px}
+.progressbar>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:5px;transition:width .5s}
+.progressinfo{font-size:11px;color:var(--muted);margin-bottom:8px;display:flex;justify-content:space-between}
+/* 完整工作流链路 */
+.flowchain{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.chain-node{display:flex;align-items:center;gap:10px;padding:7px 10px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);position:relative}
+.chain-node.done{border-color:#2E9E5B55;background:#12261A}
+.chain-node.failed{border-color:var(--err);background:#2A1216}
+.chain-node.running{border-color:var(--warn);background:#2A2412}
+.chain-node .idx{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;background:var(--accent);color:#fff;flex-shrink:0}
+.chain-node.done .idx{background:var(--ok)}
+.chain-node.failed .idx{background:var(--err)}
+.chain-node.running .idx{background:var(--warn)}
+.chain-node .nm{font-size:13px;font-weight:600}
+.chain-node .tm{font-size:11px;color:var(--muted);margin-left:auto;white-space:nowrap}
+.chain-arrow{width:2px;height:16px;background:var(--border);margin-left:20px}
+.chain-node .st{font-size:10px;color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:0 6px;margin-left:8px}
+.chain-node.done .st{color:var(--ok);border-color:var(--ok)}
+.chain-node.failed .st{color:var(--err);border-color:var(--err)}
+canvas{width:100%;background:#0D1220;border-radius:8px;margin-top:6px}
+.ftree{font-family:Consolas,monospace;font-size:12.5px;line-height:1.9;color:#A8B3CC;max-height:260px;overflow-y:auto}
+.ftree .d{color:var(--accent)}
+.empty{color:var(--muted);font-size:13px;text-align:center;padding:40px 10px;line-height:2}
+.dl{display:inline-block;margin-top:8px;background:var(--panel2);border:1px solid var(--accent);color:var(--accent2);padding:7px 14px;border-radius:8px;text-decoration:none;font-size:13px}
+.dl:hover{background:#12333B}
+.status-run{color:var(--warn);font-size:12px}.status-ok{color:var(--ok);font-size:12px}.status-bad{color:var(--err);font-size:12px}
+#legend{font-size:11px;color:var(--muted);margin-top:4px;display:flex;gap:12px;flex-wrap:wrap}
+#legend span{display:flex;align-items:center;gap:4px}
+#legend i{width:14px;height:3px;border-radius:2px;display:inline-block}
+</style>
+</head>
+<body>
+<header>
+  <h1>🌊 Chat-Foam-agent</h1>
+  <span class="sub">ChatCFD × OpenFOAM-skill 合并版 · 自然语言 → OpenFOAM 算例与数据</span>
+  <div class="sel">
+    <span>大模型</span>
+    <select id="model"></select>
+  </div>
+</header>
+<div class="main">
+  <div class="chat-col">
+    <div id="chat">
+      <div class="bubble ai"><span class="tag">Chat-Foam-agent</span>你好！我是 Chat-Foam-agent 智能体，融合了 <b>ChatCFD</b> 的自动算例生成/运行/纠错流水线与 <b>OpenFOAM-skill</b> 的领域知识库（12 篇手册 + 模板）。
+你可以：
+① 直接描述想仿真的流动（如"仿真二维方腔顶盖驱动流，雷诺数1000"），我会自动规划 → 生成 OpenFOAM 算例 → 画网格 → 运行求解 → 自动纠错，并返回残差收敛数据；
+② 询问 OpenFOAM 任何问题（求解器选择、边界条件、报错含义…），我基于知识库解答。</div>
+    </div>
+    <div class="hint">试试：<code onclick="fill(this)">仿真二维方腔顶盖驱动流，腔体边长0.1m，顶盖速度1m/s，用icoFoam层流算到0.5s</code> · <code onclick="fill(this)">simpleFoam和pimpleFoam有什么区别？</code> · <code onclick="fill(this)">生成一个二维管道流动算例，入口速度2m/s，kOmegaSST湍流模型</code></div>
+    <div class="input-row">
+      <label class="attach" title="上传 PDF / TXT 文档（论文、说明书中参数自动提取）">📎<input type="file" id="file" accept=".pdf,.txt,.md" hidden></label>
+      <textarea id="inp" placeholder="输入自然语言需求（可先 📎 上传 PDF/TXT，AI 会自动提取算例参数），Enter 发送 / Shift+Enter 换行" rows="1"></textarea>
+      <button class="send" id="btn">发送</button>
+    </div>
+  </div>
+  <div class="result-col">
+    <div class="empty" id="emptyPanel">运行进度、残差收敛曲线、生成的算例文件<br>都会展示在这里</div>
+    <div id="runPanel" style="display:none">
+      <div class="card"><h3>⚙️ 执行进度 <span id="jobStatus" class="status-run"></span></h3>
+        <div class="progressbar"><i id="pbar" style="width:0%"></i></div>
+        <div class="progressinfo"><span id="curStep">等待启动…</span><span id="elapsed">0s</span></div>
+        <div id="steps"></div>
+      </div>
+      <div class="card" id="flowCard" style="display:none"><h3>🔗 完整工作流程</h3><div id="flowchain"></div></div>
+      <div class="card" id="resCard" style="display:none"><h3>📉 残差收敛</h3><canvas id="resCanvas" width="640" height="300"></canvas><div id="legend"></div></div>
+      <div class="card" id="treeCard" style="display:none"><h3>📁 算例文件</h3><div class="ftree" id="ftree"></div><a class="dl" id="dlBtn" href="#" download>⬇ 打包下载算例</a></div>
+      <div class="card" id="errCard" style="display:none"><h3 style="color:var(--err)">❌ 错误详情</h3><div class="ftree" id="errBox"></div></div>
+    </div>
+  </div>
+</div>
+<script>
+const COLORS={"Ux":"#1a7fa8","Uy":"#22B8CF","Uz":"#4FD1C5","p":"#E05252","k":"#2E9E5B","omega":"#8B5CF6","epsilon":"#E6A817"};
+let history=[], polling=null, currentUpload=null, jobStart=Date.now();
+
+document.getElementById("file").addEventListener("change", async function(){
+  const f=this.files[0]; if(!f)return;
+  const lb=document.querySelector(".attach");
+  lb.classList.add("has"); lb.title="解析中…";
+  const fd=new FormData();
+  const resp=await fetch("/api/upload?name="+encodeURIComponent(f.name),{method:"POST",body:f});
+  const d=await resp.json();
+  if(d.error){alert(d.error); lb.classList.remove("has"); this.value=""; return;}
+  currentUpload={id:d.upload_id,name:d.name,chars:d.chars};
+  showChip();
+});
+function showChip(){
+  let c=document.getElementById("upchip");
+  if(!currentUpload){if(c)c.remove();return;}
+  if(!c){c=document.createElement("div");c.id="upchip";
+    c.style.cssText="padding:6px 20px 0;background:var(--panel)";
+    document.querySelector(".input-row").before(c);}
+  c.innerHTML='<span class="chip">📄 '+currentUpload.name+'（'+currentUpload.chars+' 字符，已就绪）<a onclick="clearUpload()">✕</a></span>';
+}
+function clearUpload(){currentUpload=null;showChip();
+  document.querySelector(".attach").classList.remove("has");
+  document.getElementById("file").value="";}
+
+fetch("/api/models").then(r=>r.json()).then(d=>{
+  const s=document.getElementById("model");
+  d.models.forEach(m=>{const o=document.createElement("option");o.value=m.id;o.textContent=m.label;s.appendChild(o);});
+});
+
+function fill(el){const i=document.getElementById("inp");i.value=el.textContent;i.focus();}
+function addBubble(role,text,tag){
+  const c=document.getElementById("chat");
+  const b=document.createElement("div");b.className="bubble "+role;
+  b.innerHTML='<span class="tag">'+tag+'</span>';
+  // 报告 HTML：若含 <h2>/<p>/<table> 等标签则用 innerHTML 渲染，否则纯文本
+  if(/<[a-z][\s\S]*>/i.test(text)){b.insertAdjacentHTML("beforeend",text);}
+  else{b.appendChild(document.createTextNode(text));}
+  c.appendChild(b);c.scrollTop=c.scrollHeight;return b;
+}
+function send(){
+  const inp=document.getElementById("inp"),msg=inp.value.trim();
+  if(!msg)return;
+  inp.value="";inp.style.height="auto";
+  const docTag=currentUpload?("\n📎 附文档："+currentUpload.name):"";
+  addBubble("user",msg+docTag,"我");
+  document.getElementById("btn").disabled=true;
+  const model=document.getElementById("model").value;
+  fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({message:msg,model,history,upload_id:currentUpload?currentUpload.id:null})})
+    .then(r=>r.json()).then(d=>{
+      clearUpload();
+      document.getElementById("emptyPanel").style.display="none";
+      document.getElementById("runPanel").style.display="block";
+      document.getElementById("flowCard").style.display="none";
+      jobStart=Date.now();
+      if(polling)clearInterval(polling);
+      polling=setInterval(()=>pollJob(d.job_id,msg),1500);
+      pollJob(d.job_id,msg);
+    });
+}
+function pollJob(id,msg){
+  fetch("/api/job/"+id).then(r=>r.json()).then(j=>{
+    renderSteps(j);
+    if(j.status==="done"){
+      clearInterval(polling);polling=null;
+      document.getElementById("btn").disabled=false;
+      if(j.answer){
+        history.push({role:"user",content:msg},{role:"assistant",content:j.answer});
+        addBubble("ai",j.answer,"Chat-Foam-agent · "+document.getElementById("model").value);
+      }else{
+        let s="✅ 算例已"+(j.case_id?"":"")+"完成。\n";
+        if(j.plan)s+="求解器："+j.plan.solver+"（"+j.plan.turbulence+"）\n物理："+(j.plan.physics_cn||"")+"\n";
+        if(j.residuals){const n=j.residuals.times.length;s+="求解迭代 "+n+" 步，残差数据见右侧图表。";}
+        addBubble("ai",s,"Chat-Foam-agent");
+        if(j.residuals)drawResiduals(j.residuals);
+        if(j.case_id)showTree(j.case_id);
+      }
+    }else if(j.status==="failed"){
+      clearInterval(polling);polling=null;
+      document.getElementById("btn").disabled=false;
+      addBubble("ai","❌ 运行失败："+(j.error||"未知错误").slice(0,800),"Chat-Foam-agent");
+      if(j.error){document.getElementById("errCard").style.display="block";
+        document.getElementById("errBox").textContent=j.error;}
+    }
+  }).catch(()=>{});
+}
+function renderSteps(j){
+  const st=document.getElementById("steps");st.innerHTML="";
+  const steps=j.steps||[];
+  // 进度条：已完成步骤占比
+  const done=steps.filter(s=>s.state!=="running").length;
+  const pct=steps.length?Math.round(done/steps.length*100):0;
+  const pbar=document.getElementById("pbar");if(pbar)pbar.style.width=pct+"%";
+  const cur=document.getElementById("curStep");
+  if(cur)cur.textContent=(j.current||(steps.length?steps[steps.length-1].name:"等待启动"))+(j.status==="done"?"（已完成）":j.status==="failed"?"（失败）":"（进行中）");
+  const el=document.getElementById("elapsed");
+  if(el)el.textContent=(j.elapsed_total!=null?j.elapsed_total.toFixed(0):Math.round((Date.now()-jobStart)/1000))+"s";
+  steps.forEach(s=>{
+    const d=document.createElement("div");d.className="step "+s.state;
+    const dur=(s.duration!=null?s.duration.toFixed(1)+"s":(s.state==="running"?"…":""));
+    d.innerHTML='<span class="dot"></span><div style="flex:1"><b>'+s.name+'</b><div class="detail">'+(s.detail||"")+'</div></div><span class="dur">'+(dur||"")+'</span>';
+    st.appendChild(d);
+  });
+  const el2=document.getElementById("jobStatus");
+  if(j.status==="running"){el2.className="status-run";el2.textContent="执行中…";}
+  else if(j.status==="done"){el2.className="status-ok";el2.textContent="完成 ✓";}
+  else{el2.className="status-bad";el2.textContent="失败";}
+  // 自动滚动到底
+  const sc=document.querySelector(".result-col");if(sc)sc.scrollTop=sc.scrollHeight;
+  // 完成/失败时渲染完整工作流
+  if(j.status==="done"||j.status==="failed"){renderFlow(j);}
+}
+function renderFlow(j){
+  const card=document.getElementById("flowCard");card.style.display="block";
+  const fc=document.getElementById("flowchain");fc.innerHTML="";
+  const steps=j.workflow||j.steps||[];
+  const stateLabel={done:"✓",failed:"✗",running:"●"};
+  steps.forEach((s,i)=>{
+    const d=document.createElement("div");d.className="chain-node "+s.state;
+    const stxt=s.state==="running"?"进行中":s.state==="done"?"完成":"失败";
+    d.innerHTML='<span class="idx">'+(i+1)+'</span><span class="nm">'+s.name+'</span>'+
+      '<span class="st">'+stxt+'</span>'+
+      '<span class="tm">'+(s.duration!=null?s.duration.toFixed(1)+"s":s.state==="running"?"进行中":"")+'</span>';
+    fc.appendChild(d);
+    if(i<steps.length-1){
+      const a=document.createElement("div");a.className="chain-arrow";fc.appendChild(a);
+    }
+  });
+}
+function drawResiduals(res){
+  document.getElementById("resCard").style.display="block";
+  const cv=document.getElementById("resCanvas"),ctx=cv.getContext("2d");
+  const W=cv.width,H=cv.height,pad={l:56,r:12,t:14,b:30};
+  ctx.clearRect(0,0,W,H);
+  const all=res.series.p||Object.values(res.series)[0];
+  const n=Math.max(...Object.values(res.series).map(a=>a.length));
+  let lo=Infinity,hi=-Infinity;
+  Object.values(res.series).forEach(a=>a.forEach(v=>{lo=Math.min(lo,v);hi=Math.max(hi, v);}));
+  const llo=Math.log10(Math.max(lo,1e-12)),lhi=Math.log10(Math.max(hi,lo*10));
+  const X=i=>pad.l+(n<=1?0:i/(n-1))*(W-pad.l-pad.r);
+  const Y=v=>pad.t+(1-(Math.log10(Math.max(v,1e-12))-llo)/(lhi-llo||1))*(H-pad.t-pad.b);
+  ctx.strokeStyle="#2A3245";ctx.fillStyle="#8B93A7";ctx.font="10px Consolas";ctx.lineWidth=1;
+  for(let d=Math.ceil(llo);d<=Math.floor(lhi);d++){
+    const y=Y(Math.pow(10,d));
+    ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();
+    ctx.fillText("1e"+d,8,y+3);
+  }
+  const lg=document.getElementById("legend");lg.innerHTML="";
+  for(const[v,arr]of Object.entries(res.series)){
+    ctx.strokeStyle=COLORS[v]||"#888";ctx.lineWidth=1.6;ctx.beginPath();
+    arr.forEach((val,i)=>{i?ctx.lineTo(X(i),Y(val)):ctx.moveTo(X(i),Y(val));});
+    ctx.stroke();
+    lg.innerHTML+='<span><i style="background:'+(COLORS[v]||"#888")+'"></i>'+v+'</span>';
+  }
+  ctx.fillStyle="#8B93A7";
+  ctx.fillText("迭代步 0",pad.l,H-8);
+  ctx.fillText(String(n-1),W-pad.r-24,H-8);
+}
+function showTree(cid){
+  document.getElementById("treeCard").style.display="block";
+  const dirs={"0/":[],"constant/":[],"system/":[]};
+  fetch("/api/job-list/"+cid).catch(()=>{});
+  // 从 job 里没有文件列表就展示常见结构
+  const t=document.getElementById("ftree");
+  t.innerHTML='<span class="d">'+cid+'/</span>\n├── <span class="d">0/</span>  U  p  k? omega?\n├── <span class="d">constant/</span>  turbulenceProperties  transportProperties\n├── <span class="d">system/</span>  controlDict  fvSchemes  fvSolution  blockMeshDict\n├── log.blockMesh  log.checkMesh  log.solver\n└── [时间步结果目录]';
+  document.getElementById("dlBtn").href="/api/download/"+cid;
+}
+document.getElementById("btn").onclick=send;
+document.getElementById("inp").addEventListener("keydown",e=>{
+  if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send();}
+});
+document.getElementById("inp").addEventListener("input",function(){
+  this.style.height="auto";this.style.height=Math.min(this.scrollHeight,120)+"px";
+});
+</script>
+</body>
+</html>

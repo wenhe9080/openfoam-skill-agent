@@ -1,0 +1,22 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      MRFProperties;
+}
+
+MRF1
+{
+    cellZone            rotor;
+    active              yes;
+
+    // 转子域内但静止的 patch（机匣/轮盖）：MRFZone::correctBoundaryVelocity 会把
+    // 转子域内所有 patch 的 U 覆写为 omega^r；机匣是静子，必须显式排除，
+    // 否则紊流边界层与 tip 泄漏的物理就错了。
+    nonRotatingPatches  (casing);
+
+    origin              (0 0 0);
+    axis                (1 0 0);
+    omega               157.08;
+}

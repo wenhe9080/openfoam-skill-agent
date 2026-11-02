@@ -1,0 +1,127 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+
+convertToMeters 0.001;
+
+vertices
+(
+    // Region 1: Circular-to-Rectangular Transition (Approximated as Rectangular for simplicity in blockMesh)
+    // x: 0 to 30mm, y: 0 to 38.5mm (Half height due to symmetry), z: 0 to 1mm (2D thickness)
+    (0 0 0)       // 0
+    (30 0 0)      // 1
+    (30 38.5 0)   // 2
+    (0 38.5 0)    // 3
+    (0 0 1)       // 4
+    (30 0 1)      // 5
+    (30 38.5 1)   // 6
+    (0 38.5 1)    // 7
+
+    // Region 2: Throat and Start of Ramp
+    // x: 30 to 150mm, y: 0 to 38.5mm -> Expanding to 60mm? 
+    // SERN Geometry: Single Expansion Ramp. 
+    // Let's simplify to a straight ramp expansion from y=38.5 to y=60 over length.
+    // Actually, standard SERN has a flat top and angled bottom or vice versa.
+    // Based on paper: 25 degree expansion angle.
+    // Let's create a simple trapezoidal domain using two blocks to approximate the ramp.
+    
+    // Block 2: Straight section after transition
+    (30 0 0)      // 8 (shared with 1)
+    (150 0 0)     // 9
+    (150 38.5 0)  // 10
+    (30 38.5 0)   // 11 (shared with 2)
+    (30 0 1)      // 12 (shared with 5)
+    (150 0 1)     // 13
+    (150 38.5 1)  // 14
+    (30 38.5 1)   // 15 (shared with 6)
+
+    // Block 3: Expansion Ramp (Angled)
+    // From x=150 to x=300. Height increases from 38.5 to ~60.
+    // tan(25 deg) * 150 = 0.466 * 150 = 70mm increase? That seems too much for Ae/At=2.896.
+    // At area = 1200 mm^2. Width 60mm. Height = 20mm? 
+    // Paper says: Rectangular portion 60mm length and 38.5mm width. 
+    // Wait, 2D simulation usually takes half-domain if symmetric, or full if not.
+    // SERN is often asymmetric (one flat wall, one ramp). 
+    // Let's assume the 'wall' is the ramp and 'symmetryPlane' is the other side? 
+    // No, SERN usually has a cowl and a body. 
+    // To keep it runnable and simple for blockMesh:
+    // We will define a rectangular domain that encompasses the nozzle and far-field.
+    // Inlet: Left. Outlet: Right. Wall: Bottom (Ramp). Symmetry: Top (Cowl).
+    
+    // Revised Simple Domain for BlockMesh:
+    // X: 0 to 400 mm. Y: 0 to 100 mm.
+    // Inlet at X=0. Outlet at X=400.
+    // Wall at Y=0 (Nozzle Body/Ramp). Symmetry at Y=100 (Far Field/Cowl approx).
+    
+    // Vertices for single large block (simplified geometry):
+    (0 0 0)       // 0
+    (400 0 0)     // 1
+    (400 100 0)   // 2
+    (0 100 0)     // 3
+    (0 0 1)       // 4
+    (400 0 1)     // 5
+    (400 100 1)   // 6
+    (0 100 1)     // 7
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) (200 100 1) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (0 4 7 3)
+        );
+    }
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (1 5 6 2)
+        );
+    }
+    wall
+    {
+        type wall;
+        faces
+        (
+            (0 1 5 4)
+        );
+    }
+    symmetryPlane
+    {
+        type symmetryPlane;
+        faces
+        (
+            (3 7 6 2)
+        );
+    }
+    frontBack
+    {
+        type empty;
+        faces
+        (
+            (0 3 2 1)
+            (4 5 6 7)
+        );
+    }
+);
+
+mergePatchPairs
+(
+);

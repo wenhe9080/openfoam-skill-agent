@@ -1,0 +1,36 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      nut;
+}
+dimensions      [0 2 -1 0 0 0 0];
+internalField   uniform 0.01;
+boundaryField
+{
+    inlet
+    {
+        type            calculated;
+    }
+    outlet
+    {
+        type            calculated;
+    }
+    casing
+    {
+        type            calculated;
+    }
+    hub
+    {
+        type            calculated;
+    }
+    frontPlane
+    {
+        type            empty;
+    }
+    backPlane
+    {
+        type            empty;
+    }
+}

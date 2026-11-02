@@ -1,0 +1,26 @@
+ddtSchemes
+{
+    default         Euler;
+}
+gradSchemes
+{
+    default         Gauss linear;
+}
+divSchemes
+{
+    default         none;
+    div(phi,U)      bounded Gauss upwind;
+    div((nu*dev(grad(U)))) Gauss linear corrected;
+}
+laplacianSchemes
+{
+    default         Gauss linear corrected;
+}
+interpolationSchemes
+{
+    default         linear;
+}
+snGradSchemes
+{
+    default         corrected;
+}

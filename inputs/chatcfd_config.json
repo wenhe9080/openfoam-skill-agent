@@ -1,0 +1,16 @@
+{
+    "DEEPSEEK_V3_KEY" : "",
+    "DEEPSEEK_V3_BASE_URL" : "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "DEEPSEEK_V3_MODEL_NAME" : "qwen-flash",
+    "V3_temperature":0.7,
+    "DEEPSEEK_R1_KEY" : "",
+    "DEEPSEEK_R1_BASE_URL" : "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "DEEPSEEK_R1_MODEL_NAME" : "qwen-flash",
+    "R1_temperature":0.9,
+    "run_time":1,
+    "OpenFOAM_path":"/usr/lib/openfoam/openfoam2406",
+    "OpenFOAM_tutorial_path":"/usr/lib/openfoam/openfoam2406/tutorials",
+    "max_running_test_round":30,
+    "pdf_chunk_d" : 1.5,
+    "sentence_transformer_path": ""
+}

@@ -1,0 +1,89 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+convertToMeters 1.0;
+
+vertices
+(
+    // Define a simple rectangular domain for testing.
+    // X: Axial direction (Inlet to Outlet)
+    // Y: Radial/Tangential approximation (Hub to Casing)
+    // Z: Spanwise/Thickness (Front to Back)
+    
+    // Bottom-Front-Left (Inlet-Hub-Front)
+    (0.0 0.0 0.0)   // 0
+    // Bottom-Front-Right (Outlet-Hub-Front)
+    (0.7 0.0 0.0)   // 1
+    // Top-Front-Right (Outlet-Casing-Front)
+    (0.7 0.25 0.0)  // 2
+    // Top-Front-Left (Inlet-Casing-Front)
+    (0.0 0.25 0.0)  // 3
+    
+    // Bottom-Back-Left (Inlet-Hub-Back)
+    (0.0 0.0 0.1)   // 4
+    // Bottom-Back-Right (Outlet-Hub-Back)
+    (0.7 0.0 0.1)   // 5
+    // Top-Back-Right (Outlet-Casing-Back)
+    (0.7 0.25 0.1)  // 6
+    // Top-Back-Left (Inlet-Casing-Back)
+    (0.0 0.25 0.1)  // 7
+);
+
+blocks
+(
+    // Hexahedral block with correct vertex ordering to ensure outward normals.
+    hex (0 1 2 3 4 5 6 7) (100 20 1) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (0 4 7 3) // Left face (X=0)
+        );
+    }
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (1 2 6 5) // Right face (X=0.7)
+        );
+    }
+    hub
+    {
+        type wall;
+        faces
+        (
+            (0 1 5 4) // Bottom face (Y=0)
+        );
+    }
+    casing
+    {
+        type wall;
+        faces
+        (
+            (3 7 6 2) // Top face (Y=0.25)
+        );
+    }
+    frontBack
+    {
+        type empty;
+        faces
+        (
+            (0 3 2 1) // Front face (Z=0)
+            (4 5 6 7) // Back face (Z=0.1)
+        );
+    }
+);

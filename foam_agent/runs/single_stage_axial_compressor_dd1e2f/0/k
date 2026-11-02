@@ -1,0 +1,44 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      k;
+}
+
+dimensions      [0 2 -2 0 0 0 0];
+
+// Estimated from Tu=1%, U=20 m/s: k = 1.5*(U*Tu)^2
+internalField   uniform 0.06;
+
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 0.06;
+    }
+    outlet
+    {
+        type            zeroGradient;
+    }
+    hub
+    {
+        type            kqRWallFunction;
+        value           uniform 0.06;
+    }
+    casing
+    {
+        type            kqRWallFunction;
+        value           uniform 0.06;
+    }
+    theta0
+    {
+        type            wedge;
+    }
+    theta1
+    {
+        type            wedge;
+    }
+}

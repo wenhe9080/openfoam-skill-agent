@@ -1,0 +1,49 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      epsilon;
+}
+dimensions      [0 2 -3 0 0 0 0];
+internalField   uniform 1000;
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 1000;
+    }
+    outlet
+    {
+        type            inletOutlet;
+        inletValue      uniform 1000;
+        value           uniform 1000;
+    }
+    farfield_top
+    {
+        type            inletOutlet;
+        inletValue      uniform 1000;
+        value           uniform 1000;
+    }
+    farfield_bottom
+    {
+        type            inletOutlet;
+        inletValue      uniform 1000;
+        value           uniform 1000;
+    }
+    wall_upper
+    {
+        type            epsilonWallFunction;
+        value           uniform 1000;
+    }
+    wall_lower
+    {
+        type            epsilonWallFunction;
+        value           uniform 1000;
+    }
+    frontAndBack
+    {
+        type            empty;
+    }
+}

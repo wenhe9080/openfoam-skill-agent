@@ -1,0 +1,122 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2406                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+// Simplified annular sector mesh for single-stage axial compressor.
+// Represents a 1-degree periodic sector of the full annulus.
+// Inner radius (hub): 0.1875 m, Outer radius (casing): 0.25 m
+// Axial length: 0.3 m (inlet to outlet)
+// Sector angle: 1 degree (approx 0.01745 rad)
+
+convertToMeters 1;
+
+vertices
+(
+    // Bottom face (z = 0 plane in Cartesian mapped from cylindrical)
+    // Reordered to counter-clockwise when viewed from +z to satisfy right-hand rule
+    (0.0 0.1875 0.0)          // 0 Inlet-Hub-Front
+    (0.3 0.1875 0.0)          // 1 Outlet-Hub-Front
+    (0.3 0.25 0.0)            // 2 Outlet-Casing-Front
+    (0.0 0.25 0.0)            // 3 Inlet-Casing-Front
+
+    // Top face (rotated by 1 degree around x-axis)
+    // cos(1deg)=0.9998477, sin(1deg)=0.0174524
+    (0.0 0.187471 0.003272)   // 4 Inlet-Hub-Back
+    (0.3 0.187471 0.003272)   // 5 Outlet-Hub-Back
+    (0.3 0.249962 0.004363)   // 6 Outlet-Casing-Back
+    (0.0 0.249962 0.004363)   // 7 Inlet-Casing-Back
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) (100 20 1) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (0 3 7 4)
+        );
+    }
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (1 5 6 2)
+        );
+    }
+    hub
+    {
+        type wall;
+        faces
+        (
+            (0 4 5 1)
+        );
+    }
+    casing
+    {
+        type wall;
+        faces
+        (
+            (3 2 6 7)
+        );
+    }
+    front
+    {
+        type cyclic;
+        neighbourPatch back;
+        faces
+        (
+            (0 1 2 3)
+        );
+    }
+    back
+    {
+        type cyclic;
+        neighbourPatch front;
+        faces
+        (
+            (4 7 6 5)
+        );
+    }
+    rotorBlades
+    {
+        type wall;
+        faces
+        (
+        );
+    }
+    statorBlades
+    {
+        type wall;
+        faces
+        (
+        );
+    }
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //

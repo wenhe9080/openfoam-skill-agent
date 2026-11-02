@@ -1,0 +1,1 @@
+在 fvSchemes 中为粘性项 `div((nu*dev(grad(U))))` 添加了显式离散格式。icoFoam 求解器需要此配置，缺失会导致运行失败或数值不稳定。

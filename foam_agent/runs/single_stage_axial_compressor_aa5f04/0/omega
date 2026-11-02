@@ -1,0 +1,43 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      omega;
+}
+
+dimensions      [0 0 -1 0 0 0 0];
+
+// omega = k^0.5 / (Cmu^0.25 * L) ~ 1000 s^-1 for typical compressor scale
+internalField   uniform 1000;
+
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 1000;
+    }
+    outlet
+    {
+        type            zeroGradient;
+    }
+    hub
+    {
+        type            omegaWallFunction;
+        value           uniform 1000;
+    }
+    casing
+    {
+        type            omegaWallFunction;
+        value           uniform 1000;
+    }
+    periodic_1
+    {
+        type            cyclic;
+    }
+    periodic_2
+    {
+        type            cyclic;
+    }
+}

@@ -1,0 +1,49 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      nut;
+}
+
+dimensions      [0 2 -1 0 0 0 0];
+
+internalField   uniform 1e-5;
+
+boundaryField
+{
+    inlet
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    outlet
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    rotorBlades
+    {
+        type            nutUSpaldingWallFunction;
+        value           uniform 1e-5;
+    }
+    statorBlades
+    {
+        type            nutUSpaldingWallFunction;
+        value           uniform 1e-5;
+    }
+    casing
+    {
+        type            nutUSpaldingWallFunction;
+        value           uniform 1e-5;
+    }
+    hub
+    {
+        type            nutUSpaldingWallFunction;
+        value           uniform 1e-5;
+    }
+    frontBack
+    {
+        type            empty;
+    }
+}

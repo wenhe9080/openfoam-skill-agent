@@ -1,0 +1,25 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      MRFProperties;
+}
+
+// Note: For a full annular mesh with cellZones, this would define the rotor zone.
+// In this unrolled single-pitch blockMesh representation without explicit cellZones,
+// the rotation effect is approximated via boundary conditions or requires snappyHexMesh
+// to generate proper cellZones. Included here as a placeholder for the physics intent.
+// To run directly with blockMesh, we rely on the movingWallVelocity BC on hub/casing
+// or treat it as a stationary cascade with inlet swirl for initial stability.
+
+// Uncomment and adapt when using a mesh with a 'rotor' cellZone:
+// rotor
+// {
+//     active      yes;
+//     cellZone    rotor;
+//     nonRotatingPatches (hub casing inlet outlet);
+//     origin      (0 0 0);
+//     axis        (0 0 1);
+//     omega       157.08; // 1500 rpm = 157.08 rad/s
+// }

@@ -1,0 +1,42 @@
+# === Python ===
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# === 虚拟环境（6.4G，含 17 个 >100MB CUDA 库，GitHub 100MB 上限无法接收）===
+chatcfd_venv/
+venv/
+.venv/
+env/
+test_env/
+
+# === 临时/生成产物（算例产物 foam_agent/runs 保留）===
+temp/
+run_chatcfd/
+removed/
+*.bak
+server.log*
+
+# === 备份/敏感配置 ===
+inputs/*_bak.json
+src/*_bak.py
+*.key
+*.pem
+.env
+.env.*
+# 本地私有配置（含密钥，永不提交）
+inputs/chatcfd_config.local.json
+inputs/*secret*
+inputs/*credential*
+# 密钥备份目录
+temp/backup_keys/
+*api_key*
+*apikey*
+*secret*
+
+# === IDE / OS ===
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

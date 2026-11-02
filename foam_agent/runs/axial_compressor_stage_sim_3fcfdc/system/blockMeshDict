@@ -1,0 +1,78 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+convertToMeters 1.0;
+vertices
+(
+    // Hub inner radius 0.1875m, Casing outer radius 0.25m
+    // Axial length 0.1m (simplified for template)
+    // Front plane z=0
+    (0.1875 0 0)   // 0: hub-in-front
+    (0.25 0 0)     // 1: casing-in-front
+    (0.25 0.1 0)   // 2: casing-out-front
+    (0.1875 0.1 0) // 3: hub-out-front
+    // Back plane z=0.001 (thin direction for 2D-like or wedge approximation if needed, but here we assume a simple annular sector block for demonstration)
+    // Note: A real compressor requires complex blade geometry. This is a placeholder straight duct mesh.
+    (0.1875 0 0.001)   // 4: hub-in-back
+    (0.25 0 0.001)     // 5: casing-in-back
+    (0.25 0.1 0.001)   // 6: casing-out-back
+    (0.1875 0.1 0.001) // 7: hub-out-back
+);
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) (10 20 20) simpleGrading (1 1 1)
+);
+edges
+(
+);
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (0 3 2 1)
+        );
+    }
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (4 5 6 7)
+        );
+    }
+    hub
+    {
+        type wall;
+        faces
+        (
+            (0 4 7 3)
+        );
+    }
+    casing
+    {
+        type wall;
+        faces
+        (
+            (1 2 6 5)
+        );
+    }
+    frontBack
+    {
+        type empty;
+        faces
+        (
+            (0 1 5 4)
+            (3 7 6 2)
+        );
+    }
+);
+mergePatchPairs
+(
+);

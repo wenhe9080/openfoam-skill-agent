@@ -1,0 +1,42 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      omega;
+}
+
+dimensions      [0 0 -1 0 0 0 0];
+
+internalField   uniform 150;
+
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 150;
+    }
+    outlet
+    {
+        type            zeroGradient;
+    }
+    hub
+    {
+        type            omegaWallFunction;
+        value           uniform 150;
+    }
+    shroud
+    {
+        type            omegaWallFunction;
+        value           uniform 150;
+    }
+    periodic_ss
+    {
+        type            cyclic;
+    }
+    periodic_ps
+    {
+        type            cyclic;
+    }
+}

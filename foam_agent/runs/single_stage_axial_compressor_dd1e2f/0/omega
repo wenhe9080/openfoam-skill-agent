@@ -1,0 +1,44 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      omega;
+}
+
+dimensions      [0 0 -1 0 0 0 0];
+
+// Estimated from k and nut: omega = k / (nut * betaStar), betaStar~0.09, nut~10*nu
+internalField   uniform 444;
+
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 444;
+    }
+    outlet
+    {
+        type            zeroGradient;
+    }
+    hub
+    {
+        type            omegaWallFunction;
+        value           uniform 444;
+    }
+    casing
+    {
+        type            omegaWallFunction;
+        value           uniform 444;
+    }
+    theta0
+    {
+        type            wedge;
+    }
+    theta1
+    {
+        type            wedge;
+    }
+}

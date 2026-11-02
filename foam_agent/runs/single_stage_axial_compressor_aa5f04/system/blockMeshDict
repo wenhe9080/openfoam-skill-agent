@@ -1,0 +1,96 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+
+convertToMeters 1;
+
+// Annular compressor passage: outer R=0.25m, inner R=0.1875m (hub ratio 0.75)
+// Unrolled 1-pitch sector in Cartesian for blockMesh compatibility.
+// x=axial, y=circumferential (unrolled), z=radial
+// Pitch at midspan = 2*pi*0.21875/20 = 0.06872 m
+// Axial length = 0.3m (inlet + rotor + stator + outlet)
+
+vertices
+(
+    // Bottom face (z=0, hub)
+    (0.0   0.0     0.0)      // 0
+    (0.3   0.0     0.0)      // 1
+    (0.3   0.06872 0.0)      // 2
+    (0.0   0.06872 0.0)      // 3
+    // Top face (z=0.0625, casing)
+    (0.0   0.0     0.0625)   // 4
+    (0.3   0.0     0.0625)   // 5
+    (0.3   0.06872 0.0625)   // 6
+    (0.0   0.06872 0.0625)   // 7
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) (60 10 8) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (0 3 7 4)
+        );
+    }
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (1 5 6 2)
+        );
+    }
+    hub
+    {
+        type wall;
+        faces
+        (
+            (0 1 2 3)
+        );
+    }
+    casing
+    {
+        type wall;
+        faces
+        (
+            (4 7 6 5)
+        );
+    }
+    periodic_1
+    {
+        type cyclic;
+        neighbourPatch periodic_2;
+        faces
+        (
+            (0 1 5 4)
+        );
+    }
+    periodic_2
+    {
+        type cyclic;
+        neighbourPatch periodic_1;
+        faces
+        (
+            (3 7 6 2)
+        );
+    }
+);
+
+mergePatchPairs
+(
+);

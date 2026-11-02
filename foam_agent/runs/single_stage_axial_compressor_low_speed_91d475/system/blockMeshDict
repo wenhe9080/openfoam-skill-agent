@@ -1,0 +1,77 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+
+convertToMeters 1.0;
+
+vertices
+(
+    // Define a simple rectangular channel to ensure valid topology
+    // Bottom face (z=0): 0, 1, 2, 3 in counter-clockwise order looking from +z
+    (0 0 0)        // 0: origin
+    (0.2 0 0)      // 1: x-direction
+    (0.2 0.0625 0) // 2: x+y direction
+    (0 0.0625 0)   // 3: y-direction
+    
+    // Top face (z=0.1): 4, 5, 6, 7 directly above 0, 1, 2, 3 respectively
+    (0 0 0.1)      // 4: above 0
+    (0.2 0 0.1)    // 5: above 1
+    (0.2 0.0625 0.1)// 6: above 2
+    (0 0.0625 0.1) // 7: above 3
+);
+
+blocks
+(
+    // Standard hex definition: (0 1 2 3 4 5 6 7)
+    hex (0 1 2 3 4 5 6 7) (20 10 1) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (0 3 7 4) // Face on x=0 plane
+        );
+    }
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (1 2 6 5) // Face at x=0.2
+        );
+    }
+    sideWalls
+    {
+        type wall;
+        faces
+        (
+            (0 1 5 4) // y=0 plane
+            (3 2 6 7) // y=0.0625 plane
+        );
+    }
+    frontBack
+    {
+        type empty;
+        faces
+        (
+            (0 1 2 3) // z=0 plane
+            (4 5 6 7) // z=0.1 plane
+        );
+    }
+);
+
+mergePatchPairs
+(
+);

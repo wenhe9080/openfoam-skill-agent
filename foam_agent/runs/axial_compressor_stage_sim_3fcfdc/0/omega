@@ -1,0 +1,47 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      omega;
+}
+dimensions      [0 0 -1 0 0 0 0];
+internalField   uniform 100.0;
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 100.0; // Specific dissipation rate inlet
+    }
+    outlet
+    {
+        type            inletOutlet;
+        inletValue      uniform 100.0;
+        value           uniform 100.0;
+    }
+    hub
+    {
+        type            omegaWallFunction;
+        value           uniform 100.0;
+    }
+    casing
+    {
+        type            omegaWallFunction;
+        value           uniform 100.0;
+    }
+    rotorBlade
+    {
+        type            omegaWallFunction;
+        value           uniform 100.0;
+    }
+    statorBlade
+    {
+        type            omegaWallFunction;
+        value           uniform 100.0;
+    }
+    frontBack
+    {
+        type            empty;
+    }
+}

@@ -1,0 +1,1619 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2406                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _1653fa08-20260127 OPENFOAM=2406 patch=260127 version=2406
+Arch   : "LSB;label=32;scalar=64"
+Exec   : blockMesh
+Date   : Oct 30 2026
+Time   : 11:27:12
+Host   : PIGPI
+PID    : 11272
+I/O    : uncollated
+Case   : /mnt/g/ChatCFD-main/foam_agent/runs/axial_compressor_stage_bc9f74
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Creating block mesh from "system/blockMeshDict"
+--> FOAM IOWarning :
+    Found [v1012] 'convertToMeters' entry instead of 'scale' in dictionary "system/blockMeshDict"
+
+    This keyword is 162 months old.
+
+Creating block edges
+No non-planar block faces defined
+Creating topology blocks
+
+Creating topology patches - from boundary section
+
+Creating block mesh topology
+
+Check topology
+
+	Basic statistics
+		Number of internal faces : 4
+		Number of boundary faces : 22
+		Number of defined boundary faces : 22
+		Number of undefined boundary faces : 0
+	Checking patch -> block consistency
+
+Creating block offsets
+Creating merge list (topological search)...
+Deleting polyMesh directory "constant/polyMesh"
+
+Creating polyMesh from blockMesh
+Creating patches
+Creating cells
+Creating points with scale (1 1 1)
+    Block 0 cell size :
+        i : 0.0032567 .. 0.0032567
+        j : 0.00416771 .. 0.00416771
+        k : 0.01 .. 0.01
+
+    Block 1 cell size :
+        i : 0.0032567 .. 0.0032567
+        j : 0.00416771 .. 0.00416771
+        k : 0.01 .. 0.01
+
+    Block 2 cell size :
+        i : 0.0032567 .. 0.0032567
+        j : 0.00416771 .. 0.00416771
+        k : 0.01 .. 0.01
+
+    Block 3 cell size :
+        i : 0.0032567 .. 0.0032567
+        j : 0.00416771 .. 0.00416771
+        k : 0.01 .. 0.01
+
+    Block 4 cell size :
+        i : 0.0032567 .. 0.0032567
+        j : 0.00416771 .. 0.00416771
+        k : 0.02 .. 0.02
+
+No patch pairs to merge
+
+Detected cyclic patches; ordering boundary faces
+Cannot find point in pts1 matching point 0 coord:(0.005 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:0 in pts1
+    Compared coord: (0.005 0.18675 -0.0329246) at index 0 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 15 coord:(0.015 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:0 in pts1
+    Compared coord: (0.005 0.18675 -0.0329246) at index 0 with difference to point 0.01
+    Compared coord: (0.015 0.18675 -0.0329246) at index 1 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 30 coord:(0.025 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:1 in pts1
+    Compared coord: (0.015 0.18675 -0.0329246) at index 1 with difference to point 0.01
+    Compared coord: (0.025 0.18675 -0.0329246) at index 2 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 45 coord:(0.035 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:2 in pts1
+    Compared coord: (0.025 0.18675 -0.0329246) at index 2 with difference to point 0.01
+    Compared coord: (0.035 0.18675 -0.0329246) at index 3 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 1 coord:(0.005 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:3 in pts1
+    Compared coord: (0.035 0.18675 -0.0329246) at index 3 with difference to point 0.0302881
+    Compared coord: (0.005 0.190854 -0.0336483) at index 4 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 16 coord:(0.015 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:4 in pts1
+    Compared coord: (0.005 0.190854 -0.0336483) at index 4 with difference to point 0.01
+    Compared coord: (0.015 0.190854 -0.0336483) at index 5 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 60 coord:(0.045 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:5 in pts1
+    Compared coord: (0.015 0.190854 -0.0336483) at index 5 with difference to point 0.0302881
+    Compared coord: (0.045 0.18675 -0.0329246) at index 6 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 31 coord:(0.025 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:6 in pts1
+    Compared coord: (0.045 0.18675 -0.0329246) at index 6 with difference to point 0.0204296
+    Compared coord: (0.025 0.190854 -0.0336483) at index 7 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 46 coord:(0.035 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:7 in pts1
+    Compared coord: (0.025 0.190854 -0.0336483) at index 7 with difference to point 0.01
+    Compared coord: (0.035 0.190854 -0.0336483) at index 8 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 75 coord:(0.055 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:8 in pts1
+    Compared coord: (0.035 0.190854 -0.0336483) at index 8 with difference to point 0.0204296
+    Compared coord: (0.055 0.18675 -0.0329246) at index 9 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 2 coord:(0.005 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:9 in pts1
+    Compared coord: (0.055 0.18675 -0.0329246) at index 9 with difference to point 0.05069
+    Compared coord: (0.005 0.194959 -0.0343719) at index 10 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 17 coord:(0.015 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:10 in pts1
+    Compared coord: (0.005 0.194959 -0.0343719) at index 10 with difference to point 0.01
+    Compared coord: (0.015 0.194959 -0.0343719) at index 11 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 61 coord:(0.045 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:11 in pts1
+    Compared coord: (0.015 0.194959 -0.0343719) at index 11 with difference to point 0.0302881
+    Compared coord: (0.045 0.190854 -0.0336483) at index 12 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 32 coord:(0.025 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:12 in pts1
+    Compared coord: (0.045 0.190854 -0.0336483) at index 12 with difference to point 0.0204296
+    Compared coord: (0.025 0.194959 -0.0343719) at index 13 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 90 coord:(0.065 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:13 in pts1
+    Compared coord: (0.025 0.194959 -0.0343719) at index 13 with difference to point 0.0408593
+    Compared coord: (0.065 0.18675 -0.0329246) at index 14 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 47 coord:(0.035 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:14 in pts1
+    Compared coord: (0.065 0.18675 -0.0329246) at index 14 with difference to point 0.0311365
+    Compared coord: (0.035 0.194959 -0.0343719) at index 15 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 76 coord:(0.055 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:15 in pts1
+    Compared coord: (0.035 0.194959 -0.0343719) at index 15 with difference to point 0.0204296
+    Compared coord: (0.055 0.190854 -0.0336483) at index 16 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 3 coord:(0.005 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:16 in pts1
+    Compared coord: (0.055 0.190854 -0.0336483) at index 16 with difference to point 0.05069
+    Compared coord: (0.005 0.199063 -0.0350956) at index 17 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 18 coord:(0.015 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:17 in pts1
+    Compared coord: (0.005 0.199063 -0.0350956) at index 17 with difference to point 0.01
+    Compared coord: (0.015 0.199063 -0.0350956) at index 18 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 62 coord:(0.045 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:18 in pts1
+    Compared coord: (0.015 0.199063 -0.0350956) at index 18 with difference to point 0.0302881
+    Compared coord: (0.045 0.194959 -0.0343719) at index 19 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 33 coord:(0.025 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:19 in pts1
+    Compared coord: (0.045 0.194959 -0.0343719) at index 19 with difference to point 0.0204296
+    Compared coord: (0.025 0.199063 -0.0350956) at index 20 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 105 coord:(0.075 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:20 in pts1
+    Compared coord: (0.025 0.199063 -0.0350956) at index 20 with difference to point 0.0515396
+    Compared coord: (0.075 0.18675 -0.0329246) at index 21 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 91 coord:(0.065 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:21 in pts1
+    Compared coord: (0.075 0.18675 -0.0329246) at index 21 with difference to point 0.0108337
+    Compared coord: (0.065 0.190854 -0.0336483) at index 22 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 48 coord:(0.035 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:22 in pts1
+    Compared coord: (0.065 0.190854 -0.0336483) at index 22 with difference to point 0.0311365
+    Compared coord: (0.035 0.199063 -0.0350956) at index 23 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 77 coord:(0.055 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:23 in pts1
+    Compared coord: (0.035 0.199063 -0.0350956) at index 23 with difference to point 0.0204296
+    Compared coord: (0.055 0.194959 -0.0343719) at index 24 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 4 coord:(0.005 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:24 in pts1
+    Compared coord: (0.055 0.194959 -0.0343719) at index 24 with difference to point 0.05069
+    Compared coord: (0.005 0.203168 -0.0358193) at index 25 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 19 coord:(0.015 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:25 in pts1
+    Compared coord: (0.005 0.203168 -0.0358193) at index 25 with difference to point 0.01
+    Compared coord: (0.015 0.203168 -0.0358193) at index 26 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 63 coord:(0.045 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:26 in pts1
+    Compared coord: (0.015 0.203168 -0.0358193) at index 26 with difference to point 0.0302881
+    Compared coord: (0.045 0.199063 -0.0350956) at index 27 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 106 coord:(0.075 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:27 in pts1
+    Compared coord: (0.045 0.199063 -0.0350956) at index 27 with difference to point 0.0311365
+    Compared coord: (0.075 0.190854 -0.0336483) at index 28 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 120 coord:(0.085 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:28 in pts1
+    Compared coord: (0.075 0.190854 -0.0336483) at index 28 with difference to point 0.0108337
+    Compared coord: (0.085 0.18675 -0.0329246) at index 29 with difference to point 4.28651e-06
+    Compared coord: (0.025 0.203168 -0.0358193) at index 30 with difference to point 0.0622729
+Cannot find point in pts1 matching point 34 coord:(0.025 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:28 in pts1
+    Compared coord: (0.075 0.190854 -0.0336483) at index 28 with difference to point 0.0515396
+    Compared coord: (0.085 0.18675 -0.0329246) at index 29 with difference to point 0.0622729
+    Compared coord: (0.025 0.203168 -0.0358193) at index 30 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 92 coord:(0.065 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:30 in pts1
+    Compared coord: (0.025 0.203168 -0.0358193) at index 30 with difference to point 0.0408593
+    Compared coord: (0.065 0.194959 -0.0343719) at index 31 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 49 coord:(0.035 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:31 in pts1
+    Compared coord: (0.065 0.194959 -0.0343719) at index 31 with difference to point 0.0311365
+    Compared coord: (0.035 0.203168 -0.0358193) at index 32 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 78 coord:(0.055 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:32 in pts1
+    Compared coord: (0.035 0.203168 -0.0358193) at index 32 with difference to point 0.0204296
+    Compared coord: (0.055 0.199063 -0.0350956) at index 33 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 5 coord:(0.005 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:33 in pts1
+    Compared coord: (0.055 0.199063 -0.0350956) at index 33 with difference to point 0.05069
+    Compared coord: (0.005 0.207272 -0.0365429) at index 34 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 20 coord:(0.015 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:34 in pts1
+    Compared coord: (0.005 0.207272 -0.0365429) at index 34 with difference to point 0.01
+    Compared coord: (0.015 0.207272 -0.0365429) at index 35 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 64 coord:(0.045 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:35 in pts1
+    Compared coord: (0.015 0.207272 -0.0365429) at index 35 with difference to point 0.0302881
+    Compared coord: (0.045 0.203168 -0.0358193) at index 36 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 121 coord:(0.085 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:36 in pts1
+    Compared coord: (0.045 0.203168 -0.0358193) at index 36 with difference to point 0.0419086
+    Compared coord: (0.085 0.190854 -0.0336483) at index 37 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 107 coord:(0.075 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:37 in pts1
+    Compared coord: (0.085 0.190854 -0.0336483) at index 37 with difference to point 0.0108337
+    Compared coord: (0.075 0.194959 -0.0343719) at index 38 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 35 coord:(0.025 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:38 in pts1
+    Compared coord: (0.075 0.194959 -0.0343719) at index 38 with difference to point 0.0515396
+    Compared coord: (0.025 0.207272 -0.0365429) at index 39 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 135 coord:(0.095 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:39 in pts1
+    Compared coord: (0.025 0.207272 -0.0365429) at index 39 with difference to point 0.0730359
+    Compared coord: (0.095 0.18675 -0.0329246) at index 40 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 93 coord:(0.065 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:40 in pts1
+    Compared coord: (0.095 0.18675 -0.0329246) at index 40 with difference to point 0.0325012
+    Compared coord: (0.065 0.199063 -0.0350956) at index 41 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 50 coord:(0.035 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:41 in pts1
+    Compared coord: (0.065 0.199063 -0.0350956) at index 41 with difference to point 0.0311365
+    Compared coord: (0.035 0.207272 -0.0365429) at index 42 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 79 coord:(0.055 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:42 in pts1
+    Compared coord: (0.035 0.207272 -0.0365429) at index 42 with difference to point 0.0204296
+    Compared coord: (0.055 0.203168 -0.0358193) at index 43 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 6 coord:(0.005 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:43 in pts1
+    Compared coord: (0.055 0.203168 -0.0358193) at index 43 with difference to point 0.05069
+    Compared coord: (0.005 0.211376 -0.0372666) at index 44 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 21 coord:(0.015 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:44 in pts1
+    Compared coord: (0.005 0.211376 -0.0372666) at index 44 with difference to point 0.01
+    Compared coord: (0.015 0.211376 -0.0372666) at index 45 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 65 coord:(0.045 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:45 in pts1
+    Compared coord: (0.015 0.211376 -0.0372666) at index 45 with difference to point 0.0302881
+    Compared coord: (0.045 0.207272 -0.0365429) at index 46 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 122 coord:(0.085 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:46 in pts1
+    Compared coord: (0.045 0.207272 -0.0365429) at index 46 with difference to point 0.0419086
+    Compared coord: (0.085 0.194959 -0.0343719) at index 47 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 108 coord:(0.075 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:47 in pts1
+    Compared coord: (0.085 0.194959 -0.0343719) at index 47 with difference to point 0.0108337
+    Compared coord: (0.075 0.199063 -0.0350956) at index 48 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 136 coord:(0.095 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:48 in pts1
+    Compared coord: (0.075 0.199063 -0.0350956) at index 48 with difference to point 0.0216675
+    Compared coord: (0.095 0.190854 -0.0336483) at index 49 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 36 coord:(0.025 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:49 in pts1
+    Compared coord: (0.095 0.190854 -0.0336483) at index 49 with difference to point 0.0730359
+    Compared coord: (0.025 0.211376 -0.0372666) at index 50 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 94 coord:(0.065 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:50 in pts1
+    Compared coord: (0.025 0.211376 -0.0372666) at index 50 with difference to point 0.0408593
+    Compared coord: (0.065 0.203168 -0.0358193) at index 51 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 150 coord:(0.105 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:51 in pts1
+    Compared coord: (0.065 0.203168 -0.0358193) at index 51 with difference to point 0.0433349
+    Compared coord: (0.105 0.18675 -0.0329246) at index 52 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 51 coord:(0.035 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:52 in pts1
+    Compared coord: (0.105 0.18675 -0.0329246) at index 52 with difference to point 0.0743324
+    Compared coord: (0.035 0.211376 -0.0372666) at index 53 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 80 coord:(0.055 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:53 in pts1
+    Compared coord: (0.035 0.211376 -0.0372666) at index 53 with difference to point 0.0204296
+    Compared coord: (0.055 0.207272 -0.0365429) at index 54 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 7 coord:(0.005 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:54 in pts1
+    Compared coord: (0.055 0.207272 -0.0365429) at index 54 with difference to point 0.05069
+    Compared coord: (0.005 0.215481 -0.0379903) at index 55 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 123 coord:(0.085 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:55 in pts1
+    Compared coord: (0.005 0.215481 -0.0379903) at index 55 with difference to point 0.0817185
+    Compared coord: (0.085 0.199063 -0.0350956) at index 56 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 66 coord:(0.045 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:56 in pts1
+    Compared coord: (0.085 0.199063 -0.0350956) at index 56 with difference to point 0.0419086
+    Compared coord: (0.045 0.211376 -0.0372666) at index 57 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 22 coord:(0.015 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:57 in pts1
+    Compared coord: (0.045 0.211376 -0.0372666) at index 57 with difference to point 0.0302881
+    Compared coord: (0.015 0.215481 -0.0379903) at index 58 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 109 coord:(0.075 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:58 in pts1
+    Compared coord: (0.015 0.215481 -0.0379903) at index 58 with difference to point 0.0612889
+    Compared coord: (0.075 0.203168 -0.0358193) at index 59 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 137 coord:(0.095 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:59 in pts1
+    Compared coord: (0.075 0.203168 -0.0358193) at index 59 with difference to point 0.0216675
+    Compared coord: (0.095 0.194959 -0.0343719) at index 60 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 37 coord:(0.025 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:60 in pts1
+    Compared coord: (0.095 0.194959 -0.0343719) at index 60 with difference to point 0.0730359
+    Compared coord: (0.025 0.215481 -0.0379903) at index 61 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 95 coord:(0.065 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:61 in pts1
+    Compared coord: (0.025 0.215481 -0.0379903) at index 61 with difference to point 0.0408593
+    Compared coord: (0.065 0.207272 -0.0365429) at index 62 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 151 coord:(0.105 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:62 in pts1
+    Compared coord: (0.065 0.207272 -0.0365429) at index 62 with difference to point 0.0433349
+    Compared coord: (0.105 0.190854 -0.0336483) at index 63 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 81 coord:(0.055 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:63 in pts1
+    Compared coord: (0.105 0.190854 -0.0336483) at index 63 with difference to point 0.0541687
+    Compared coord: (0.055 0.211376 -0.0372666) at index 64 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 52 coord:(0.035 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:64 in pts1
+    Compared coord: (0.055 0.211376 -0.0372666) at index 64 with difference to point 0.0204296
+    Compared coord: (0.035 0.215481 -0.0379903) at index 65 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 165 coord:(0.115 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:65 in pts1
+    Compared coord: (0.035 0.215481 -0.0379903) at index 65 with difference to point 0.0851535
+    Compared coord: (0.115 0.18675 -0.0329246) at index 66 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 8 coord:(0.005 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:66 in pts1
+    Compared coord: (0.115 0.18675 -0.0329246) at index 66 with difference to point 0.114942
+    Compared coord: (0.005 0.219585 -0.0387139) at index 67 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 124 coord:(0.085 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:67 in pts1
+    Compared coord: (0.005 0.219585 -0.0387139) at index 67 with difference to point 0.0817185
+    Compared coord: (0.085 0.203168 -0.0358193) at index 68 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 138 coord:(0.095 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:68 in pts1
+    Compared coord: (0.085 0.203168 -0.0358193) at index 68 with difference to point 0.0108337
+    Compared coord: (0.095 0.199063 -0.0350956) at index 69 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 67 coord:(0.045 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:69 in pts1
+    Compared coord: (0.095 0.199063 -0.0350956) at index 69 with difference to point 0.0527059
+    Compared coord: (0.045 0.215481 -0.0379903) at index 70 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 110 coord:(0.075 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:70 in pts1
+    Compared coord: (0.045 0.215481 -0.0379903) at index 70 with difference to point 0.0311365
+    Compared coord: (0.075 0.207272 -0.0365429) at index 71 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 23 coord:(0.015 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:71 in pts1
+    Compared coord: (0.075 0.207272 -0.0365429) at index 71 with difference to point 0.0612889
+    Compared coord: (0.015 0.219585 -0.0387139) at index 72 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 152 coord:(0.105 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:72 in pts1
+    Compared coord: (0.015 0.219585 -0.0387139) at index 72 with difference to point 0.0934094
+    Compared coord: (0.105 0.194959 -0.0343719) at index 73 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 96 coord:(0.065 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:73 in pts1
+    Compared coord: (0.105 0.194959 -0.0343719) at index 73 with difference to point 0.0433349
+    Compared coord: (0.065 0.211376 -0.0372666) at index 74 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 38 coord:(0.025 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:74 in pts1
+    Compared coord: (0.065 0.211376 -0.0372666) at index 74 with difference to point 0.0408593
+    Compared coord: (0.025 0.219585 -0.0387139) at index 75 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 166 coord:(0.115 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:75 in pts1
+    Compared coord: (0.025 0.219585 -0.0387139) at index 75 with difference to point 0.0946104
+    Compared coord: (0.115 0.190854 -0.0336483) at index 76 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 82 coord:(0.055 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:76 in pts1
+    Compared coord: (0.115 0.190854 -0.0336483) at index 76 with difference to point 0.0650024
+    Compared coord: (0.055 0.215481 -0.0379903) at index 77 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 53 coord:(0.035 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:77 in pts1
+    Compared coord: (0.055 0.215481 -0.0379903) at index 77 with difference to point 0.0204296
+    Compared coord: (0.035 0.219585 -0.0387139) at index 78 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 125 coord:(0.085 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:78 in pts1
+    Compared coord: (0.035 0.219585 -0.0387139) at index 78 with difference to point 0.0515396
+    Compared coord: (0.085 0.207272 -0.0365429) at index 79 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 180 coord:(0.125 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:79 in pts1
+    Compared coord: (0.085 0.207272 -0.0365429) at index 79 with difference to point 0.0451026
+    Compared coord: (0.125 0.18675 -0.0329246) at index 80 with difference to point 4.28651e-06
+    Compared coord: (0.095 0.203168 -0.0358193) at index 81 with difference to point 0.0343208
+Cannot find point in pts1 matching point 139 coord:(0.095 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:79 in pts1
+    Compared coord: (0.085 0.207272 -0.0365429) at index 79 with difference to point 0.0108337
+    Compared coord: (0.125 0.18675 -0.0329246) at index 80 with difference to point 0.0343208
+    Compared coord: (0.095 0.203168 -0.0358193) at index 81 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 9 coord:(0.005 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:81 in pts1
+    Compared coord: (0.095 0.203168 -0.0358193) at index 81 with difference to point 0.092381
+    Compared coord: (0.005 0.22369 -0.0394376) at index 82 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 111 coord:(0.075 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:82 in pts1
+    Compared coord: (0.005 0.22369 -0.0394376) at index 82 with difference to point 0.0711079
+    Compared coord: (0.075 0.211376 -0.0372666) at index 83 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 68 coord:(0.045 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:83 in pts1
+    Compared coord: (0.075 0.211376 -0.0372666) at index 83 with difference to point 0.0311365
+    Compared coord: (0.045 0.219585 -0.0387139) at index 84 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 24 coord:(0.015 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:84 in pts1
+    Compared coord: (0.045 0.219585 -0.0387139) at index 84 with difference to point 0.0302881
+    Compared coord: (0.015 0.22369 -0.0394376) at index 85 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 153 coord:(0.105 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:85 in pts1
+    Compared coord: (0.015 0.22369 -0.0394376) at index 85 with difference to point 0.0934094
+    Compared coord: (0.105 0.199063 -0.0350956) at index 86 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 97 coord:(0.065 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:86 in pts1
+    Compared coord: (0.105 0.199063 -0.0350956) at index 86 with difference to point 0.0433349
+    Compared coord: (0.065 0.215481 -0.0379903) at index 87 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 39 coord:(0.025 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:87 in pts1
+    Compared coord: (0.065 0.215481 -0.0379903) at index 87 with difference to point 0.0408593
+    Compared coord: (0.025 0.22369 -0.0394376) at index 88 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 167 coord:(0.115 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:88 in pts1
+    Compared coord: (0.025 0.22369 -0.0394376) at index 88 with difference to point 0.0946104
+    Compared coord: (0.115 0.194959 -0.0343719) at index 89 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 83 coord:(0.055 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:89 in pts1
+    Compared coord: (0.115 0.194959 -0.0343719) at index 89 with difference to point 0.0650024
+    Compared coord: (0.055 0.219585 -0.0387139) at index 90 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 54 coord:(0.035 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:90 in pts1
+    Compared coord: (0.055 0.219585 -0.0387139) at index 90 with difference to point 0.0204296
+    Compared coord: (0.035 0.22369 -0.0394376) at index 91 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 181 coord:(0.125 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:91 in pts1
+    Compared coord: (0.035 0.22369 -0.0394376) at index 91 with difference to point 0.0959774
+    Compared coord: (0.125 0.190854 -0.0336483) at index 92 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 126 coord:(0.085 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:92 in pts1
+    Compared coord: (0.125 0.190854 -0.0336483) at index 92 with difference to point 0.0451026
+    Compared coord: (0.085 0.211376 -0.0372666) at index 93 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 140 coord:(0.095 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:93 in pts1
+    Compared coord: (0.085 0.211376 -0.0372666) at index 93 with difference to point 0.0108337
+    Compared coord: (0.095 0.207272 -0.0365429) at index 94 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 112 coord:(0.075 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:94 in pts1
+    Compared coord: (0.095 0.207272 -0.0365429) at index 94 with difference to point 0.0216675
+    Compared coord: (0.075 0.215481 -0.0379903) at index 95 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 10 coord:(0.005 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:95 in pts1
+    Compared coord: (0.075 0.215481 -0.0379903) at index 95 with difference to point 0.0711079
+    Compared coord: (0.005 0.227794 -0.0401613) at index 96 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 154 coord:(0.105 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:96 in pts1
+    Compared coord: (0.005 0.227794 -0.0401613) at index 96 with difference to point 0.103079
+    Compared coord: (0.105 0.203168 -0.0358193) at index 97 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 69 coord:(0.045 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:97 in pts1
+    Compared coord: (0.105 0.203168 -0.0358193) at index 97 with difference to point 0.0635157
+    Compared coord: (0.045 0.22369 -0.0394376) at index 98 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 25 coord:(0.015 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:98 in pts1
+    Compared coord: (0.045 0.22369 -0.0394376) at index 98 with difference to point 0.0302881
+    Compared coord: (0.015 0.227794 -0.0401613) at index 99 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 98 coord:(0.065 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:99 in pts1
+    Compared coord: (0.015 0.227794 -0.0401613) at index 99 with difference to point 0.05069
+    Compared coord: (0.065 0.219585 -0.0387139) at index 100 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 168 coord:(0.115 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:100 in pts1
+    Compared coord: (0.065 0.219585 -0.0387139) at index 100 with difference to point 0.0541687
+    Compared coord: (0.115 0.199063 -0.0350956) at index 101 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 40 coord:(0.025 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:101 in pts1
+    Compared coord: (0.115 0.199063 -0.0350956) at index 101 with difference to point 0.0946104
+    Compared coord: (0.025 0.227794 -0.0401613) at index 102 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 195 coord:(0.135 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:102 in pts1
+    Compared coord: (0.025 0.227794 -0.0401613) at index 102 with difference to point 0.117631
+    Compared coord: (0.135 0.18675 -0.0329246) at index 103 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 84 coord:(0.055 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:103 in pts1
+    Compared coord: (0.135 0.18675 -0.0329246) at index 103 with difference to point 0.088357
+    Compared coord: (0.055 0.22369 -0.0394376) at index 104 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 55 coord:(0.035 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:104 in pts1
+    Compared coord: (0.055 0.22369 -0.0394376) at index 104 with difference to point 0.0204296
+    Compared coord: (0.035 0.227794 -0.0401613) at index 105 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 182 coord:(0.125 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:105 in pts1
+    Compared coord: (0.035 0.227794 -0.0401613) at index 105 with difference to point 0.0959774
+    Compared coord: (0.125 0.194959 -0.0343719) at index 106 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 141 coord:(0.095 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:106 in pts1
+    Compared coord: (0.125 0.194959 -0.0343719) at index 106 with difference to point 0.0343208
+    Compared coord: (0.095 0.211376 -0.0372666) at index 107 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 127 coord:(0.085 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:107 in pts1
+    Compared coord: (0.095 0.211376 -0.0372666) at index 107 with difference to point 0.0108337
+    Compared coord: (0.085 0.215481 -0.0379903) at index 108 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 155 coord:(0.105 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:108 in pts1
+    Compared coord: (0.085 0.215481 -0.0379903) at index 108 with difference to point 0.0216675
+    Compared coord: (0.105 0.207272 -0.0365429) at index 109 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 113 coord:(0.075 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:109 in pts1
+    Compared coord: (0.105 0.207272 -0.0365429) at index 109 with difference to point 0.0325012
+    Compared coord: (0.075 0.219585 -0.0387139) at index 110 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 11 coord:(0.005 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:110 in pts1
+    Compared coord: (0.075 0.219585 -0.0387139) at index 110 with difference to point 0.0711079
+    Compared coord: (0.005 0.231898 -0.0408849) at index 111 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 70 coord:(0.045 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:111 in pts1
+    Compared coord: (0.005 0.231898 -0.0408849) at index 111 with difference to point 0.0402165
+    Compared coord: (0.045 0.227794 -0.0401613) at index 112 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 26 coord:(0.015 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:112 in pts1
+    Compared coord: (0.045 0.227794 -0.0401613) at index 112 with difference to point 0.0302881
+    Compared coord: (0.015 0.231898 -0.0408849) at index 113 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 196 coord:(0.135 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:113 in pts1
+    Compared coord: (0.015 0.231898 -0.0408849) at index 113 with difference to point 0.127031
+    Compared coord: (0.135 0.190854 -0.0336483) at index 114 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 169 coord:(0.115 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:114 in pts1
+    Compared coord: (0.135 0.190854 -0.0336483) at index 114 with difference to point 0.0235866
+    Compared coord: (0.115 0.203168 -0.0358193) at index 115 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 99 coord:(0.065 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:115 in pts1
+    Compared coord: (0.115 0.203168 -0.0358193) at index 115 with difference to point 0.0541687
+    Compared coord: (0.065 0.22369 -0.0394376) at index 116 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 41 coord:(0.025 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:116 in pts1
+    Compared coord: (0.065 0.22369 -0.0394376) at index 116 with difference to point 0.0408593
+    Compared coord: (0.025 0.231898 -0.0408849) at index 117 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 183 coord:(0.125 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:117 in pts1
+    Compared coord: (0.025 0.231898 -0.0408849) at index 117 with difference to point 0.105412
+    Compared coord: (0.125 0.199063 -0.0350956) at index 118 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 85 coord:(0.055 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:118 in pts1
+    Compared coord: (0.125 0.199063 -0.0350956) at index 118 with difference to point 0.0758361
+    Compared coord: (0.055 0.227794 -0.0401613) at index 119 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 56 coord:(0.035 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:119 in pts1
+    Compared coord: (0.055 0.227794 -0.0401613) at index 119 with difference to point 0.0204296
+    Compared coord: (0.035 0.231898 -0.0408849) at index 120 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 142 coord:(0.095 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:120 in pts1
+    Compared coord: (0.035 0.231898 -0.0408849) at index 120 with difference to point 0.0622729
+    Compared coord: (0.095 0.215481 -0.0379903) at index 121 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 128 coord:(0.085 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:121 in pts1
+    Compared coord: (0.095 0.215481 -0.0379903) at index 121 with difference to point 0.0108337
+    Compared coord: (0.085 0.219585 -0.0387139) at index 122 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 210 coord:(0.145 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:122 in pts1
+    Compared coord: (0.085 0.219585 -0.0387139) at index 122 with difference to point 0.0686416
+    Compared coord: (0.145 0.18675 -0.0329246) at index 123 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 156 coord:(0.105 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:123 in pts1
+    Compared coord: (0.145 0.18675 -0.0329246) at index 123 with difference to point 0.0471732
+    Compared coord: (0.105 0.211376 -0.0372666) at index 124 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 114 coord:(0.075 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:124 in pts1
+    Compared coord: (0.105 0.211376 -0.0372666) at index 124 with difference to point 0.0325012
+    Compared coord: (0.075 0.22369 -0.0394376) at index 125 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 197 coord:(0.135 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:125 in pts1
+    Compared coord: (0.075 0.22369 -0.0394376) at index 125 with difference to point 0.0667167
+    Compared coord: (0.135 0.194959 -0.0343719) at index 126 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 12 coord:(0.005 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:126 in pts1
+    Compared coord: (0.135 0.194959 -0.0343719) at index 126 with difference to point 0.136517
+    Compared coord: (0.005 0.236003 -0.0416086) at index 127 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 71 coord:(0.045 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:127 in pts1
+    Compared coord: (0.005 0.236003 -0.0416086) at index 127 with difference to point 0.0402165
+    Compared coord: (0.045 0.231898 -0.0408849) at index 128 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 170 coord:(0.115 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:128 in pts1
+    Compared coord: (0.045 0.231898 -0.0408849) at index 128 with difference to point 0.0743324
+    Compared coord: (0.115 0.207272 -0.0365429) at index 129 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 27 coord:(0.015 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:129 in pts1
+    Compared coord: (0.115 0.207272 -0.0365429) at index 129 with difference to point 0.104169
+    Compared coord: (0.015 0.236003 -0.0416086) at index 130 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 100 coord:(0.065 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:130 in pts1
+    Compared coord: (0.015 0.236003 -0.0416086) at index 130 with difference to point 0.05069
+    Compared coord: (0.065 0.227794 -0.0401613) at index 131 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 42 coord:(0.025 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:131 in pts1
+    Compared coord: (0.065 0.227794 -0.0401613) at index 131 with difference to point 0.0408593
+    Compared coord: (0.025 0.236003 -0.0416086) at index 132 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 184 coord:(0.125 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:132 in pts1
+    Compared coord: (0.025 0.236003 -0.0416086) at index 132 with difference to point 0.105412
+    Compared coord: (0.125 0.203168 -0.0358193) at index 133 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 86 coord:(0.055 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:133 in pts1
+    Compared coord: (0.125 0.203168 -0.0358193) at index 133 with difference to point 0.0758361
+    Compared coord: (0.055 0.231898 -0.0408849) at index 134 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 211 coord:(0.145 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:134 in pts1
+    Compared coord: (0.055 0.231898 -0.0408849) at index 134 with difference to point 0.0991815
+    Compared coord: (0.145 0.190854 -0.0336483) at index 135 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 57 coord:(0.035 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:135 in pts1
+    Compared coord: (0.145 0.190854 -0.0336483) at index 135 with difference to point 0.119171
+    Compared coord: (0.035 0.236003 -0.0416086) at index 136 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 143 coord:(0.095 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:136 in pts1
+    Compared coord: (0.035 0.236003 -0.0416086) at index 136 with difference to point 0.0622729
+    Compared coord: (0.095 0.219585 -0.0387139) at index 137 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 129 coord:(0.085 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:137 in pts1
+    Compared coord: (0.095 0.219585 -0.0387139) at index 137 with difference to point 0.0108337
+    Compared coord: (0.085 0.22369 -0.0394376) at index 138 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 157 coord:(0.105 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:138 in pts1
+    Compared coord: (0.085 0.22369 -0.0394376) at index 138 with difference to point 0.0216675
+    Compared coord: (0.105 0.215481 -0.0379903) at index 139 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 198 coord:(0.135 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:139 in pts1
+    Compared coord: (0.105 0.215481 -0.0379903) at index 139 with difference to point 0.0343208
+    Compared coord: (0.135 0.199063 -0.0350956) at index 140 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 115 coord:(0.075 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:140 in pts1
+    Compared coord: (0.135 0.199063 -0.0350956) at index 140 with difference to point 0.0667167
+    Compared coord: (0.075 0.227794 -0.0401613) at index 141 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 171 coord:(0.115 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:141 in pts1
+    Compared coord: (0.075 0.227794 -0.0401613) at index 141 with difference to point 0.0433349
+    Compared coord: (0.115 0.211376 -0.0372666) at index 142 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 72 coord:(0.045 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:142 in pts1
+    Compared coord: (0.115 0.211376 -0.0372666) at index 142 with difference to point 0.0743324
+    Compared coord: (0.045 0.236003 -0.0416086) at index 143 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 13 coord:(0.005 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:143 in pts1
+    Compared coord: (0.045 0.236003 -0.0416086) at index 143 with difference to point 0.0402165
+    Compared coord: (0.005 0.240107 -0.0423323) at index 144 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 28 coord:(0.015 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:144 in pts1
+    Compared coord: (0.005 0.240107 -0.0423323) at index 144 with difference to point 0.01
+    Compared coord: (0.015 0.240107 -0.0423323) at index 145 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 101 coord:(0.065 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:145 in pts1
+    Compared coord: (0.015 0.240107 -0.0423323) at index 145 with difference to point 0.05069
+    Compared coord: (0.065 0.231898 -0.0408849) at index 146 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 185 coord:(0.125 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:146 in pts1
+    Compared coord: (0.065 0.231898 -0.0408849) at index 146 with difference to point 0.0650024
+    Compared coord: (0.125 0.207272 -0.0365429) at index 147 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 225 coord:(0.155 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:147 in pts1
+    Compared coord: (0.125 0.207272 -0.0365429) at index 147 with difference to point 0.0365273
+    Compared coord: (0.155 0.18675 -0.0329246) at index 148 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 43 coord:(0.025 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:148 in pts1
+    Compared coord: (0.155 0.18675 -0.0329246) at index 148 with difference to point 0.140839
+    Compared coord: (0.025 0.240107 -0.0423323) at index 149 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 212 coord:(0.145 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:149 in pts1
+    Compared coord: (0.025 0.240107 -0.0423323) at index 149 with difference to point 0.128459
+    Compared coord: (0.145 0.194959 -0.0343719) at index 150 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 87 coord:(0.055 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:150 in pts1
+    Compared coord: (0.145 0.194959 -0.0343719) at index 150 with difference to point 0.0991815
+    Compared coord: (0.055 0.236003 -0.0416086) at index 151 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 144 coord:(0.095 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:151 in pts1
+    Compared coord: (0.055 0.236003 -0.0416086) at index 151 with difference to point 0.0419086
+    Compared coord: (0.095 0.22369 -0.0394376) at index 152 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 58 coord:(0.035 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:152 in pts1
+    Compared coord: (0.095 0.22369 -0.0394376) at index 152 with difference to point 0.0622729
+    Compared coord: (0.035 0.240107 -0.0423323) at index 153 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 130 coord:(0.085 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:153 in pts1
+    Compared coord: (0.035 0.240107 -0.0423323) at index 153 with difference to point 0.0515396
+    Compared coord: (0.085 0.227794 -0.0401613) at index 154 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 158 coord:(0.105 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:154 in pts1
+    Compared coord: (0.085 0.227794 -0.0401613) at index 154 with difference to point 0.0216675
+    Compared coord: (0.105 0.219585 -0.0387139) at index 155 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 199 coord:(0.135 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:155 in pts1
+    Compared coord: (0.105 0.219585 -0.0387139) at index 155 with difference to point 0.0343208
+    Compared coord: (0.135 0.203168 -0.0358193) at index 156 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 116 coord:(0.075 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:156 in pts1
+    Compared coord: (0.135 0.203168 -0.0358193) at index 156 with difference to point 0.0667167
+    Compared coord: (0.075 0.231898 -0.0408849) at index 157 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 172 coord:(0.115 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:157 in pts1
+    Compared coord: (0.075 0.231898 -0.0408849) at index 157 with difference to point 0.0433349
+    Compared coord: (0.115 0.215481 -0.0379903) at index 158 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 73 coord:(0.045 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:158 in pts1
+    Compared coord: (0.115 0.215481 -0.0379903) at index 158 with difference to point 0.0743324
+    Compared coord: (0.045 0.240107 -0.0423323) at index 159 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 14 coord:(0.005 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:159 in pts1
+    Compared coord: (0.045 0.240107 -0.0423323) at index 159 with difference to point 0.0402165
+    Compared coord: (0.005 0.244212 -0.0430559) at index 160 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 226 coord:(0.155 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:160 in pts1
+    Compared coord: (0.005 0.244212 -0.0430559) at index 160 with difference to point 0.159485
+    Compared coord: (0.155 0.190854 -0.0336483) at index 161 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 102 coord:(0.065 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:161 in pts1
+    Compared coord: (0.155 0.190854 -0.0336483) at index 161 with difference to point 0.101004
+    Compared coord: (0.065 0.236003 -0.0416086) at index 162 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 186 coord:(0.125 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:162 in pts1
+    Compared coord: (0.065 0.236003 -0.0416086) at index 162 with difference to point 0.0650024
+    Compared coord: (0.125 0.211376 -0.0372666) at index 163 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 29 coord:(0.015 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:163 in pts1
+    Compared coord: (0.125 0.211376 -0.0372666) at index 163 with difference to point 0.114942
+    Compared coord: (0.015 0.244212 -0.0430559) at index 164 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 213 coord:(0.145 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:164 in pts1
+    Compared coord: (0.015 0.244212 -0.0430559) at index 164 with difference to point 0.137847
+    Compared coord: (0.145 0.199063 -0.0350956) at index 165 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 44 coord:(0.025 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:165 in pts1
+    Compared coord: (0.145 0.199063 -0.0350956) at index 165 with difference to point 0.128459
+    Compared coord: (0.025 0.244212 -0.0430559) at index 166 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 88 coord:(0.055 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:166 in pts1
+    Compared coord: (0.025 0.244212 -0.0430559) at index 166 with difference to point 0.0302881
+    Compared coord: (0.055 0.240107 -0.0423323) at index 167 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 200 coord:(0.135 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:167 in pts1
+    Compared coord: (0.055 0.240107 -0.0423323) at index 167 with difference to point 0.0866699
+    Compared coord: (0.135 0.207272 -0.0365429) at index 168 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 145 coord:(0.095 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:168 in pts1
+    Compared coord: (0.135 0.207272 -0.0365429) at index 168 with difference to point 0.0451026
+    Compared coord: (0.095 0.227794 -0.0401613) at index 169 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 159 coord:(0.105 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:169 in pts1
+    Compared coord: (0.095 0.227794 -0.0401613) at index 169 with difference to point 0.0108337
+    Compared coord: (0.105 0.22369 -0.0394376) at index 170 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 131 coord:(0.085 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:170 in pts1
+    Compared coord: (0.105 0.22369 -0.0394376) at index 170 with difference to point 0.0216675
+    Compared coord: (0.085 0.231898 -0.0408849) at index 171 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 59 coord:(0.035 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:171 in pts1
+    Compared coord: (0.085 0.231898 -0.0408849) at index 171 with difference to point 0.0515396
+    Compared coord: (0.035 0.244212 -0.0430559) at index 172 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 173 coord:(0.115 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:172 in pts1
+    Compared coord: (0.035 0.244212 -0.0430559) at index 172 with difference to point 0.0838171
+    Compared coord: (0.115 0.219585 -0.0387139) at index 173 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 117 coord:(0.075 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:173 in pts1
+    Compared coord: (0.115 0.219585 -0.0387139) at index 173 with difference to point 0.0433349
+    Compared coord: (0.075 0.236003 -0.0416086) at index 174 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 240 coord:(0.165 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:174 in pts1
+    Compared coord: (0.075 0.236003 -0.0416086) at index 174 with difference to point 0.102962
+    Compared coord: (0.165 0.18675 -0.0329246) at index 175 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 227 coord:(0.155 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:175 in pts1
+    Compared coord: (0.165 0.18675 -0.0329246) at index 175 with difference to point 0.0130184
+    Compared coord: (0.155 0.194959 -0.0343719) at index 176 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 187 coord:(0.125 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:176 in pts1
+    Compared coord: (0.155 0.194959 -0.0343719) at index 176 with difference to point 0.0365273
+    Compared coord: (0.125 0.215481 -0.0379903) at index 177 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 74 coord:(0.045 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:177 in pts1
+    Compared coord: (0.125 0.215481 -0.0379903) at index 177 with difference to point 0.0851535
+    Compared coord: (0.045 0.244212 -0.0430559) at index 178 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 214 coord:(0.145 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:178 in pts1
+    Compared coord: (0.045 0.244212 -0.0430559) at index 178 with difference to point 0.108337
+    Compared coord: (0.145 0.203168 -0.0358193) at index 179 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 103 coord:(0.065 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:179 in pts1
+    Compared coord: (0.145 0.203168 -0.0358193) at index 179 with difference to point 0.088357
+    Compared coord: (0.065 0.240107 -0.0423323) at index 180 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 201 coord:(0.135 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:180 in pts1
+    Compared coord: (0.065 0.240107 -0.0423323) at index 180 with difference to point 0.0758361
+    Compared coord: (0.135 0.211376 -0.0372666) at index 181 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 146 coord:(0.095 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:181 in pts1
+    Compared coord: (0.135 0.211376 -0.0372666) at index 181 with difference to point 0.0451026
+    Compared coord: (0.095 0.231898 -0.0408849) at index 182 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 89 coord:(0.055 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:182 in pts1
+    Compared coord: (0.095 0.231898 -0.0408849) at index 182 with difference to point 0.0419086
+    Compared coord: (0.055 0.244212 -0.0430559) at index 183 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 160 coord:(0.105 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:183 in pts1
+    Compared coord: (0.055 0.244212 -0.0430559) at index 183 with difference to point 0.0527059
+    Compared coord: (0.105 0.227794 -0.0401613) at index 184 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 132 coord:(0.085 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:184 in pts1
+    Compared coord: (0.105 0.227794 -0.0401613) at index 184 with difference to point 0.0216675
+    Compared coord: (0.085 0.236003 -0.0416086) at index 185 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 241 coord:(0.165 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:185 in pts1
+    Compared coord: (0.085 0.236003 -0.0416086) at index 185 with difference to point 0.0922049
+    Compared coord: (0.165 0.190854 -0.0336483) at index 186 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 174 coord:(0.115 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:186 in pts1
+    Compared coord: (0.165 0.190854 -0.0336483) at index 186 with difference to point 0.0600971
+    Compared coord: (0.115 0.22369 -0.0394376) at index 187 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 228 coord:(0.155 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:187 in pts1
+    Compared coord: (0.115 0.22369 -0.0394376) at index 187 with difference to point 0.0471732
+    Compared coord: (0.155 0.199063 -0.0350956) at index 188 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 118 coord:(0.075 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:188 in pts1
+    Compared coord: (0.155 0.199063 -0.0350956) at index 188 with difference to point 0.0902052
+    Compared coord: (0.075 0.240107 -0.0423323) at index 189 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 215 coord:(0.145 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:189 in pts1
+    Compared coord: (0.075 0.240107 -0.0423323) at index 189 with difference to point 0.0775349
+    Compared coord: (0.145 0.207272 -0.0365429) at index 190 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 188 coord:(0.125 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:190 in pts1
+    Compared coord: (0.145 0.207272 -0.0365429) at index 190 with difference to point 0.0235866
+    Compared coord: (0.125 0.219585 -0.0387139) at index 191 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 104 coord:(0.065 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:191 in pts1
+    Compared coord: (0.125 0.219585 -0.0387139) at index 191 with difference to point 0.0650024
+    Compared coord: (0.065 0.244212 -0.0430559) at index 192 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 202 coord:(0.135 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:192 in pts1
+    Compared coord: (0.065 0.244212 -0.0430559) at index 192 with difference to point 0.0758361
+    Compared coord: (0.135 0.215481 -0.0379903) at index 193 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 242 coord:(0.165 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:193 in pts1
+    Compared coord: (0.135 0.215481 -0.0379903) at index 193 with difference to point 0.0365273
+    Compared coord: (0.165 0.194959 -0.0343719) at index 194 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 147 coord:(0.095 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:194 in pts1
+    Compared coord: (0.165 0.194959 -0.0343719) at index 194 with difference to point 0.0814677
+    Compared coord: (0.095 0.236003 -0.0416086) at index 195 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 161 coord:(0.105 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:195 in pts1
+    Compared coord: (0.095 0.236003 -0.0416086) at index 195 with difference to point 0.0108337
+    Compared coord: (0.105 0.231898 -0.0408849) at index 196 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 255 coord:(0.175 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:196 in pts1
+    Compared coord: (0.105 0.231898 -0.0408849) at index 196 with difference to point 0.0836764
+    Compared coord: (0.175 0.18675 -0.0329246) at index 197 with difference to point 4.28651e-06
+    Compared coord: (0.155 0.203168 -0.0358193) at index 198 with difference to point 0.0260368
+Cannot find point in pts1 matching point 229 coord:(0.155 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:196 in pts1
+    Compared coord: (0.105 0.231898 -0.0408849) at index 196 with difference to point 0.0578889
+    Compared coord: (0.175 0.18675 -0.0329246) at index 197 with difference to point 0.0260368
+    Compared coord: (0.155 0.203168 -0.0358193) at index 198 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 133 coord:(0.085 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:198 in pts1
+    Compared coord: (0.155 0.203168 -0.0358193) at index 198 with difference to point 0.0794163
+    Compared coord: (0.085 0.240107 -0.0423323) at index 199 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 175 coord:(0.115 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:199 in pts1
+    Compared coord: (0.085 0.240107 -0.0423323) at index 199 with difference to point 0.0325012
+    Compared coord: (0.115 0.227794 -0.0401613) at index 200 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 216 coord:(0.145 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:200 in pts1
+    Compared coord: (0.115 0.227794 -0.0401613) at index 200 with difference to point 0.0343208
+    Compared coord: (0.145 0.211376 -0.0372666) at index 201 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 119 coord:(0.075 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:201 in pts1
+    Compared coord: (0.145 0.211376 -0.0372666) at index 201 with difference to point 0.0775349
+    Compared coord: (0.075 0.244212 -0.0430559) at index 202 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 189 coord:(0.125 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:202 in pts1
+    Compared coord: (0.075 0.244212 -0.0430559) at index 202 with difference to point 0.0541687
+    Compared coord: (0.125 0.22369 -0.0394376) at index 203 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 203 coord:(0.135 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:203 in pts1
+    Compared coord: (0.125 0.22369 -0.0394376) at index 203 with difference to point 0.0108337
+    Compared coord: (0.135 0.219585 -0.0387139) at index 204 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 243 coord:(0.165 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:204 in pts1
+    Compared coord: (0.135 0.219585 -0.0387139) at index 204 with difference to point 0.0365273
+    Compared coord: (0.165 0.199063 -0.0350956) at index 205 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 256 coord:(0.175 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:205 in pts1
+    Compared coord: (0.165 0.199063 -0.0350956) at index 205 with difference to point 0.0130184
+    Compared coord: (0.175 0.190854 -0.0336483) at index 206 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 230 coord:(0.155 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:206 in pts1
+    Compared coord: (0.175 0.190854 -0.0336483) at index 206 with difference to point 0.0260368
+    Compared coord: (0.155 0.207272 -0.0365429) at index 207 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 162 coord:(0.105 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:207 in pts1
+    Compared coord: (0.155 0.207272 -0.0365429) at index 207 with difference to point 0.0578889
+    Compared coord: (0.105 0.236003 -0.0416086) at index 208 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 148 coord:(0.095 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:208 in pts1
+    Compared coord: (0.105 0.236003 -0.0416086) at index 208 with difference to point 0.0108337
+    Compared coord: (0.095 0.240107 -0.0423323) at index 209 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 176 coord:(0.115 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:209 in pts1
+    Compared coord: (0.095 0.240107 -0.0423323) at index 209 with difference to point 0.0216675
+    Compared coord: (0.115 0.231898 -0.0408849) at index 210 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 134 coord:(0.085 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:210 in pts1
+    Compared coord: (0.115 0.231898 -0.0408849) at index 210 with difference to point 0.0325012
+    Compared coord: (0.085 0.244212 -0.0430559) at index 211 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 217 coord:(0.145 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:211 in pts1
+    Compared coord: (0.085 0.244212 -0.0430559) at index 211 with difference to point 0.0667167
+    Compared coord: (0.145 0.215481 -0.0379903) at index 212 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 190 coord:(0.125 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:212 in pts1
+    Compared coord: (0.145 0.215481 -0.0379903) at index 212 with difference to point 0.0235866
+    Compared coord: (0.125 0.227794 -0.0401613) at index 213 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 244 coord:(0.165 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:213 in pts1
+    Compared coord: (0.125 0.227794 -0.0401613) at index 213 with difference to point 0.0471732
+    Compared coord: (0.165 0.203168 -0.0358193) at index 214 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 257 coord:(0.175 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:214 in pts1
+    Compared coord: (0.165 0.203168 -0.0358193) at index 214 with difference to point 0.0130184
+    Compared coord: (0.175 0.194959 -0.0343719) at index 215 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 204 coord:(0.135 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:215 in pts1
+    Compared coord: (0.175 0.194959 -0.0343719) at index 215 with difference to point 0.0495088
+    Compared coord: (0.135 0.22369 -0.0394376) at index 216 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 231 coord:(0.155 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:216 in pts1
+    Compared coord: (0.135 0.22369 -0.0394376) at index 216 with difference to point 0.0235866
+    Compared coord: (0.155 0.211376 -0.0372666) at index 217 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 270 coord:(0.185 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:217 in pts1
+    Compared coord: (0.155 0.211376 -0.0372666) at index 217 with difference to point 0.0390553
+    Compared coord: (0.185 0.18675 -0.0329246) at index 218 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 163 coord:(0.105 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:218 in pts1
+    Compared coord: (0.185 0.18675 -0.0329246) at index 218 with difference to point 0.0966204
+    Compared coord: (0.105 0.240107 -0.0423323) at index 219 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 149 coord:(0.095 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:219 in pts1
+    Compared coord: (0.105 0.240107 -0.0423323) at index 219 with difference to point 0.0108337
+    Compared coord: (0.095 0.244212 -0.0430559) at index 220 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 177 coord:(0.115 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:220 in pts1
+    Compared coord: (0.095 0.244212 -0.0430559) at index 220 with difference to point 0.0216675
+    Compared coord: (0.115 0.236003 -0.0416086) at index 221 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 218 coord:(0.145 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:221 in pts1
+    Compared coord: (0.115 0.236003 -0.0416086) at index 221 with difference to point 0.0343208
+    Compared coord: (0.145 0.219585 -0.0387139) at index 222 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 191 coord:(0.125 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:222 in pts1
+    Compared coord: (0.145 0.219585 -0.0387139) at index 222 with difference to point 0.0235866
+    Compared coord: (0.125 0.231898 -0.0408849) at index 223 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 258 coord:(0.175 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:223 in pts1
+    Compared coord: (0.125 0.231898 -0.0408849) at index 223 with difference to point 0.0600971
+    Compared coord: (0.175 0.199063 -0.0350956) at index 224 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 245 coord:(0.165 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:224 in pts1
+    Compared coord: (0.175 0.199063 -0.0350956) at index 224 with difference to point 0.0130184
+    Compared coord: (0.165 0.207272 -0.0365429) at index 225 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 205 coord:(0.135 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:225 in pts1
+    Compared coord: (0.165 0.207272 -0.0365429) at index 225 with difference to point 0.0365273
+    Compared coord: (0.135 0.227794 -0.0401613) at index 226 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 271 coord:(0.185 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:226 in pts1
+    Compared coord: (0.135 0.227794 -0.0401613) at index 226 with difference to point 0.0625056
+    Compared coord: (0.185 0.190854 -0.0336483) at index 227 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 232 coord:(0.155 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:227 in pts1
+    Compared coord: (0.185 0.190854 -0.0336483) at index 227 with difference to point 0.0390553
+    Compared coord: (0.155 0.215481 -0.0379903) at index 228 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 164 coord:(0.105 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:228 in pts1
+    Compared coord: (0.155 0.215481 -0.0379903) at index 228 with difference to point 0.0578889
+    Compared coord: (0.105 0.244212 -0.0430559) at index 229 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 219 coord:(0.145 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:229 in pts1
+    Compared coord: (0.105 0.244212 -0.0430559) at index 229 with difference to point 0.0451026
+    Compared coord: (0.145 0.22369 -0.0394376) at index 230 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 178 coord:(0.115 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:230 in pts1
+    Compared coord: (0.145 0.22369 -0.0394376) at index 230 with difference to point 0.0343208
+    Compared coord: (0.115 0.240107 -0.0423323) at index 231 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 192 coord:(0.125 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:231 in pts1
+    Compared coord: (0.115 0.240107 -0.0423323) at index 231 with difference to point 0.0108337
+    Compared coord: (0.125 0.236003 -0.0416086) at index 232 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 259 coord:(0.175 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:232 in pts1
+    Compared coord: (0.125 0.236003 -0.0416086) at index 232 with difference to point 0.0600971
+    Compared coord: (0.175 0.203168 -0.0358193) at index 233 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 246 coord:(0.165 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:233 in pts1
+    Compared coord: (0.175 0.203168 -0.0358193) at index 233 with difference to point 0.0130184
+    Compared coord: (0.165 0.211376 -0.0372666) at index 234 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 272 coord:(0.185 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:234 in pts1
+    Compared coord: (0.165 0.211376 -0.0372666) at index 234 with difference to point 0.0260368
+    Compared coord: (0.185 0.194959 -0.0343719) at index 235 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 206 coord:(0.135 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:235 in pts1
+    Compared coord: (0.185 0.194959 -0.0343719) at index 235 with difference to point 0.0625056
+    Compared coord: (0.135 0.231898 -0.0408849) at index 236 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 233 coord:(0.155 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:236 in pts1
+    Compared coord: (0.135 0.231898 -0.0408849) at index 236 with difference to point 0.0235866
+    Compared coord: (0.155 0.219585 -0.0387139) at index 237 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 285 coord:(0.195 0.186749 -0.0329288) in pts0 when using tolerance 5.41687e-07
+Searching started from:237 in pts1
+    Compared coord: (0.155 0.219585 -0.0387139) at index 237 with difference to point 0.0520737
+    Compared coord: (0.195 0.18675 -0.0329246) at index 238 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 220 coord:(0.145 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:238 in pts1
+    Compared coord: (0.195 0.18675 -0.0329246) at index 238 with difference to point 0.0650921
+    Compared coord: (0.145 0.227794 -0.0401613) at index 239 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 179 coord:(0.115 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:239 in pts1
+    Compared coord: (0.145 0.227794 -0.0401613) at index 239 with difference to point 0.0343208
+    Compared coord: (0.115 0.244212 -0.0430559) at index 240 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 260 coord:(0.175 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:240 in pts1
+    Compared coord: (0.115 0.244212 -0.0430559) at index 240 with difference to point 0.0707598
+    Compared coord: (0.175 0.207272 -0.0365429) at index 241 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 193 coord:(0.125 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:241 in pts1
+    Compared coord: (0.175 0.207272 -0.0365429) at index 241 with difference to point 0.0600971
+    Compared coord: (0.125 0.240107 -0.0423323) at index 242 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 273 coord:(0.185 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:242 in pts1
+    Compared coord: (0.125 0.240107 -0.0423323) at index 242 with difference to point 0.0730546
+    Compared coord: (0.185 0.199063 -0.0350956) at index 243 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 247 coord:(0.165 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:243 in pts1
+    Compared coord: (0.185 0.199063 -0.0350956) at index 243 with difference to point 0.0260368
+    Compared coord: (0.165 0.215481 -0.0379903) at index 244 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 286 coord:(0.195 0.190854 -0.0336525) in pts0 when using tolerance 5.41687e-07
+Searching started from:244 in pts1
+    Compared coord: (0.165 0.215481 -0.0379903) at index 244 with difference to point 0.0390553
+    Compared coord: (0.195 0.190854 -0.0336483) at index 245 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 234 coord:(0.155 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:245 in pts1
+    Compared coord: (0.195 0.190854 -0.0336483) at index 245 with difference to point 0.0520737
+    Compared coord: (0.155 0.22369 -0.0394376) at index 246 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 207 coord:(0.135 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:246 in pts1
+    Compared coord: (0.155 0.22369 -0.0394376) at index 246 with difference to point 0.0235866
+    Compared coord: (0.135 0.236003 -0.0416086) at index 247 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 221 coord:(0.145 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:247 in pts1
+    Compared coord: (0.135 0.236003 -0.0416086) at index 247 with difference to point 0.0108337
+    Compared coord: (0.145 0.231898 -0.0408849) at index 248 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 261 coord:(0.175 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:248 in pts1
+    Compared coord: (0.145 0.231898 -0.0408849) at index 248 with difference to point 0.0365273
+    Compared coord: (0.175 0.211376 -0.0372666) at index 249 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 274 coord:(0.185 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:249 in pts1
+    Compared coord: (0.175 0.211376 -0.0372666) at index 249 with difference to point 0.0130184
+    Compared coord: (0.185 0.203168 -0.0358193) at index 250 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 248 coord:(0.165 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:250 in pts1
+    Compared coord: (0.185 0.203168 -0.0358193) at index 250 with difference to point 0.0260368
+    Compared coord: (0.165 0.219585 -0.0387139) at index 251 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 194 coord:(0.125 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:251 in pts1
+    Compared coord: (0.165 0.219585 -0.0387139) at index 251 with difference to point 0.0471732
+    Compared coord: (0.125 0.244212 -0.0430559) at index 252 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 287 coord:(0.195 0.194958 -0.0343762) in pts0 when using tolerance 5.41687e-07
+Searching started from:252 in pts1
+    Compared coord: (0.125 0.244212 -0.0430559) at index 252 with difference to point 0.0860305
+    Compared coord: (0.195 0.194959 -0.0343719) at index 253 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 235 coord:(0.155 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:253 in pts1
+    Compared coord: (0.195 0.194959 -0.0343719) at index 253 with difference to point 0.0520737
+    Compared coord: (0.155 0.227794 -0.0401613) at index 254 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 208 coord:(0.135 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:254 in pts1
+    Compared coord: (0.155 0.227794 -0.0401613) at index 254 with difference to point 0.0235866
+    Compared coord: (0.135 0.240107 -0.0423323) at index 255 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 222 coord:(0.145 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:255 in pts1
+    Compared coord: (0.135 0.240107 -0.0423323) at index 255 with difference to point 0.0108337
+    Compared coord: (0.145 0.236003 -0.0416086) at index 256 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 262 coord:(0.175 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:256 in pts1
+    Compared coord: (0.145 0.236003 -0.0416086) at index 256 with difference to point 0.0365273
+    Compared coord: (0.175 0.215481 -0.0379903) at index 257 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 275 coord:(0.185 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:257 in pts1
+    Compared coord: (0.175 0.215481 -0.0379903) at index 257 with difference to point 0.0130184
+    Compared coord: (0.185 0.207272 -0.0365429) at index 258 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 249 coord:(0.165 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:258 in pts1
+    Compared coord: (0.185 0.207272 -0.0365429) at index 258 with difference to point 0.0260368
+    Compared coord: (0.165 0.22369 -0.0394376) at index 259 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 288 coord:(0.195 0.199062 -0.0350998) in pts0 when using tolerance 5.41687e-07
+Searching started from:259 in pts1
+    Compared coord: (0.165 0.22369 -0.0394376) at index 259 with difference to point 0.0390553
+    Compared coord: (0.195 0.199063 -0.0350956) at index 260 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 236 coord:(0.155 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:260 in pts1
+    Compared coord: (0.195 0.199063 -0.0350956) at index 260 with difference to point 0.0520737
+    Compared coord: (0.155 0.231898 -0.0408849) at index 261 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 209 coord:(0.135 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:261 in pts1
+    Compared coord: (0.155 0.231898 -0.0408849) at index 261 with difference to point 0.0235866
+    Compared coord: (0.135 0.244212 -0.0430559) at index 262 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 300 coord:(0.21 0.186749 -0.0329288) in pts0 when using tolerance 1.02148e-06
+Searching started from:262 in pts1
+    Compared coord: (0.135 0.244212 -0.0430559) at index 262 with difference to point 0.0950236
+    Compared coord: (0.21 0.18675 -0.0329246) at index 263 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 276 coord:(0.185 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:263 in pts1
+    Compared coord: (0.21 0.18675 -0.0329246) at index 263 with difference to point 0.0353598
+    Compared coord: (0.185 0.211376 -0.0372666) at index 264 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 263 coord:(0.175 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:264 in pts1
+    Compared coord: (0.185 0.211376 -0.0372666) at index 264 with difference to point 0.0130184
+    Compared coord: (0.175 0.219585 -0.0387139) at index 265 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 223 coord:(0.145 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:265 in pts1
+    Compared coord: (0.175 0.219585 -0.0387139) at index 265 with difference to point 0.0365273
+    Compared coord: (0.145 0.240107 -0.0423323) at index 266 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 289 coord:(0.195 0.203167 -0.0358235) in pts0 when using tolerance 5.41687e-07
+Searching started from:266 in pts1
+    Compared coord: (0.145 0.240107 -0.0423323) at index 266 with difference to point 0.0625056
+    Compared coord: (0.195 0.203168 -0.0358193) at index 267 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 250 coord:(0.165 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:267 in pts1
+    Compared coord: (0.195 0.203168 -0.0358193) at index 267 with difference to point 0.0390553
+    Compared coord: (0.165 0.227794 -0.0401613) at index 268 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 237 coord:(0.155 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:268 in pts1
+    Compared coord: (0.165 0.227794 -0.0401613) at index 268 with difference to point 0.0130184
+    Compared coord: (0.155 0.236003 -0.0416086) at index 269 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 301 coord:(0.21 0.190854 -0.0336525) in pts0 when using tolerance 1.02148e-06
+Searching started from:269 in pts1
+    Compared coord: (0.155 0.236003 -0.0416086) at index 269 with difference to point 0.0716013
+    Compared coord: (0.21 0.190854 -0.0336483) at index 270 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 277 coord:(0.185 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:270 in pts1
+    Compared coord: (0.21 0.190854 -0.0336483) at index 270 with difference to point 0.0353598
+    Compared coord: (0.185 0.215481 -0.0379903) at index 271 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 264 coord:(0.175 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:271 in pts1
+    Compared coord: (0.185 0.215481 -0.0379903) at index 271 with difference to point 0.0130184
+    Compared coord: (0.175 0.22369 -0.0394376) at index 272 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 290 coord:(0.195 0.207271 -0.0365472) in pts0 when using tolerance 5.41687e-07
+Searching started from:272 in pts1
+    Compared coord: (0.175 0.22369 -0.0394376) at index 272 with difference to point 0.0260368
+    Compared coord: (0.195 0.207272 -0.0365429) at index 273 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 224 coord:(0.145 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:273 in pts1
+    Compared coord: (0.195 0.207272 -0.0365429) at index 273 with difference to point 0.0625056
+    Compared coord: (0.145 0.244212 -0.0430559) at index 274 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 251 coord:(0.165 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:274 in pts1
+    Compared coord: (0.145 0.244212 -0.0430559) at index 274 with difference to point 0.0235866
+    Compared coord: (0.165 0.231898 -0.0408849) at index 275 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 302 coord:(0.21 0.194958 -0.0343762) in pts0 when using tolerance 1.02148e-06
+Searching started from:275 in pts1
+    Compared coord: (0.165 0.231898 -0.0408849) at index 275 with difference to point 0.0585829
+    Compared coord: (0.21 0.194959 -0.0343719) at index 276 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 238 coord:(0.155 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:276 in pts1
+    Compared coord: (0.21 0.194959 -0.0343719) at index 276 with difference to point 0.0716013
+    Compared coord: (0.155 0.240107 -0.0423323) at index 277 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 278 coord:(0.185 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:277 in pts1
+    Compared coord: (0.155 0.240107 -0.0423323) at index 277 with difference to point 0.0365273
+    Compared coord: (0.185 0.219585 -0.0387139) at index 278 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 291 coord:(0.195 0.211376 -0.0372708) in pts0 when using tolerance 5.41687e-07
+Searching started from:278 in pts1
+    Compared coord: (0.185 0.219585 -0.0387139) at index 278 with difference to point 0.0130184
+    Compared coord: (0.195 0.211376 -0.0372666) at index 279 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 265 coord:(0.175 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:279 in pts1
+    Compared coord: (0.195 0.211376 -0.0372666) at index 279 with difference to point 0.0260368
+    Compared coord: (0.175 0.227794 -0.0401613) at index 280 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 252 coord:(0.165 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:280 in pts1
+    Compared coord: (0.175 0.227794 -0.0401613) at index 280 with difference to point 0.0130184
+    Compared coord: (0.165 0.236003 -0.0416086) at index 281 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 303 coord:(0.21 0.199062 -0.0350998) in pts0 when using tolerance 1.02148e-06
+Searching started from:281 in pts1
+    Compared coord: (0.165 0.236003 -0.0416086) at index 281 with difference to point 0.0585829
+    Compared coord: (0.21 0.199063 -0.0350956) at index 282 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 239 coord:(0.155 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:282 in pts1
+    Compared coord: (0.21 0.199063 -0.0350956) at index 282 with difference to point 0.0716013
+    Compared coord: (0.155 0.244212 -0.0430559) at index 283 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 279 coord:(0.185 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:283 in pts1
+    Compared coord: (0.155 0.244212 -0.0430559) at index 283 with difference to point 0.0365273
+    Compared coord: (0.185 0.22369 -0.0394376) at index 284 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 292 coord:(0.195 0.21548 -0.0379945) in pts0 when using tolerance 5.41687e-07
+Searching started from:284 in pts1
+    Compared coord: (0.185 0.22369 -0.0394376) at index 284 with difference to point 0.0130184
+    Compared coord: (0.195 0.215481 -0.0379903) at index 285 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 266 coord:(0.175 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:285 in pts1
+    Compared coord: (0.195 0.215481 -0.0379903) at index 285 with difference to point 0.0260368
+    Compared coord: (0.175 0.231898 -0.0408849) at index 286 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 304 coord:(0.21 0.203167 -0.0358235) in pts0 when using tolerance 1.02148e-06
+Searching started from:286 in pts1
+    Compared coord: (0.175 0.231898 -0.0408849) at index 286 with difference to point 0.0455645
+    Compared coord: (0.21 0.203168 -0.0358193) at index 287 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 253 coord:(0.165 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:287 in pts1
+    Compared coord: (0.21 0.203168 -0.0358193) at index 287 with difference to point 0.0585829
+    Compared coord: (0.165 0.240107 -0.0423323) at index 288 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 280 coord:(0.185 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:288 in pts1
+    Compared coord: (0.165 0.240107 -0.0423323) at index 288 with difference to point 0.0235866
+    Compared coord: (0.185 0.227794 -0.0401613) at index 289 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 293 coord:(0.195 0.219584 -0.0387182) in pts0 when using tolerance 5.41687e-07
+Searching started from:289 in pts1
+    Compared coord: (0.185 0.227794 -0.0401613) at index 289 with difference to point 0.0130184
+    Compared coord: (0.195 0.219585 -0.0387139) at index 290 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 267 coord:(0.175 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:290 in pts1
+    Compared coord: (0.195 0.219585 -0.0387139) at index 290 with difference to point 0.0260368
+    Compared coord: (0.175 0.236003 -0.0416086) at index 291 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 305 coord:(0.21 0.207271 -0.0365472) in pts0 when using tolerance 1.02148e-06
+Searching started from:291 in pts1
+    Compared coord: (0.175 0.236003 -0.0416086) at index 291 with difference to point 0.0455645
+    Compared coord: (0.21 0.207272 -0.0365429) at index 292 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 254 coord:(0.165 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:292 in pts1
+    Compared coord: (0.21 0.207272 -0.0365429) at index 292 with difference to point 0.0585829
+    Compared coord: (0.165 0.244212 -0.0430559) at index 293 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 315 coord:(0.23 0.186749 -0.0329288) in pts0 when using tolerance 1.02148e-06
+Searching started from:293 in pts1
+    Compared coord: (0.165 0.244212 -0.0430559) at index 293 with difference to point 0.0873469
+    Compared coord: (0.23 0.18675 -0.0329246) at index 294 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 294 coord:(0.195 0.223689 -0.0394418) in pts0 when using tolerance 5.41687e-07
+Searching started from:294 in pts1
+    Compared coord: (0.23 0.18675 -0.0329246) at index 294 with difference to point 0.0513026
+    Compared coord: (0.195 0.22369 -0.0394376) at index 295 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 281 coord:(0.185 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:295 in pts1
+    Compared coord: (0.195 0.22369 -0.0394376) at index 295 with difference to point 0.0130184
+    Compared coord: (0.185 0.231898 -0.0408849) at index 296 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 268 coord:(0.175 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:296 in pts1
+    Compared coord: (0.185 0.231898 -0.0408849) at index 296 with difference to point 0.0130184
+    Compared coord: (0.175 0.240107 -0.0423323) at index 297 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 306 coord:(0.21 0.211376 -0.0372708) in pts0 when using tolerance 1.02148e-06
+Searching started from:297 in pts1
+    Compared coord: (0.175 0.240107 -0.0423323) at index 297 with difference to point 0.0455645
+    Compared coord: (0.21 0.211376 -0.0372666) at index 298 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 316 coord:(0.23 0.190854 -0.0336525) in pts0 when using tolerance 1.02148e-06
+Searching started from:298 in pts1
+    Compared coord: (0.21 0.211376 -0.0372666) at index 298 with difference to point 0.0288833
+    Compared coord: (0.23 0.190854 -0.0336483) at index 299 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 295 coord:(0.195 0.227793 -0.0401655) in pts0 when using tolerance 5.41687e-07
+Searching started from:299 in pts1
+    Compared coord: (0.23 0.190854 -0.0336483) at index 299 with difference to point 0.0513026
+    Compared coord: (0.195 0.227794 -0.0401613) at index 300 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 282 coord:(0.185 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:300 in pts1
+    Compared coord: (0.195 0.227794 -0.0401613) at index 300 with difference to point 0.0130184
+    Compared coord: (0.185 0.236003 -0.0416086) at index 301 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 307 coord:(0.21 0.21548 -0.0379945) in pts0 when using tolerance 1.02148e-06
+Searching started from:301 in pts1
+    Compared coord: (0.185 0.236003 -0.0416086) at index 301 with difference to point 0.032546
+    Compared coord: (0.21 0.215481 -0.0379903) at index 302 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 317 coord:(0.23 0.194958 -0.0343762) in pts0 when using tolerance 1.02148e-06
+Searching started from:302 in pts1
+    Compared coord: (0.21 0.215481 -0.0379903) at index 302 with difference to point 0.0288833
+    Compared coord: (0.23 0.194959 -0.0343719) at index 303 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 269 coord:(0.175 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:303 in pts1
+    Compared coord: (0.23 0.194959 -0.0343719) at index 303 with difference to point 0.0743388
+    Compared coord: (0.175 0.244212 -0.0430559) at index 304 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 296 coord:(0.195 0.231898 -0.0408892) in pts0 when using tolerance 5.41687e-07
+Searching started from:304 in pts1
+    Compared coord: (0.175 0.244212 -0.0430559) at index 304 with difference to point 0.0235866
+    Compared coord: (0.195 0.231898 -0.0408849) at index 305 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 283 coord:(0.185 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:305 in pts1
+    Compared coord: (0.195 0.231898 -0.0408849) at index 305 with difference to point 0.0130184
+    Compared coord: (0.185 0.240107 -0.0423323) at index 306 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 318 coord:(0.23 0.199062 -0.0350998) in pts0 when using tolerance 1.02148e-06
+Searching started from:306 in pts1
+    Compared coord: (0.185 0.240107 -0.0423323) at index 306 with difference to point 0.061335
+    Compared coord: (0.23 0.199063 -0.0350956) at index 307 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 308 coord:(0.21 0.219584 -0.0387182) in pts0 when using tolerance 1.02148e-06
+Searching started from:307 in pts1
+    Compared coord: (0.23 0.199063 -0.0350956) at index 307 with difference to point 0.0288833
+    Compared coord: (0.21 0.219585 -0.0387139) at index 308 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 297 coord:(0.195 0.236002 -0.0416128) in pts0 when using tolerance 5.41687e-07
+Searching started from:308 in pts1
+    Compared coord: (0.21 0.219585 -0.0387139) at index 308 with difference to point 0.0224258
+    Compared coord: (0.195 0.236003 -0.0416086) at index 309 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 319 coord:(0.23 0.203167 -0.0358235) in pts0 when using tolerance 1.02148e-06
+Searching started from:309 in pts1
+    Compared coord: (0.195 0.236003 -0.0416086) at index 309 with difference to point 0.0483391
+    Compared coord: (0.23 0.203168 -0.0358193) at index 310 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 309 coord:(0.21 0.223689 -0.0394418) in pts0 when using tolerance 1.02148e-06
+Searching started from:310 in pts1
+    Compared coord: (0.23 0.203168 -0.0358193) at index 310 with difference to point 0.0288833
+    Compared coord: (0.21 0.22369 -0.0394376) at index 311 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 284 coord:(0.185 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:311 in pts1
+    Compared coord: (0.21 0.22369 -0.0394376) at index 311 with difference to point 0.032546
+    Compared coord: (0.185 0.244212 -0.0430559) at index 312 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 320 coord:(0.23 0.207271 -0.0365472) in pts0 when using tolerance 1.02148e-06
+Searching started from:312 in pts1
+    Compared coord: (0.185 0.244212 -0.0430559) at index 312 with difference to point 0.0585829
+    Compared coord: (0.23 0.207272 -0.0365429) at index 313 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 298 coord:(0.195 0.240106 -0.0423365) in pts0 when using tolerance 5.41687e-07
+Searching started from:313 in pts1
+    Compared coord: (0.23 0.207272 -0.0365429) at index 313 with difference to point 0.0483391
+    Compared coord: (0.195 0.240107 -0.0423323) at index 314 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 310 coord:(0.21 0.227793 -0.0401655) in pts0 when using tolerance 1.02148e-06
+Searching started from:314 in pts1
+    Compared coord: (0.195 0.240107 -0.0423323) at index 314 with difference to point 0.0195276
+    Compared coord: (0.21 0.227794 -0.0401613) at index 315 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 330 coord:(0.25 0.186749 -0.0329288) in pts0 when using tolerance 1.02148e-06
+Searching started from:315 in pts1
+    Compared coord: (0.21 0.227794 -0.0401613) at index 315 with difference to point 0.0577666
+    Compared coord: (0.25 0.18675 -0.0329246) at index 316 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 321 coord:(0.23 0.211376 -0.0372708) in pts0 when using tolerance 1.02148e-06
+Searching started from:316 in pts1
+    Compared coord: (0.25 0.18675 -0.0329246) at index 316 with difference to point 0.0320205
+    Compared coord: (0.23 0.211376 -0.0372666) at index 317 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 299 coord:(0.195 0.244211 -0.0430602) in pts0 when using tolerance 5.41687e-07
+Searching started from:317 in pts1
+    Compared coord: (0.23 0.211376 -0.0372666) at index 317 with difference to point 0.0483391
+    Compared coord: (0.195 0.244212 -0.0430559) at index 318 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 311 coord:(0.21 0.231898 -0.0408892) in pts0 when using tolerance 1.02148e-06
+Searching started from:318 in pts1
+    Compared coord: (0.195 0.244212 -0.0430559) at index 318 with difference to point 0.0195276
+    Compared coord: (0.21 0.231898 -0.0408849) at index 319 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 331 coord:(0.25 0.190854 -0.0336525) in pts0 when using tolerance 1.02148e-06
+Searching started from:319 in pts1
+    Compared coord: (0.21 0.231898 -0.0408849) at index 319 with difference to point 0.0577666
+    Compared coord: (0.25 0.190854 -0.0336483) at index 320 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 322 coord:(0.23 0.21548 -0.0379945) in pts0 when using tolerance 1.02148e-06
+Searching started from:320 in pts1
+    Compared coord: (0.25 0.190854 -0.0336483) at index 320 with difference to point 0.0320205
+    Compared coord: (0.23 0.215481 -0.0379903) at index 321 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 312 coord:(0.21 0.236002 -0.0416128) in pts0 when using tolerance 1.02148e-06
+Searching started from:321 in pts1
+    Compared coord: (0.23 0.215481 -0.0379903) at index 321 with difference to point 0.0288833
+    Compared coord: (0.21 0.236003 -0.0416086) at index 322 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 332 coord:(0.25 0.194958 -0.0343762) in pts0 when using tolerance 1.02148e-06
+Searching started from:322 in pts1
+    Compared coord: (0.21 0.236003 -0.0416086) at index 322 with difference to point 0.0577666
+    Compared coord: (0.25 0.194959 -0.0343719) at index 323 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 323 coord:(0.23 0.219584 -0.0387182) in pts0 when using tolerance 1.02148e-06
+Searching started from:323 in pts1
+    Compared coord: (0.25 0.194959 -0.0343719) at index 323 with difference to point 0.0320205
+    Compared coord: (0.23 0.219585 -0.0387139) at index 324 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 333 coord:(0.25 0.199062 -0.0350998) in pts0 when using tolerance 1.02148e-06
+Searching started from:324 in pts1
+    Compared coord: (0.23 0.219585 -0.0387139) at index 324 with difference to point 0.0288833
+    Compared coord: (0.25 0.199063 -0.0350956) at index 325 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 313 coord:(0.21 0.240106 -0.0423365) in pts0 when using tolerance 1.02148e-06
+Searching started from:325 in pts1
+    Compared coord: (0.25 0.199063 -0.0350956) at index 325 with difference to point 0.0577666
+    Compared coord: (0.21 0.240107 -0.0423323) at index 326 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 324 coord:(0.23 0.223689 -0.0394418) in pts0 when using tolerance 1.02148e-06
+Searching started from:326 in pts1
+    Compared coord: (0.21 0.240107 -0.0423323) at index 326 with difference to point 0.0260368
+    Compared coord: (0.23 0.22369 -0.0394376) at index 327 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 334 coord:(0.25 0.203167 -0.0358235) in pts0 when using tolerance 1.02148e-06
+Searching started from:327 in pts1
+    Compared coord: (0.23 0.22369 -0.0394376) at index 327 with difference to point 0.0288833
+    Compared coord: (0.25 0.203168 -0.0358193) at index 328 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 314 coord:(0.21 0.244211 -0.0430602) in pts0 when using tolerance 1.02148e-06
+Searching started from:328 in pts1
+    Compared coord: (0.25 0.203168 -0.0358193) at index 328 with difference to point 0.0577666
+    Compared coord: (0.21 0.244212 -0.0430559) at index 329 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 325 coord:(0.23 0.227793 -0.0401655) in pts0 when using tolerance 1.02148e-06
+Searching started from:329 in pts1
+    Compared coord: (0.21 0.244212 -0.0430559) at index 329 with difference to point 0.0260368
+    Compared coord: (0.23 0.227794 -0.0401613) at index 330 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 335 coord:(0.25 0.207271 -0.0365472) in pts0 when using tolerance 1.02148e-06
+Searching started from:330 in pts1
+    Compared coord: (0.23 0.227794 -0.0401613) at index 330 with difference to point 0.0288833
+    Compared coord: (0.25 0.207272 -0.0365429) at index 331 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 326 coord:(0.23 0.231898 -0.0408892) in pts0 when using tolerance 1.02148e-06
+Searching started from:331 in pts1
+    Compared coord: (0.25 0.207272 -0.0365429) at index 331 with difference to point 0.0320205
+    Compared coord: (0.23 0.231898 -0.0408849) at index 332 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 336 coord:(0.25 0.211376 -0.0372708) in pts0 when using tolerance 1.02148e-06
+Searching started from:332 in pts1
+    Compared coord: (0.23 0.231898 -0.0408849) at index 332 with difference to point 0.0288833
+    Compared coord: (0.25 0.211376 -0.0372666) at index 333 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 345 coord:(0.27 0.186749 -0.0329288) in pts0 when using tolerance 1.02148e-06
+Searching started from:333 in pts1
+    Compared coord: (0.25 0.211376 -0.0372666) at index 333 with difference to point 0.0320205
+    Compared coord: (0.27 0.18675 -0.0329246) at index 334 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 327 coord:(0.23 0.236002 -0.0416128) in pts0 when using tolerance 1.02148e-06
+Searching started from:334 in pts1
+    Compared coord: (0.27 0.18675 -0.0329246) at index 334 with difference to point 0.064041
+    Compared coord: (0.23 0.236003 -0.0416086) at index 335 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 337 coord:(0.25 0.21548 -0.0379945) in pts0 when using tolerance 1.02148e-06
+Searching started from:335 in pts1
+    Compared coord: (0.23 0.236003 -0.0416086) at index 335 with difference to point 0.0288833
+    Compared coord: (0.25 0.215481 -0.0379903) at index 336 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 346 coord:(0.27 0.190854 -0.0336525) in pts0 when using tolerance 1.02148e-06
+Searching started from:336 in pts1
+    Compared coord: (0.25 0.215481 -0.0379903) at index 336 with difference to point 0.0320205
+    Compared coord: (0.27 0.190854 -0.0336483) at index 337 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 347 coord:(0.27 0.194958 -0.0343762) in pts0 when using tolerance 1.02148e-06
+Searching started from:337 in pts1
+    Compared coord: (0.27 0.190854 -0.0336483) at index 337 with difference to point 0.00416771
+    Compared coord: (0.27 0.194959 -0.0343719) at index 338 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 338 coord:(0.25 0.219584 -0.0387182) in pts0 when using tolerance 1.02148e-06
+Searching started from:338 in pts1
+    Compared coord: (0.27 0.194959 -0.0343719) at index 338 with difference to point 0.0320205
+    Compared coord: (0.25 0.219585 -0.0387139) at index 339 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 328 coord:(0.23 0.240106 -0.0423365) in pts0 when using tolerance 1.02148e-06
+Searching started from:339 in pts1
+    Compared coord: (0.25 0.219585 -0.0387139) at index 339 with difference to point 0.0288833
+    Compared coord: (0.23 0.240107 -0.0423323) at index 340 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 348 coord:(0.27 0.199062 -0.0350998) in pts0 when using tolerance 1.02148e-06
+Searching started from:340 in pts1
+    Compared coord: (0.23 0.240107 -0.0423323) at index 340 with difference to point 0.0577666
+    Compared coord: (0.27 0.199063 -0.0350956) at index 341 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 339 coord:(0.25 0.223689 -0.0394418) in pts0 when using tolerance 1.02148e-06
+Searching started from:341 in pts1
+    Compared coord: (0.27 0.199063 -0.0350956) at index 341 with difference to point 0.0320205
+    Compared coord: (0.25 0.22369 -0.0394376) at index 342 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 329 coord:(0.23 0.244211 -0.0430602) in pts0 when using tolerance 1.02148e-06
+Searching started from:342 in pts1
+    Compared coord: (0.25 0.22369 -0.0394376) at index 342 with difference to point 0.0288833
+    Compared coord: (0.23 0.244212 -0.0430559) at index 343 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 349 coord:(0.27 0.203167 -0.0358235) in pts0 when using tolerance 1.02148e-06
+Searching started from:343 in pts1
+    Compared coord: (0.23 0.244212 -0.0430559) at index 343 with difference to point 0.0577666
+    Compared coord: (0.27 0.203168 -0.0358193) at index 344 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 340 coord:(0.25 0.227793 -0.0401655) in pts0 when using tolerance 1.02148e-06
+Searching started from:344 in pts1
+    Compared coord: (0.27 0.203168 -0.0358193) at index 344 with difference to point 0.0320205
+    Compared coord: (0.25 0.227794 -0.0401613) at index 345 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 350 coord:(0.27 0.207271 -0.0365472) in pts0 when using tolerance 1.02148e-06
+Searching started from:345 in pts1
+    Compared coord: (0.25 0.227794 -0.0401613) at index 345 with difference to point 0.0288833
+    Compared coord: (0.27 0.207272 -0.0365429) at index 346 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 341 coord:(0.25 0.231898 -0.0408892) in pts0 when using tolerance 1.02148e-06
+Searching started from:346 in pts1
+    Compared coord: (0.27 0.207272 -0.0365429) at index 346 with difference to point 0.0320205
+    Compared coord: (0.25 0.231898 -0.0408849) at index 347 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 351 coord:(0.27 0.211376 -0.0372708) in pts0 when using tolerance 1.02148e-06
+Searching started from:347 in pts1
+    Compared coord: (0.25 0.231898 -0.0408849) at index 347 with difference to point 0.0288833
+    Compared coord: (0.27 0.211376 -0.0372666) at index 348 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 342 coord:(0.25 0.236002 -0.0416128) in pts0 when using tolerance 1.02148e-06
+Searching started from:348 in pts1
+    Compared coord: (0.27 0.211376 -0.0372666) at index 348 with difference to point 0.0320205
+    Compared coord: (0.25 0.236003 -0.0416086) at index 349 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 360 coord:(0.29 0.186749 -0.0329288) in pts0 when using tolerance 1.02148e-06
+Searching started from:349 in pts1
+    Compared coord: (0.25 0.236003 -0.0416086) at index 349 with difference to point 0.064041
+    Compared coord: (0.29 0.18675 -0.0329246) at index 350 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 352 coord:(0.27 0.21548 -0.0379945) in pts0 when using tolerance 1.02148e-06
+Searching started from:350 in pts1
+    Compared coord: (0.29 0.18675 -0.0329246) at index 350 with difference to point 0.0353712
+    Compared coord: (0.27 0.215481 -0.0379903) at index 351 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 361 coord:(0.29 0.190854 -0.0336525) in pts0 when using tolerance 1.02148e-06
+Searching started from:351 in pts1
+    Compared coord: (0.27 0.215481 -0.0379903) at index 351 with difference to point 0.0320205
+    Compared coord: (0.29 0.190854 -0.0336483) at index 352 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 343 coord:(0.25 0.240106 -0.0423365) in pts0 when using tolerance 1.02148e-06
+Searching started from:352 in pts1
+    Compared coord: (0.29 0.190854 -0.0336483) at index 352 with difference to point 0.064041
+    Compared coord: (0.25 0.240107 -0.0423323) at index 353 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 353 coord:(0.27 0.219584 -0.0387182) in pts0 when using tolerance 1.02148e-06
+Searching started from:353 in pts1
+    Compared coord: (0.25 0.240107 -0.0423323) at index 353 with difference to point 0.0288833
+    Compared coord: (0.27 0.219585 -0.0387139) at index 354 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 362 coord:(0.29 0.194958 -0.0343762) in pts0 when using tolerance 1.02148e-06
+Searching started from:354 in pts1
+    Compared coord: (0.27 0.219585 -0.0387139) at index 354 with difference to point 0.0320205
+    Compared coord: (0.29 0.194959 -0.0343719) at index 355 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 344 coord:(0.25 0.244211 -0.0430602) in pts0 when using tolerance 1.02148e-06
+Searching started from:355 in pts1
+    Compared coord: (0.29 0.194959 -0.0343719) at index 355 with difference to point 0.064041
+    Compared coord: (0.25 0.244212 -0.0430559) at index 356 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 354 coord:(0.27 0.223689 -0.0394418) in pts0 when using tolerance 1.02148e-06
+Searching started from:356 in pts1
+    Compared coord: (0.25 0.244212 -0.0430559) at index 356 with difference to point 0.0288833
+    Compared coord: (0.27 0.22369 -0.0394376) at index 357 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 363 coord:(0.29 0.199062 -0.0350998) in pts0 when using tolerance 1.02148e-06
+Searching started from:357 in pts1
+    Compared coord: (0.27 0.22369 -0.0394376) at index 357 with difference to point 0.0320205
+    Compared coord: (0.29 0.199063 -0.0350956) at index 358 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 355 coord:(0.27 0.227793 -0.0401655) in pts0 when using tolerance 1.02148e-06
+Searching started from:358 in pts1
+    Compared coord: (0.29 0.199063 -0.0350956) at index 358 with difference to point 0.0353712
+    Compared coord: (0.27 0.227794 -0.0401613) at index 359 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 364 coord:(0.29 0.203167 -0.0358235) in pts0 when using tolerance 1.02148e-06
+Searching started from:359 in pts1
+    Compared coord: (0.27 0.227794 -0.0401613) at index 359 with difference to point 0.0320205
+    Compared coord: (0.29 0.203168 -0.0358193) at index 360 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 356 coord:(0.27 0.231898 -0.0408892) in pts0 when using tolerance 1.02148e-06
+Searching started from:360 in pts1
+    Compared coord: (0.29 0.203168 -0.0358193) at index 360 with difference to point 0.0353712
+    Compared coord: (0.27 0.231898 -0.0408849) at index 361 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 365 coord:(0.29 0.207271 -0.0365472) in pts0 when using tolerance 1.02148e-06
+Searching started from:361 in pts1
+    Compared coord: (0.27 0.231898 -0.0408849) at index 361 with difference to point 0.0320205
+    Compared coord: (0.29 0.207272 -0.0365429) at index 362 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 366 coord:(0.29 0.211376 -0.0372708) in pts0 when using tolerance 1.02148e-06
+Searching started from:362 in pts1
+    Compared coord: (0.29 0.207272 -0.0365429) at index 362 with difference to point 0.00416771
+    Compared coord: (0.29 0.211376 -0.0372666) at index 363 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 357 coord:(0.27 0.236002 -0.0416128) in pts0 when using tolerance 1.02148e-06
+Searching started from:363 in pts1
+    Compared coord: (0.29 0.211376 -0.0372666) at index 363 with difference to point 0.0320205
+    Compared coord: (0.27 0.236003 -0.0416086) at index 364 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 367 coord:(0.29 0.21548 -0.0379945) in pts0 when using tolerance 1.02148e-06
+Searching started from:364 in pts1
+    Compared coord: (0.27 0.236003 -0.0416086) at index 364 with difference to point 0.0288833
+    Compared coord: (0.29 0.215481 -0.0379903) at index 365 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 358 coord:(0.27 0.240106 -0.0423365) in pts0 when using tolerance 1.02148e-06
+Searching started from:365 in pts1
+    Compared coord: (0.29 0.215481 -0.0379903) at index 365 with difference to point 0.0320205
+    Compared coord: (0.27 0.240107 -0.0423323) at index 366 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 368 coord:(0.29 0.219584 -0.0387182) in pts0 when using tolerance 1.02148e-06
+Searching started from:366 in pts1
+    Compared coord: (0.27 0.240107 -0.0423323) at index 366 with difference to point 0.0288833
+    Compared coord: (0.29 0.219585 -0.0387139) at index 367 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 359 coord:(0.27 0.244211 -0.0430602) in pts0 when using tolerance 1.02148e-06
+Searching started from:367 in pts1
+    Compared coord: (0.29 0.219585 -0.0387139) at index 367 with difference to point 0.0320205
+    Compared coord: (0.27 0.244212 -0.0430559) at index 368 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 369 coord:(0.29 0.223689 -0.0394418) in pts0 when using tolerance 1.02148e-06
+Searching started from:368 in pts1
+    Compared coord: (0.27 0.244212 -0.0430559) at index 368 with difference to point 0.0288833
+    Compared coord: (0.29 0.22369 -0.0394376) at index 369 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 370 coord:(0.29 0.227793 -0.0401655) in pts0 when using tolerance 1.02148e-06
+Searching started from:369 in pts1
+    Compared coord: (0.29 0.22369 -0.0394376) at index 369 with difference to point 0.00416771
+    Compared coord: (0.29 0.227794 -0.0401613) at index 370 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 371 coord:(0.29 0.231898 -0.0408892) in pts0 when using tolerance 1.02148e-06
+Searching started from:370 in pts1
+    Compared coord: (0.29 0.227794 -0.0401613) at index 370 with difference to point 0.00416771
+    Compared coord: (0.29 0.231898 -0.0408849) at index 371 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 372 coord:(0.29 0.236002 -0.0416128) in pts0 when using tolerance 1.02148e-06
+Searching started from:371 in pts1
+    Compared coord: (0.29 0.231898 -0.0408849) at index 371 with difference to point 0.00416771
+    Compared coord: (0.29 0.236003 -0.0416086) at index 372 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 373 coord:(0.29 0.240106 -0.0423365) in pts0 when using tolerance 1.02148e-06
+Searching started from:372 in pts1
+    Compared coord: (0.29 0.236003 -0.0416086) at index 372 with difference to point 0.00416771
+    Compared coord: (0.29 0.240107 -0.0423323) at index 373 with difference to point 4.28651e-06
+Cannot find point in pts1 matching point 374 coord:(0.29 0.244211 -0.0430602) in pts0 when using tolerance 1.02148e-06
+Searching started from:373 in pts1
+    Compared coord: (0.29 0.240107 -0.0423323) at index 373 with difference to point 0.00416771
+    Compared coord: (0.29 0.244212 -0.0430559) at index 374 with difference to point 4.28651e-06
+cyclicPolyPatch::order : Writing neighbour faces to OBJ file "/mnt/g/ChatCFD-main/foam_agent/runs/axial_compressor_stage_bc9f74/periodic_ss_faces.obj"
+cyclicPolyPatch::order : Writing my faces to OBJ file "/mnt/g/ChatCFD-main/foam_agent/runs/axial_compressor_stage_bc9f74/periodic_ps_faces.obj"
+cyclicPolyPatch::order : Dumping currently found cyclic match as lines between corresponding face centres to file "/mnt/g/ChatCFD-main/foam_agent/runs/axial_compressor_stage_bc9f74/periodic_ps_faceCentres.obj"
+--> FOAM Serious Error : 
+    From virtual bool Foam::cyclicPolyPatch::order(Foam::PstreamBuffers&, const primitivePatch&, Foam::labelList&, Foam::labelList&) const
+    in file meshes/polyMesh/polyPatches/constraint/cyclic/cyclicPolyPatch.C at line 1384
+    Patch:periodic_ps : Cannot match vectors to faces on both sides of patch
+    Perhaps your faces do not match? The obj files written contain the current match.
+    Continuing with incorrect face ordering from now on!
+
+Writing polyMesh with 0 cellZones
+----------------
+Mesh Information
+----------------
+  boundingBox: (0 0.184697 -0.043422) (0.3 0.246263 0.043422)
+  nPoints: 8736
+  nCells: 7500
+  nFaces: 23675
+  nInternalFaces: 21325
+----------------
+Patches
+----------------
+  patch 0 (start: 21325 size: 300) name: inlet
+  patch 1 (start: 21625 size: 300) name: outlet
+  patch 2 (start: 21925 size: 500) name: hub
+  patch 3 (start: 22425 size: 500) name: shroud
+  patch 4 (start: 22925 size: 375) name: periodic_ss
+  patch 5 (start: 23300 size: 375) name: periodic_ps
+
+End
+

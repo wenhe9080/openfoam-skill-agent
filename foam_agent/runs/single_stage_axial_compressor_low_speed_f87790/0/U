@@ -1,0 +1,33 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+dimensions      [0 1 -1 0 0 0 0];
+internalField   uniform (0 0 0);
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform (35 0 0); // Axial velocity based on flow coeff 0.55 and Um ~64m/s
+    }
+    outlet
+    {
+        type            zeroGradient;
+    }
+    casing
+    {
+        type            noSlip;
+    }
+    hub
+    {
+        type            noSlip;
+    }
+    frontBack
+    {
+        type            empty;
+    }
+}

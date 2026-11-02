@@ -1,0 +1,79 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+
+convertToMeters 1.0;
+
+vertices
+(
+    // Define a simple rectangular box to ensure topological closure
+    // X: -0.01 to 0.01
+    // Y: -0.25 to 0.25
+    // Z: 0.0 to 0.3
+    (-0.01 -0.25 0.0)   // 0
+    ( 0.01 -0.25 0.0)   // 1
+    ( 0.01  0.25 0.0)   // 2
+    (-0.01  0.25 0.0)   // 3
+    (-0.01 -0.25 0.3)   // 4
+    ( 0.01 -0.25 0.3)   // 5
+    ( 0.01  0.25 0.3)   // 6
+    (-0.01  0.25 0.3)   // 7
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) (10 20 30) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (0 3 7 4)   // Left face (X = -0.01)
+        );
+    }
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (1 5 6 2)   // Right face (X = 0.01)
+        );
+    }
+    hub
+    {
+        type wall;
+        faces
+        (
+            (0 4 5 1)   // Bottom face (Y = -0.25)
+        );
+    }
+    shroud
+    {
+        type wall;
+        faces
+        (
+            (3 2 6 7)   // Top face (Y = 0.25)
+        );
+    }
+    frontBack
+    {
+        type wall;
+        faces
+        (
+            (0 1 2 3)   // Front face (Z = 0.0)
+            (4 7 6 5)   // Back face (Z = 0.3)
+        );
+    }
+);

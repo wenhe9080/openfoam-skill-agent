@@ -1,0 +1,17 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      MRFProperties;
+}
+
+rotor
+{
+    cellZone        rotorZone;
+    active          yes;
+
+    origin          (0 0 0);
+    axis            (0 0 1);
+    omega           157.0796;
+}

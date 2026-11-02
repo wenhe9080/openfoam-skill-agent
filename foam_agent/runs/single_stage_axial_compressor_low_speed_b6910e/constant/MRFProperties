@@ -1,0 +1,10 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      MRFProperties;
+}
+
+// Disabled MRF as no cell zones were defined in blockMeshDict
+// Active MRF requires a valid cellZone name existing in the mesh

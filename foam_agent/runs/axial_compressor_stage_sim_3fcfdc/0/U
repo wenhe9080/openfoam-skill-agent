@@ -1,0 +1,43 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+dimensions      [0 1 -1 0 0 0 0];
+internalField   uniform (0 0 0);
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform (50 0 0); // Approx axial velocity based on design point
+    }
+    outlet
+    {
+        type            pressureInletOutletVelocity;
+        value           uniform (0 0 0);
+    }
+    hub
+    {
+        type            noSlip;
+    }
+    casing
+    {
+        type            noSlip;
+    }
+    rotorBlade
+    {
+        type            movingWallVelocity;
+        value           uniform (0 0 0);
+    }
+    statorBlade
+    {
+        type            noSlip;
+    }
+    frontBack
+    {
+        type            empty;
+    }
+}

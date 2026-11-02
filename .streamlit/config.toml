@@ -1,0 +1,15 @@
+# ChatCFD Streamlit 深色主题配置
+[theme]
+base = "dark"
+# 主色：流体蓝青色
+primaryColor = "#22B8CF"
+# 主背景 / 侧边栏 / 卡片
+backgroundColor = "#0E1117"
+secondaryBackgroundColor = "#161B26"
+textColor = "#E6EDF3"
+
+[browser]
+gatherUsageStats = false
+
+[server]
+fileWatcherType = "none"

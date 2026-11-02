@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChatCFD 复现进展报告 — 2026-10-27</title>
+<style>
+  :root {
+    --bg: #0f1117; --panel: #1a1d27; --border: #2a2e3d;
+    --text: #e2e4ea; --muted: #9aa0b0; --accent: #4f8ff7;
+    --green: #3fb96f; --red: #e05656; --amber: #e0a83f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: "Segoe UI", "Microsoft YaHei", sans-serif; line-height: 1.65; padding: 40px 20px; }
+  .wrap { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 26px; margin-bottom: 6px; }
+  .sub { color: var(--muted); margin-bottom: 28px; font-size: 14px; }
+  h2 { font-size: 19px; margin: 34px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 15px; margin: 18px 0 8px; color: var(--accent); }
+  p, li { font-size: 14px; color: var(--text); }
+  ul { padding-left: 22px; margin: 8px 0; }
+  code, pre { font-family: Consolas, "Courier New", monospace; font-size: 12.5px; }
+  code { background: #232738; padding: 1px 6px; border-radius: 4px; }
+  pre { background: #161923; border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; overflow-x: auto; margin: 10px 0; white-space: pre-wrap; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin: 14px 0; }
+  .ok { border-left: 4px solid var(--green); }
+  .fail { border-left: 4px solid var(--red); }
+  .warn { border-left: 4px solid var(--amber); }
+  .info { border-left: 4px solid var(--accent); }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13.5px; }
+  th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+  th { background: #20242f; color: var(--muted); font-weight: 600; }
+  .badge { display: inline-block; font-size: 12px; padding: 2px 10px; border-radius: 12px; margin-right: 6px; font-weight: 600; }
+  .b-ok { background: rgba(63,185,111,.15); color: var(--green); }
+  .b-fail { background: rgba(224,86,86,.15); color: var(--red); }
+  .b-warn { background: rgba(224,168,63,.15); color: var(--amber); }
+  .muted { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ChatCFD 复现进展报告</h1>
+  <div class="sub">OpenFOAM v2406 · WSL Ubuntu-22.04 · DashScope qwen-flash 替代 DeepSeek-R1/V3 · 2026-10-27 凌晨</div>
+
+  <h2>一、本次复现结论</h2>
+  <div class="card ok">
+    <span class="badge b-ok">成功</span><strong>NACA0012 不可压缩案例（simpleFoam + kOmegaSST）</strong><br>
+    端到端全流程跑通：论文 PDF → LLM 提取边界条件 → 自动生成全部 case 文件 → Fluent 网格转换 → OpenFOAM 运行 → ICOT 自动纠错 <b>24 轮后成功</b>。求解器正常结束，输出 0.02–0.1 共 5 个时间步结果。<br>
+    <span class="muted">论文报告该案例成功率 40%，本次复现结果与论文一致。</span>
+  </div>
+  <div class="card fail">
+    <span class="badge b-fail">失败×2</span><strong>SERN 过膨胀喷管可压缩案例（rhoCentralFoam + RNGkEpsilon）</strong><br>
+    两次独立运行均完整走通生成与运行流程，但 30 轮 ICOT 调试预算耗尽后仍存在字典格式错误（thermophysicalProperties / 0/p 的 waveTransmissive psi 条目）。<br>
+    <span class="muted">论文报告该案例成功率仅 30%，且 rhoCentralFoam 官方教程全部为 laminar（无湍流模型参考文件），纠错参考缺失是重要原因。属可复现的合理结果。</span>
+  </div>
+
+  <h2>二、边界条件提取质量验证（关键亮点）</h2>
+  <p>流水线从 <code>Yu_2023_nozzle.pdf</code> 中通过 RAG + LLM 自动提取的边界条件与论文表格<b>完全吻合</b>：</p>
+  <table>
+    <tr><th>边界</th><th>LLM 提取结果</th><th>论文原始设定</th></tr>
+    <tr><td>Inlet</td><td><code>totalPressure p0=93243.66 Pa</code> + <code>totalTemperature 300 K</code></td><td>压力入口：总压 93243.66 Pa，300 K ✓</td></tr>
+    <tr><td>Outlet / FarField</td><td><code>waveTransmissive fieldInf=31073.02 Pa, gamma=1.4</code></td><td>压力远场/出口：31073.02 Pa，300 K ✓</td></tr>
+    <tr><td>Wall</td><td><code>noSlip</code> + nutkWallFunction / kqRWallFunction / epsilonWallFunction</td><td>无滑移壁面 + 壁面函数 ✓</td></tr>
+    <tr><td>frontAndBackPlanes</td><td><code>empty</code>（2D）</td><td>2D 平面 ✓</td></tr>
+  </table>
+
+  <h2>三、修复的 5 个上游代码 bug</h2>
+  <p>原仓库代码在 DeepSeek 官方 API 之外的环境下无法运行，以下修复使流水线首次真正跑通：</p>
+  <table>
+    <tr><th>#</th><th>文件</th><th>问题</th><th>修复</th></tr>
+    <tr><td>1</td><td><code>src/config.py</code></td><td><code>llm_config</code> dataclass 缺少 <code>DEEPSEEK_V3/R1_MODEL_NAME</code> 字段，JSON 配置被过滤丢弃，环境变量回退到 DeepSeek 默认模型名 → DashScope 返回 404 model_not_found</td><td>补齐两个 model name 字段</td></tr>
+    <tr><td>2</td><td><code>src/file_preparation.py</code> (case_required_files)</td><td>LLM 三次编造参考案例名后，<code>response.lower() == "none"</code> 是无操作语句（原作者笔误），<code>file_structure</code> 未赋值 → UnboundLocalError</td><td>改为 <code>response = "none"</code>，走求解器默认文件清单回退分支</td></tr>
+    <tr><td>3</td><td><code>src/file_corrector.py</code> (extract_content_from_response)</td><td>LLM 返回不带 ``` 围栏的裸 JSON 时被双重编码返回 str，上层 <code>bc_info[i][j]</code> 崩溃 → generate_initial_files 无限重试（每轮损失 20+ 分钟）</td><td>增加二次 JSON 解码</td></tr>
+    <tr><td>4</td><td><code>src/file_preparation.py</code> (generate_initial_files)</td><td>边界条件提取无结构校验，坏输出导致整轮初始化重做</td><td>增加结构校验 + 局部重试（3 次）</td></tr>
+    <tr><td>5</td><td><code>src/qa_modules.py</code> + <code>src/file_corrector.py</code></td><td>qwen-flash 为混合思考模型，流式调用默认开 thinking：4 万 token prompt 思考 15–20 分钟才输出；LLM 偶发在 FoamFile 头前输出孤立 <code>foam</code> 行导致 "problem while reading header"</td><td>调用点加 <code>extra_body={"enable_thinking": False}</code>（提速 10 倍+）；<code>write_field_to_file</code> 写入前净化围栏与游离 foam 行</td></tr>
+  </table>
+
+  <h2>四、ICOT 自动纠错轨迹（复现论文核心机制）</h2>
+  <h3>NACA0012 案例 — 23 轮调试修复的 9 类错误</h3>
+  <ul>
+    <li>fvSchemes / fvSolution 头部格式错误（LLM 输出游离 foam 行）→ 已由净化补丁根治</li>
+    <li>0/U、0/p 边界条件语法错误（"double 93243.7"、缺 uniform 关键字）</li>
+    <li>0/T 缺 gamma / T0 条目</li>
+    <li>symmGaussSeidel 拼写错误（应为 symGaussSeidel）→ 第 24 轮修复后运行成功</li>
+  </ul>
+  <h3>Nozzle 案例 — 30 轮调试修复后仍遗留</h3>
+  <ul>
+    <li>成功修复：fvSchemes/fvSolution 头部、0/p 语法、Unexpected EOF、T 边界 gamma 等 8 类错误</li>
+    <li>未修复：thermophysicalProperties 的 mixture 子典结构错误（hConst/perfectGas 要求 specie/thermodynamics/transport 平级，LLM 生成嵌套结构）；纠错时"both solver and turbulence model 匹配"的参考案例缺失（rhoCentralFoam 教程均无湍流模型）</li>
+  </ul>
+
+  <h2>五、资源消耗统计</h2>
+  <table>
+    <tr><th>案例</th><th>LLM 调用</th><th>Prompt tokens</th><th>输出 tokens</th><th>结论</th></tr>
+    <tr><td>NACA0012（两次运行）</td><td>316（V3: 229 / R1: 87）</td><td>540k</td><td>95k</td><td><span class="badge b-ok">Success</span></td></tr>
+    <tr><td>Nozzle（两次运行）</td><td>432（V3: 323 / R1: 109）</td><td>804k</td><td>119k</td><td><span class="badge b-fail">Failure×2</span></td></tr>
+  </table>
+  <p class="muted">qwen-flash 价格极低，两案例合计约 156 万 token，成本可忽略（论文用 DeepSeek 报价 $0.20–0.30/案例）。修复 thinking 模式后单次完整运行约 12–25 分钟。</p>
+
+  <h2>六、产物位置</h2>
+  <pre>run_chatcfd/
+├── sample_naca0012/sample_NACA0012_AOA10_kOmegaSST_0/   # ✅ 成功案例
+│   ├── case_run.log          # 求解器运行日志（Time=0.1 正常 End）
+│   ├── cycle_index.txt       # "run successfully at test_round 23+1"
+│   ├── error_history.txt     # 23 轮纠错轨迹
+│   ├── 0.02–0.1/             # 5 个时间步结果场
+│   └── qa_logs.jsonl         # 全部 LLM 调用与 token 统计
+├── sample_nozzle/sample_SERN_NPR3_rhoCentralFoam_0/     # ❌ 失败案例（轨迹完整）
+├── naca_console.log / nozzle_console*.log               # 控制台全量日志
+
+test_chatcfd_smoke.py      # NACA0012 驱动脚本（不可压）
+test_chatcfd_nozzle.py     # Nozzle 驱动脚本（可压缩，含 HF_HUB_OFFLINE 设置）</pre>
+
+  <h2>七、后续建议</h2>
+  <ul>
+    <li><b>Nozzle 案例</b>：可再跑 1–3 次（生成有随机性，论文成功率 30%）；或换 laminar / kOmegaSST 以获得教程参考文件；也可在 ICOT 中为 thermophysicalProperties 注入官方教程参考模板</li>
+    <li><b>物理保真度</b>：NACA 案例连续性残差后期发散（sum local 连续性误差增大），建议将 run_time 调大、检查 AOA=10° 入口速度分解后做长时间收敛运行，对照论文升阻力系数</li>
+    <li><b>Web 界面</b>：<code>streamlit run src/chatbot.py</code>（Mode 0）尚未验证，可作下一步</li>
+  </ul>
+</div>
+</body>
+</html>

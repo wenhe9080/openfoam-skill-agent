@@ -1,0 +1,21 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      k;
+}
+
+dimensions      [0 2 -2 0 0 0 0];
+
+internalField   uniform 1.33935;
+
+boundaryField
+{
+    inlet   { type fixedValue; value uniform 1.33935; }
+    outlet  { type inletOutlet; inletValue uniform 1.33935; value uniform 1.33935; }
+    hub     { type kqRWallFunction; value uniform 1.33935; }
+    casing  { type kqRWallFunction; value uniform 1.33935; }
+    front   { type wedge; }
+    back    { type wedge; }
+}

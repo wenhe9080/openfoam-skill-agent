@@ -1,0 +1,55 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      p;
+}
+dimensions      [0 2 -2 0 0 0 0];
+internalField   uniform 93243.66;
+boundaryField
+{
+    inlet
+    {
+        type            zeroGradient;
+    }
+    outlet
+    {
+        type            waveTransmissive;
+        gamma           1.4;
+        gammaInf        1.4;
+        fieldInf        31073.02;
+        lInf            1000;
+        value           uniform 31073.02;
+    }
+    farfield_top
+    {
+        type            waveTransmissive;
+        gamma           1.4;
+        gammaInf        1.4;
+        fieldInf        31073.02;
+        lInf            1000;
+        value           uniform 31073.02;
+    }
+    farfield_bottom
+    {
+        type            waveTransmissive;
+        gamma           1.4;
+        gammaInf        1.4;
+        fieldInf        31073.02;
+        lInf            1000;
+        value           uniform 31073.02;
+    }
+    wall_upper
+    {
+        type            zeroGradient;
+    }
+    wall_lower
+    {
+        type            zeroGradient;
+    }
+    frontAndBack
+    {
+        type            empty;
+    }
+}

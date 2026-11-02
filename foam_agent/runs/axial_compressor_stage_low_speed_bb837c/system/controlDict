@@ -1,0 +1,41 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+
+application     simpleFoam;
+startFrom       startTime;
+startTime       0;
+stopAt          endTime;
+endTime         0.5;
+deltaT          5e-05;
+writeControl    timeStep;
+writeInterval   100;
+purgeWrite      0;
+runTimeModifiable true;
+functions
+{
+    forceCoeffs
+    {
+        type            forceCoeffs;
+        libs            ("forces");
+        writeControl    timeStep;
+        writeInterval   100;
+        // 注意：请确认网格中是否存在名为 rotor_blades 的 patch。
+        // 如果不存在，请修改为实际的叶片 patch 名称，否则只会产生警告。
+        patches         (rotor_blades);
+        rho             rhoInf;
+        rhoInf          1.225;
+        magUInf         60.7; 
+        liftDir         (0 1 0);
+        dragDir         (0 0 1);
+        pitchAxis       (0 1 0);
+        CofR            (0 0 0);
+        // 修复：添加缺失的参考长度和参考面积
+        lRef            1.0;
+        Aref            1.0;
+    }
+}

@@ -1,0 +1,7 @@
+database_OFv24/** linguist-vendored linguist-detectable=false
+grids/** linguist-vendored linguist-detectable=false
+inputs/** linguist-vendored linguist-detectable=false
+run_chatcfd/** linguist-vendored linguist-detectable=false
+temp/** linguist-vendored linguist-detectable=false
+test_env/** linguist-vendored linguist-detectable=false
+datasets/** linguist-vendored linguist-detectable=false

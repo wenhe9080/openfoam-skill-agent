@@ -1,0 +1,69 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2406                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _1653fa08-20260127 OPENFOAM=2406 patch=260127 version=2406
+Arch   : "LSB;label=32;scalar=64"
+Exec   : simpleFoam
+Date   : Oct 30 2026
+Time   : 04:05:51
+Host   : PIGPI
+PID    : 157661
+I/O    : uncollated
+Case   : /mnt/g/ChatCFD-main/foam_agent/runs/single_stage_axial_compressor_c9610a
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+
+SIMPLE: convergence criteria
+    field p	 tolerance 0.0001
+    field U	 tolerance 0.0001
+    field k	 tolerance 0.0001
+    field omega	 tolerance 0.0001
+
+Reading field p
+
+AMI: Creating AMI for source:periodic1 and target:periodic2
+AMI: Patch source faces: 800
+AMI: Patch target faces: 800
+--> FOAM Warning : 
+    From void Foam::advancingFrontAMI::checkPatches() const
+    in file AMIInterpolation/AMIInterpolation/advancingFrontAMI/advancingFrontAMI.C at line 107
+    Source and target patch bounding boxes are not similar
+    source box span     : (7.14e-05 0.016347 0.3)
+    target box span     : (9.52e-05 0.021796 0.3)
+    source box          : (0.187429 0 0) (0.1875 0.016347 0.3)
+    target box          : (0.249905 0 0) (0.25 0.021796 0.3)
+    inflated target box : (0.234865 -0.0150395 -0.0150395) (0.26504 0.0368355 0.31504)
+AMI: Patch source sum(weights) min:1 max:1 average:1
+AMI: Patch target sum(weights) min:0 max:1 average:0.75
+Reading field U
+
+Reading/calculating face flux field phi
+
+Selecting incompressible transport model Newtonian
+Selecting turbulence model type RAS
+Selecting RAS turbulence model kOmegaSST
+
+
+--> FOAM FATAL IO ERROR: (openfoam-2406 patch=260127)
+Entry 'method' not found in dictionary "/mnt/g/ChatCFD-main/foam_agent/runs/single_stage_axial_compressor_c9610a/system/fvSchemes/wallDist"
+
+
+file: system/fvSchemes/wallDist
+
+    From bool Foam::dictionary::readEntry(const Foam::word&, T&, Foam::keyType::option, Foam::IOobjectOption::readOption) const [with T = Foam::word]
+    in file ./src/OpenFOAM/lnInclude/dictionaryTemplates.C at line 327.
+
+FOAM exiting
+

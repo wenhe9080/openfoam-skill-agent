@@ -1,0 +1,117 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+
+convertToMeters 1;
+
+// Annular sector: 5 degrees, hub r=0.1875m, tip r=0.25m
+// Axial layout: inlet(0-0.1) rotor(0.1-0.15) stator(0.15-0.2) outlet(0.2-0.3)
+vertices
+(
+    (0.1875 0 0)
+    (0.25 0 0)
+    (0.2499048 0.021796 0)
+    (0.1874286 0.016347 0)
+    (0.1875 0 0.1)
+    (0.25 0 0.1)
+    (0.2499048 0.021796 0.1)
+    (0.1874286 0.016347 0.1)
+    (0.1875 0 0.15)
+    (0.25 0 0.15)
+    (0.2499048 0.021796 0.15)
+    (0.1874286 0.016347 0.15)
+    (0.1875 0 0.2)
+    (0.25 0 0.2)
+    (0.2499048 0.021796 0.2)
+    (0.1874286 0.016347 0.2)
+    (0.1875 0 0.3)
+    (0.25 0 0.3)
+    (0.2499048 0.021796 0.3)
+    (0.1874286 0.016347 0.3)
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) inletZone (1 10 20) simpleGrading (1 1 1)
+    hex (4 5 6 7 8 9 10 11) rotorZone (1 10 20) simpleGrading (1 1 1)
+    hex (8 9 10 11 12 13 14 15) statorZone (1 10 20) simpleGrading (1 1 1)
+    hex (12 13 14 15 16 17 18 19) outletZone (1 10 20) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (0 3 2 1)
+        );
+    }
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (16 17 18 19)
+        );
+    }
+    hub
+    {
+        type wall;
+        faces
+        (
+            (0 1 5 4)
+            (4 5 9 8)
+            (8 9 13 12)
+            (12 13 17 16)
+        );
+    }
+    shroud
+    {
+        type wall;
+        faces
+        (
+            (2 3 7 6)
+            (6 7 11 10)
+            (10 11 15 14)
+            (14 15 19 18)
+        );
+    }
+    periodic1
+    {
+        type cyclicAMI;
+        neighbourPatch periodic2;
+        faces
+        (
+            (0 3 7 4)
+            (4 7 11 8)
+            (8 11 15 12)
+            (12 15 19 16)
+        );
+    }
+    periodic2
+    {
+        type cyclicAMI;
+        neighbourPatch periodic1;
+        faces
+        (
+            (1 5 6 2)
+            (5 9 10 6)
+            (9 13 14 10)
+            (13 17 18 14)
+        );
+    }
+);
+
+mergePatchPairs
+(
+);

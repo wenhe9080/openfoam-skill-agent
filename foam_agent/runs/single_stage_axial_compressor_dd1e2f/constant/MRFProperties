@@ -1,0 +1,19 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      MRFProperties;
+}
+
+// Rotor rotates at 1500 rpm = 157.08 rad/s about Z-axis
+rotor
+{
+    cellZone        rotor;
+    active          yes;
+
+    origin          (0 0 0);
+    axis            (0 0 1);
+    omega           157.08;
+}

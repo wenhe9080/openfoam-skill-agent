@@ -1,0 +1,108 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+convertToMeters 0.1;
+vertices
+(
+    // Region 1: Transition (Circular to Rectangular approximated as rectangular for simplicity in blockMesh)
+    // x: 0 to 0.3, y: 0 to 0.385
+    (0 0 0)       // 0
+    (0.3 0 0)     // 1
+    (0.3 0.385 0) // 2
+    (0 0.385 0)   // 3
+    (0 0 0.06)    // 4
+    (0.3 0 0.06)  // 5
+    (0.3 0.385 0.06) // 6
+    (0 0.385 0.06)   // 7
+
+    // Region 2: Throat/Converging-Diverging start
+    // x: 0.3 to 0.6, y: 0 to 0.385
+    (0.3 0 0)     // 8
+    (0.6 0 0)     // 9
+    (0.6 0.385 0) // 10
+    (0.3 0.385 0) // 11
+    (0.3 0 0.06)  // 12
+    (0.6 0 0.06)  // 13
+    (0.6 0.385 0.06) // 14
+    (0.3 0.385 0.06) // 15
+
+    // Region 3: Expansion Ramp (SERN) - Simplified as a trapezoidal-like expansion using multiple blocks or one large block with grading
+    // To keep it simple and valid for blockMesh without complex edges, we approximate the ramp with a larger rectangular domain that includes the flow area.
+    // The actual SERN geometry is complex. For a runnable demo case, we create a generic supersonic nozzle shape.
+    // Let's define a single large block covering the whole domain for stability first, then refine if needed.
+    // Actually, let's stick to a simpler 2D channel with an expansion angle approximation via vertex positions.
+    
+    // Re-defining vertices for a simplified SERN-like geometry:
+    // Inlet at x=0, Outlet at x=1.0
+    // Wall lower: y=0
+    // Wall upper: Starts at y=0.385, expands to y=0.8 at x=1.0 (approx 25 deg slope)
+    
+    // Block 1: Main Domain
+    (0 0 0)       // 0
+    (1.0 0 0)     // 1
+    (1.0 0.8 0)   // 2
+    (0 0.385 0)   // 3
+    (0 0 0.06)    // 4
+    (1.0 0 0.06)  // 5
+    (1.0 0.8 0.06)// 6
+    (0 0.385 0.06)// 7
+);
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) (200 100 1) simpleGrading (1 1 1)
+);
+edges
+(
+);
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (0 3 7 4)
+        );
+    }
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (1 2 6 5)
+        );
+    }
+    wall_lower
+    {
+        type wall;
+        faces
+        (
+            (0 1 5 4)
+        );
+    }
+    wall_upper
+    {
+        type wall;
+        faces
+        (
+            (3 2 6 7)
+        );
+    }
+    frontAndBack
+    {
+        type empty;
+        faces
+        (
+            (0 1 2 3)
+            (4 5 6 7)
+        );
+    }
+);
+
+mergePatchPairs
+(
+);

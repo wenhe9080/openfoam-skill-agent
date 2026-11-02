@@ -1,0 +1,42 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+
+dimensions      [0 1 -1 0 0 0 0];
+
+// Axial velocity ~43.2 m/s based on flow coefficient 0.55 and midspan speed
+internalField   uniform (43.2 0 0);
+
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform (43.2 0 0);
+    }
+    outlet
+    {
+        type            pressureInletOutletVelocity;
+        value           uniform (43.2 0 0);
+    }
+    hub
+    {
+        type            noSlip;
+    }
+    casing
+    {
+        type            noSlip;
+    }
+    periodic_1
+    {
+        type            cyclic;
+    }
+    periodic_2
+    {
+        type            cyclic;
+    }
+}

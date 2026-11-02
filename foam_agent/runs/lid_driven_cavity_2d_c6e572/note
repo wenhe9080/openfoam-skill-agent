@@ -1,0 +1,9 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      note;
+}
+
+Removed the 'relaxationFactors' block from system/fvSolution. The PISO algorithm used by icoFoam does not support under-relaxation factors for fields or equations. Including this block causes a dictionary parsing error ('in file db/dictionary/dictionary.C') because the solver expects specific keys and fails on unexpected ones, leading to immediate exit before time stepping.

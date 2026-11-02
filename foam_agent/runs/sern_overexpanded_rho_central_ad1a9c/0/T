@@ -1,0 +1,36 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      T;
+}
+
+// Dimensions: [0 0 0 1 0 0 0] (Temperature)
+dimensions      [0 0 0 1 0 0 0];
+
+internalField   uniform 300;
+
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 300;
+    }
+    outlet
+    {
+        type            waveTransmissive;
+        fieldInf        300;
+        lInf            1000;
+        gamma           1.4;
+    }
+    wall
+    {
+        type            zeroGradient; // Adiabatic
+    }
+    symmetryPlane
+    {
+        type            symmetryPlane;
+    }
+}

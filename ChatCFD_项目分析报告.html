@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChatCFD 项目拆解与分析报告</title>
+<style>
+  :root{
+    --bg:#0f172a; --panel:#1e293b; --card:#243449; --line:#334155;
+    --text:#e2e8f0; --muted:#94a3b8; --accent:#38bdf8; --accent2:#34d399;
+    --warn:#fbbf24; --danger:#f87171; --violet:#a78bfa; --pink:#f472b6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  .wrap{max-width:1100px;margin:0 auto;padding:32px 20px}
+  header{text-align:center;padding:40px 0 20px}
+  header h1{font-size:2.2rem;letter-spacing:1px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2),var(--violet));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  header p{color:var(--muted);margin-top:10px;font-size:.95rem}
+  .tag{display:inline-block;background:var(--card);border:1px solid var(--line);
+    border-radius:999px;padding:3px 12px;margin:4px;font-size:.8rem;color:var(--muted)}
+  section{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:28px;margin:24px 0}
+  section h2{font-size:1.35rem;color:var(--accent);margin-bottom:16px;
+    padding-bottom:10px;border-bottom:1px solid var(--line)}
+  section h3{font-size:1.05rem;color:var(--accent2);margin:18px 0 8px}
+  p{color:var(--text);margin-bottom:10px}
+  .grid{display:grid;gap:14px}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+  .card h4{color:var(--violet);font-size:.95rem;margin-bottom:8px}
+  .card ul{padding-left:18px}
+  .card li{margin:4px 0;font-size:.9rem;color:var(--muted)}
+  .card li b{color:var(--text)}
+  .kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0}
+  .kpi .box{background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:14px;text-align:center}
+  .kpi .num{font-size:1.7rem;font-weight:700;color:var(--accent2)}
+  .kpi .lbl{font-size:.78rem;color:var(--muted);margin-top:4px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.88rem}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left}
+  th{background:var(--card);color:var(--accent);font-weight:600}
+  tr:nth-child(even) td{background:rgba(36,52,73,.4)}
+  .bar-row{display:flex;align-items:center;gap:10px;margin:8px 0}
+  .bar-lbl{width:220px;font-size:.85rem;color:var(--muted);flex-shrink:0}
+  .bar-track{flex:1;background:var(--line);border-radius:999px;height:18px;overflow:hidden}
+  .bar-fill{height:100%;border-radius:999px;transition:width 1s}
+  .bar-val{width:60px;text-align:right;font-size:.85rem;font-weight:600}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0}
+  .flow .node{background:var(--card);border:1px solid var(--line);border-radius:8px;
+    padding:10px 14px;font-size:.85rem;text-align:center;min-width:110px}
+  .flow .node b{display:block;color:var(--accent2);font-size:.95rem;margin-bottom:3px}
+  .flow .arrow{color:var(--accent);font-size:1.3rem}
+  .loopbox{border:2px dashed var(--warn);border-radius:10px;padding:14px;margin:12px 0;background:rgba(251,191,36,.05)}
+  .loopbox .t{color:var(--warn);font-weight:700;margin-bottom:8px}
+  .note{background:rgba(56,189,248,.08);border-left:4px solid var(--accent);
+    padding:12px 14px;border-radius:6px;margin:12px 0;font-size:.88rem;color:var(--muted)}
+  .note b{color:var(--accent)}
+  code{background:var(--card);border:1px solid var(--line);padding:2px 7px;
+    border-radius:5px;font-family:Consolas,monospace;font-size:.85rem;color:var(--accent2)}
+  pre{background:#0b1220;border:1px solid var(--line);border-radius:10px;
+    padding:16px;overflow-x:auto;font-size:.82rem;margin:12px 0;line-height:1.5}
+  pre code{background:none;border:none;padding:0;color:var(--text)}
+  .status{display:flex;align-items:center;gap:6px;font-size:.82rem;margin:4px 0}
+  .dot{width:10px;height:10px;border-radius:50%}
+  .dot.ok{background:var(--accent2)} .dot.mid{background:var(--warn)} .dot.bad{background:var(--danger)}
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:30px 0}
+  .hl{color:var(--accent2);font-weight:600}
+  .warn-c{color:var(--warn)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>ChatCFD 项目拆解与分析报告</h1>
+  <p>LLM 驱动的 OpenFOAM 端到端 CFD 自动化 Agent &nbsp;|&nbsp; 基于 <code>g:/ChatCFD-main</code> 全量源码分析</p>
+  <div>
+    <span class="tag">多智能体架构</span>
+    <span class="tag">OpenFOAM v2406</span>
+    <span class="tag">DeepSeek R1 / V3</span>
+    <span class="tag">RAG + FAISS 向量检索</span>
+    <span class="tag">Streamlit 交互界面</span>
+    <span class="tag">迭代反思纠错</span>
+  </div>
+</header>
+
+<!-- ============ 1. 项目用途 ============ -->
+<section>
+  <h2>一、项目用途与定位</h2>
+  <p>CFD（计算流体力学）长期受困于操作复杂、专业知识门槛高、学习曲线陡峭。
+  <b class="hl">ChatCFD</b> 是一个由大语言模型（LLM）驱动的智能体系统，运行在开源 CFD 框架
+  <code>OpenFOAM</code> 之上，让用户通过<b>自然语言对话或上传论文 PDF</b>即可完成复杂 CFD 算例的配置与运行，
+  实现 CFD 工作流的<b>端到端自动化</b>，使缺乏 CFD 专业背景的用户也能准确执行仿真。</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>核心价值主张</h4>
+      <ul>
+        <li><b>自然语言 → 仿真</b>：一句话、一篇论文即可启动 CFD 计算</li>
+        <li><b>多模态输入</b>：支持 PDF 论文、TXT 说明、.msh 网格文件上传</li>
+        <li><b>ChatGPT 式交互</b>：可对话确认/修改求解器、湍流模型、边界条件</li>
+        <li><b>结果可下载</b>：生成完整 OpenFOAM 算例目录，可打包下载</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>两大使用模式</h4>
+      <ul>
+        <li><b>模式 0（推荐）</b>：Streamlit Web 前端，交互式上传文档+网格、对话确认配置</li>
+        <li><b>模式 1</b>：命令行批处理，直接指定 <code>--document_path / --grid_path / --run_time</code></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. 系统原理 ============ -->
+<section>
+  <h2>二、系统原理与架构</h2>
+  <p>ChatCFD 采用<b>双模型多智能体架构</b>（DeepSeek-R1 负责推理/诊断，DeepSeek-V3 负责配置/改写），
+  结合三大关键技术保证成功率与物理准确性：</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>① 领域结构化知识库（RAG）</h4>
+      <ul>
+        <li><b>知识库</b>：<code>database_OFv24/</code> 预处理的 OpenFOAM v2406 官方教程数据</li>
+        <li><b>向量化检索</b>：论文经 <code>sentence-transformers</code> 编码 + <code>FAISS</code> 相似度搜索，精准定位物理描述段落</li>
+        <li><b>参考案例注入</b>：按求解器/湍流模型匹配历史案例文件作为 prompt 参考</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>② 迭代反思纠错机制</h4>
+      <ul>
+        <li>仿真失败时捕获 stderr，交给 R1 分析根因、定位可疑文件</li>
+        <li>连续同类错误 → 触发 <b>Reflection</b> 反思上轮失败原因，避免重复</li>
+        <li>反思 2 轮仍失败 → 直接<b>重写整个文件</b>；最多 30 轮自修复</li>
+        <li>自动处理：缺文件补建、CFL 步长控制、网格转换重试</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>③ 自然语言 → 案例转换</h4>
+      <ul>
+        <li>解析论文中每个独立仿真算例（不同 Re/Mach/AoA/模型 = 不同案例）</li>
+        <li>LLM 推荐适配的 OpenFOAM 求解器与湍流模型</li>
+        <li>自动抽取边界条件、初始条件、物理属性并填充到各字典文件</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>④ 交互多模态界面</h4>
+      <ul>
+        <li>Streamlit 实现类 ChatGPT 体验</li>
+        <li>侧边栏：上传文档、上传网格、导出聊天记录、下载 OpenFOAM 算例 zip</li>
+        <li>用户可在对话中随时修改配置（如换湍流模型）再启动仿真</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>端到端执行流程图</h3>
+  <div class="flow">
+    <div class="node"><b>输入</b>论文PDF / 自然语言 + .msh网格</div>
+    <div class="arrow">→</div>
+    <div class="node"><b>案例识别</b>R1抽取算例、选求解器/湍流模型</div>
+    <div class="arrow">→</div>
+    <div class="node"><b>网格转换</b>fluentMeshToFoam + 边界名提取</div>
+    <div class="arrow">→</div>
+    <div class="node"><b>文件生成</b>RAG检索 + 生成0/系统/常数字典</div>
+    <div class="arrow">→</div>
+    <div class="node"><b>运行仿真</b>subprocess 调用 OpenFOAM solver</div>
+  </div>
+  <div class="loopbox">
+    <div class="t">↻ 迭代反思纠错循环（最多 30 轮）</div>
+    <div class="flow">
+      <div class="node"><b>失败</b>捕获 stderr</div>
+      <div class="arrow">→</div>
+      <div class="node"><b>定位</b>R1分析根因文件</div>
+      <div class="arrow">→</div>
+      <div class="node"><b>修复</b>V3改写/补建文件</div>
+      <div class="arrow">→</div>
+      <div class="node"><b>反思</b>同类错误2次触发</div>
+      <div class="arrow">→</div>
+      <div class="node"><b>重写</b>反思2次仍失败</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. 实践方法 ============ -->
+<section>
+  <h2>三、实践方法（使用步骤）</h2>
+  <h3>安装六步法</h3>
+  <table>
+    <tr><th>步骤</th><th>操作</th><th>说明</th></tr>
+    <tr><td>1. 克隆仓库</td><td><code>git clone</code> ChatCFD</td><td>获取完整源码与数据库</td></tr>
+    <tr><td>2. Python 环境</td><td><code>conda env create -f chatcfd_env.yml</code></td><td>Python 3.11.4，⚠ 避免 3.12（PyFoam 冲突）</td></tr>
+    <tr><td>3. 验证组件</td><td>测试 faiss / PyFoam import</td><td>确认核心依赖可用</td></tr>
+    <tr><td>4. 下载嵌入模型</td><td><code>python test_env/download_model.py</code></td><td>下载 all-mpnet-base-v2</td></tr>
+    <tr><td>5. 安装 OpenFOAM</td><td>Debian 源安装 <code>openfoam2406-default</code></td><td>版本必须 v2406，否则知识库失配</td></tr>
+    <tr><td>6. 配置 API</td><td>编辑 <code>inputs/chatcfd_config.json</code></td><td>填入 DeepSeek API Key、路径</td></tr>
+  </table>
+
+  <h3>运行方式</h3>
+  <pre><code># 模式 0：Web 前端（推荐）
+streamlit run src/chatbot.py --server.port 8501
+
+# 模式 1：命令行批处理
+python src/chatbot.py --document_path &lt;pdf/txt&gt; --grid_path &lt;网格&gt; --run_time 1</code></pre>
+
+  <h3>核心源码模块说明</h3>
+  <table>
+    <tr><th>文件</th><th>职责</th></tr>
+    <tr><td><code>chatbot.py</code></td><td>主入口，Streamlit 对话界面 + 命令行双模式调度</td></tr>
+    <tr><td><code>main_run_chatcfd.py</code></td><td>工作流编排：读文档 → 生成文件 → 运行 → 纠错循环</td></tr>
+    <tr><td><code>file_preparation.py</code></td><td>网格转换、边界提取、生成 0/系统/常数 字典文件</td></tr>
+    <tr><td><code>file_corrector.py</code></td><td>错误定位、参考文件查找、文件改写/补建（R1 诊断 + V3 修复）</td></tr>
+    <tr><td><code>Reflextion.py</code></td><td>迭代反思：总结失败原因并注入下一轮 prompt</td></tr>
+    <tr><td><code>pdf_chunk_ask_question.py</code></td><td>PDF 分块 + 嵌入 + FAISS 检索 + RAG 问答</td></tr>
+    <tr><td><code>qa_modules.py</code></td><td>封装 R1/V3 双模型调用，token 统计与日志</td></tr>
+    <tr><td><code>run_of_case.py</code></td><td>subprocess 调用 OpenFOAM solver 执行仿真</td></tr>
+    <tr><td><code>preprocess_OF_tutorial.py</code></td><td>构建/加载 OpenFOAM 教程知识库 JSON</td></tr>
+    <tr><td><code>config.py</code></td><td>路径/依赖/LLM/运行参数集中管理</td></tr>
+  </table>
+</section>
+
+<!-- ============ 4. 性能指标 ============ -->
+<section>
+  <h2>四、性能指标</h2>
+  <h3>OpenFOAM 基础测试（315 个官方教程案例）</h3>
+  <div class="bar-row"><div class="bar-lbl">执行成功率 (run)</div><div class="bar-track"><div class="bar-fill" style="width:82%;background:var(--accent2)"></div></div><div class="bar-val" style="color:var(--accent2)">82%</div></div>
+  <div class="bar-row"><div class="bar-lbl">物理保真度 (phy√)</div><div class="bar-track"><div class="bar-fill" style="width:59%;background:var(--violet)"></div></div><div class="bar-val" style="color:var(--violet)">59%</div></div>
+  <div class="kpi">
+    <div class="box"><div class="num">$0.20</div><div class="lbl">单案例平均成本</div></div>
+    <div class="box"><div class="num">315</div><div class="lbl">基础测试案例数</div></div>
+  </div>
+
+  <h3>复杂论文复现能力</h3>
+  <div class="bar-row"><div class="bar-lbl">不可压 NACA0012 成功率</div><div class="bar-track"><div class="bar-fill" style="width:40%;background:var(--warn)"></div></div><div class="bar-val" style="color:var(--warn)">40%</div></div>
+  <div class="bar-row"><div class="bar-lbl">可压喷嘴 Nozzle 成功率</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:var(--danger)"></div></div><div class="bar-val" style="color:var(--danger)">30%</div></div>
+  <div class="kpi">
+    <div class="box"><div class="num">$0.30</div><div class="lbl">单案例成本（论文复现）</div></div>
+    <div class="box"><div class="num">30</div><div class="lbl">最大反思迭代轮数</div></div>
+  </div>
+
+  <h3>模型灵活性</h3>
+  <ul style="padding-left:18px;color:var(--muted)">
+    <li><b>自适应求解器选择</b>：根据稳态/瞬态、可压/不可压智能匹配 OpenFOAM solver</li>
+    <li><b>自然语言模型切换</b>：对话即可改换湍流模型（k-ε / Spalart-Allmaras / kΩ-SST 等）</li>
+  </ul>
+  <div class="note"><b>解读：</b>基础案例成功率 82% 表明自动化配置可靠性较高；物理保真度 59%
+  说明结果数值准确仍有提升空间。论文级复杂案例成功率 30-40%，反映跨文档推理与参数耦合的难度。
+  单案例 $0.2–0.3 的低成本在同类 LLM-CFD 系统中具有竞争力。</div>
+</section>
+
+<!-- ============ 5. 运行依赖 ============ -->
+<section>
+  <h2>五、运行依赖</h2>
+  <h3>核心软硬件要求</h3>
+  <table>
+    <tr><th>依赖</th><th>版本/要求</th><th>备注</th></tr>
+    <tr><td>操作系统</td><td>Linux / Windows(WSL2)</td><td>Linux 推荐，保证 OpenFOAM 兼容</td></tr>
+    <tr><td>CFD 软件</td><td><span class="warn-c">OpenFOAM v2406（必须）</span></td><td>其他版本会导致知识库失配</td></tr>
+    <tr><td>Python</td><td><span class="warn-c">3.11.4（避免 3.12）</span></td><td>3.12 与 PyFoam 存在未知冲突</td></tr>
+    <tr><td>硬件</td><td>CUDA GPU（可选）</td><td>加速嵌入模型等组件</td></tr>
+    <tr><td>LLM API</td><td>DeepSeek-V3 + R1</td><td>需 API Key，兼容 OpenAI 接口</td></tr>
+  </table>
+
+  <h3>关键 Python 依赖</h3>
+  <div class="grid grid-2">
+    <div class="card"><h4>AI / ML</h4><ul>
+      <li>PyTorch 2.6.0</li><li>Transformers 4.50.3</li>
+      <li>Sentence-Transformers 4.0.1</li><li>FAISS-CPU 1.7.4</li>
+      <li>Scikit-learn 1.6.1 / NumPy 1.26.4</li></ul></div>
+    <div class="card"><h4>Web / API / OpenFOAM</h4><ul>
+      <li>Streamlit 1.41.1</li><li>OpenAI 1.39.0</li>
+      <li>LangChain 0.1.19</li><li>PyFoam 2023.7</li>
+      <li>PDFPlumber 0.11.5 / PyPDF2 3.0.1</li></ul></div>
+  </div>
+
+  <h3>本地环境检测结果（Windows + WSL2）</h3>
+  <div class="card">
+    <div class="status"><span class="dot ok"></span> WSL2 (Ubuntu-22.04) 已安装，可作为 Linux 运行环境</div>
+    <div class="status"><span class="dot ok"></span> 已通过 deadsnakes PPA 在 WSL 安装 Python 3.11.17</div>
+    <div class="status"><span class="dot ok"></span> 已创建 venv <code>chatcfd_venv</code>，安装 requirements.txt 全部核心依赖</div>
+    <div class="status"><span class="dot ok"></span> 已通过 OpenFOAM Debian 源安装 openfoam2406-default</div>
+    <div class="status"><span class="dot ok"></span> 已配置 <code>inputs/chatcfd_config.json</code> 路径（API 密钥待填）</div>
+  </div>
+</section>
+
+<!-- ============ 6. 本地复现结果 ============ -->
+<section>
+  <h2>六、本地安装复现结果</h2>
+  <p>依据「安装六步法」在本机（Windows + WSL2 Ubuntu-22.04）执行复现，已完成的步骤与验证结果：</p>
+  <table>
+    <tr><th>复现步骤</th><th>目标</th><th>状态</th></tr>
+    <tr><td>环境探测</td><td>Python / OpenFOAM / 包管理器</td><td><span class="dot ok"></span> 已完成</td></tr>
+    <tr><td>安装 Python 3.11</td><td>满足项目硬性要求</td><td><span class="dot ok"></span> Python 3.11.17 已装</td></tr>
+    <tr><td>创建 venv 并安装依赖</td><td>requirements.txt</td><td><span class="dot ok"></span> 核心依赖全部成功</td></tr>
+    <tr><td>安装 OpenFOAM 2406</td><td>Debian 源 openfoam2406-default</td><td><span class="dot ok"></span> 已装，路径确认</td></tr>
+    <tr><td>配置 chatcfd_config.json</td><td>OpenFOAM 路径等</td><td><span class="dot ok"></span> 路径已填，API 待填</td></tr>
+    <tr><td>组件 import 验证</td><td>faiss/PyFoam/streamlit/ST/torch</td><td><span class="dot ok"></span> 全部通过</td></tr>
+  </table>
+
+  <h3>关键组件验证结果</h3>
+  <table>
+    <tr><th>组件</th><th>实测版本</th><th>状态</th></tr>
+    <tr><td>Python</td><td>3.11.17</td><td><span class="dot ok"></span> OK（符合 3.11 要求）</td></tr>
+    <tr><td>faiss-cpu</td><td>1.7.4</td><td><span class="dot ok"></span> OK</td></tr>
+    <tr><td>PyFoam</td><td>2023.7</td><td><span class="dot ok"></span> OK</td></tr>
+    <tr><td>streamlit</td><td>1.41.1</td><td><span class="dot ok"></span> OK</td></tr>
+    <tr><td>sentence-transformers</td><td>4.0.1</td><td><span class="dot ok"></span> OK</td></tr>
+    <tr><td>torch</td><td>2.14.1+cu130</td><td><span class="dot ok"></span> OK（版本较 requirements 的 2.6.0 更新，功能兼容）</td></tr>
+    <tr><td>openai / langchain / pdfplumber / tiktoken / PyPDF2</td><td>1.39.0 / 0.1.19 / 0.11.5</td><td><span class="dot ok"></span> 全部 OK</td></tr>
+    <tr><td>OpenFOAM</td><td>/usr/lib/openfoam/openfoam2406</td><td><span class="dot ok"></span> 已安装</td></tr>
+  </table>
+
+  <h3>剩余待办（需用户操作）</h3>
+  <div class="note">
+    <b>1. 填入 DeepSeek API：</b>编辑 <code>inputs/chatcfd_config.json</code>，将 <code>DEEPSEEK_V3_KEY / DEEPSEEK_R1_KEY / BASE_URL / MODEL_NAME</code> 占位符替换为真实密钥。
+    <b>2. 下载嵌入模型：</b>在 WSL 内执行 <code>python test_env/download_model.py</code> 并将路径填入 <code>sentence_transformer_path</code>。
+    <b>3. 启动验证：</b><code>cd /mnt/g/ChatCFD-main && source chatcfd_venv/bin/activate && source /usr/lib/openfoam/openfoam2406/etc/bashrc && streamlit run src/chatbot.py --server.port 8501</code>，访问 <code>http://localhost:8501</code>。
+  </div>
+
+  <h3>本地运行命令速查（在 WSL 内）</h3>
+  <pre><code>cd /mnt/g/ChatCFD-main
+source chatcfd_venv/bin/activate
+source /usr/lib/openfoam/openfoam2406/etc/bashrc
+
+# 启动 Web 前端
+streamlit run src/chatbot.py --server.port 8501
+
+# 或命令行批处理（需先填好 API Key）
+python src/chatbot.py --document_path pdf/sun_2023_naca0012.pdf \
+                      --grid_path grids/naca0012.msh --run_time 1</code></pre>
+</section>
+
+<footer>
+  ChatCFD 项目分析报告 &nbsp;·&nbsp; 生成于 2026-10-26 &nbsp;·&nbsp; 数据来源：g:/ChatCFD-main 全量源码与 ReadMe.md
+</footer>
+</div>
+</body>
+</html>

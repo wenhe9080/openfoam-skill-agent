@@ -1,0 +1,41 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      p;
+}
+dimensions      [0 2 -2 0 0 0 0];
+internalField   uniform 101325; // Static pressure approx
+boundaryField
+{
+    inlet
+    {
+        type            zeroGradient;
+    }
+    outlet
+    {
+        type            fixedValue;
+        value           uniform 101325; // Reference static pressure at outlet
+    }
+    hub
+    {
+        type            zeroGradient;
+    }
+    casing
+    {
+        type            zeroGradient;
+    }
+    rotorBlade
+    {
+        type            zeroGradient;
+    }
+    statorBlade
+    {
+        type            zeroGradient;
+    }
+    frontBack
+    {
+        type            empty;
+    }
+}

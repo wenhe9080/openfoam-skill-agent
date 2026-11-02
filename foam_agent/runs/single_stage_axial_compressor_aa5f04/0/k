@@ -1,0 +1,43 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      k;
+}
+
+dimensions      [0 2 -2 0 0 0 0];
+
+// Turbulence intensity ~1%
+internalField   uniform 0.279;
+
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 0.279;
+    }
+    outlet
+    {
+        type            zeroGradient;
+    }
+    hub
+    {
+        type            kqRWallFunction;
+        value           uniform 0.279;
+    }
+    casing
+    {
+        type            kqRWallFunction;
+        value           uniform 0.279;
+    }
+    periodic_1
+    {
+        type            cyclic;
+    }
+    periodic_2
+    {
+        type            cyclic;
+    }
+}

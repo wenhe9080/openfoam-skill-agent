@@ -1,0 +1,42 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    location    "0";
+    object      U;
+}
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform (20 0 0);
+
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform (20 0 0);
+    }
+    outlet
+    {
+        type            pressureInletOutletVelocity;
+        value           uniform (20 0 0);
+    }
+    hub
+    {
+        type            noSlip;
+    }
+    casing
+    {
+        type            noSlip;
+    }
+    theta0
+    {
+        type            wedge;
+    }
+    theta1
+    {
+        type            wedge;
+    }
+}
