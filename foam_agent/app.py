@@ -2612,6 +2612,20 @@ def run_case(jid, case_dir, plan):
                 job_step(jid, "checkMesh 网格检查", "failed", fatal[-300:])
                 return False, err_all + "\n[checkMesh 失败] " + fatal[-1500:]
         job_step(jid, "checkMesh 网格检查", "done", out[-200:])
+        # 网格生成完毕 → 自动保存：原生 polyMesh 快照 + obj + msh + 报告 + tar.gz
+        try:
+            import mesh_export as _mx
+            _mfest = _mx.export_mesh(case_dir)
+            _r = _mfest.get("_report", {})
+            _sc = _r.get("mesh_scale", {})
+            _files = [k for k in _mfest if k.startswith("mesh_export/")]
+            job_step(jid, "网格保存", "done",
+                     (f"已保存 {len(_files)} 个文件（{_sc.get('n_cells', '?')} cells）："
+                      f"polyMesh 快照 + mesh.obj + mesh.msh + mesh.tar.gz + 报告")
+                     [:400])
+            job_update(jid, mesh=_r)
+        except Exception as _e:
+            job_step(jid, "网格保存", "failed", f"{type(_e).__name__}: {_e}"[:300])
     if patch_transient_final_entries(case_dir, solver):
         job_step(jid, "确定性补丁", "done", "补齐 UFinal/pFinal 求解器条目")
     if re.search(r"rhoCentralFoam|rhoPimpleFoam|sonicFoam|buoyantFoam", solver or ""):

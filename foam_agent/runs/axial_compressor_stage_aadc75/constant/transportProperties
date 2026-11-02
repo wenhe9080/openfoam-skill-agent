@@ -1,0 +1,12 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      transportProperties;
+}
+
+// 空气 20°C：nu = mu/rho ≈ 1.5e-5 m^2/s（不可压 simpleFoam/pimpleFoam 必需）
+transportModel  Newtonian;
+
+nu              [0 2 -1 0 0 0 0] 1.5e-05;

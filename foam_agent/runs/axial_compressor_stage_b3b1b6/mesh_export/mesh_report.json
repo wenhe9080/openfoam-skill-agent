@@ -1,0 +1,78 @@
+{
+  "case": "axial_compressor_stage_b3b1b6",
+  "generated_at": "2026-11-02T20:32:35",
+  "mesh_scale": {
+    "cells": 9600,
+    "n_cells": 9600,
+    "n_points": 19762,
+    "n_faces": 38680,
+    "n_internal_faces": 18920,
+    "total_volume_m3": 0.000143164
+  },
+  "mesh_quality": {
+    "non_orthogonality_max": 0,
+    "non_orthogonality_avg": 0,
+    "skewness_max": 0.0434558,
+    "aspect_ratio_max": 2.8601,
+    "mesh_ok": true,
+    "mesh_type": "structured hexahedral (blockMesh)"
+  },
+  "boundary_patches": [
+    {
+      "name": "inlet",
+      "type": "patch",
+      "nFaces": 40
+    },
+    {
+      "name": "outlet",
+      "type": "patch",
+      "nFaces": 40
+    },
+    {
+      "name": "hub",
+      "type": "wall",
+      "nFaces": 240
+    },
+    {
+      "name": "casing",
+      "type": "wall",
+      "nFaces": 240
+    },
+    {
+      "name": "front",
+      "type": "wedge",
+      "nFaces": 9600
+    },
+    {
+      "name": "back",
+      "type": "wedge",
+      "nFaces": 9600
+    }
+  ],
+  "cell_zones": [
+    {
+      "name": "rotor",
+      "cells": 2400
+    },
+    {
+      "name": "stator",
+      "cells": 2400
+    }
+  ],
+  "files": {
+    "_snapshot": "polyMesh_snapshot/",
+    "mesh_export/mesh.obj": 1259706,
+    "_obj_triangles": 9600,
+    "mesh_export/mesh.msh": 1319286,
+    "_msh_elements": 9602
+  },
+  "download": {
+    "how": "GET /api/download/{case_id} → mesh.tar.gz（含快照+报告）",
+    "formats": {
+      "polyMesh_snapshot/": "OpenFOAM 原生网格（最可靠，可复用于再算）",
+      "mesh.obj": "外表面三角化，任意 3D 软件查看",
+      "mesh.msh": "Gmsh 格式，表面可靠；体积 hex8 节点顺序需校验",
+      "mesh_report.json": "网格统计/质量/文件清单"
+    }
+  }
+}
